@@ -1,0 +1,562 @@
+/*
+ * Author: Carlos Alvarez
+ * URL: http://alvarez.is
+ *
+ * Project Name: SPOT - Free Bootstrap 3 Theme
+ * Version: 1.0
+ * URL: http://blacktie.co
+ */
+
+/* FONTS */
+@import url(http://fonts.googleapis.com/css?family=Lato:300,400,700,900);
+@import url(http://fonts.googleapis.com/css?family=Raleway:400,300,700,900);
+
+/* OVERALL ASPECT */
+
+body {
+  background-color: #eaeaea;
+    font-family: "Lato";
+    font-weight: 300;
+    font-size: 16px;
+    color: #555;
+
+    -webkit-font-smoothing: antialiased;
+    -webkit-overflow-scrolling: touch;
+
+    /* margin-top: 70px; */
+}
+
+/* Titles */
+h1, h2, h3, h4, h5, h6 {
+    font-family: "Raleway";
+    font-weight: 300;
+    color: #333;
+}
+
+/* Paragraph & Typographic */
+p {
+    line-height: 28px;
+    margin-bottom: 25px;
+}
+
+.centered {
+    text-align: center;
+}
+
+.slider {
+  margin: 40px 80px 0px 80px;
+}
+
+.carousel-control.right, .carousel-control.left {
+  background-image: linear-gradient(to right,rgba(0,0,0,0) 0,rgba(0,0,0,0) 100%);
+}
+
+#ExplorerForm img{
+  width:640px;
+  height: 360px;
+  margin-top: 24px;
+  border: 4px solid #2a9f9f;
+  -webkit-box-shadow: 0px 0px 29px 1px rgba(0,0,0,0.32);
+  -moz-box-shadow: 0px 0px 29px 1px rgba(0,0,0,0.32);
+  box-shadow: 0px 0px 29px 1px rgba(0,0,0,0.32);
+}
+
+#ExplorerForm table{
+  margin-bottom: 60px;
+}
+
+#ExplorerForm .slider-container{
+  padding: 0px 80px 0px 80px;
+}
+
+.slider-handle {
+  background-image: linear-gradient(to bottom,#2a9f9f 0,#2a9f9f 100%)
+}
+
+/* Links */
+a {
+    color: #2a9f9f;
+    word-wrap: break-word;
+
+    -webkit-transition: color 0.1s ease-in, background 0.1s ease-in;
+    -moz-transition: color 0.1s ease-in, background 0.1s ease-in;
+    -ms-transition: color 0.1s ease-in, background 0.1s ease-in;
+    -o-transition: color 0.1s ease-in, background 0.1s ease-in;
+    transition: color 0.1s ease-in, background 0.1s ease-in;
+}
+
+a:hover,
+a:focus {
+    color: #7b7b7b;
+    text-decoration: none;
+    outline: 0;
+}
+
+a:before,
+a:after {
+    -webkit-transition: color 0.1s ease-in, background 0.1s ease-in;
+    -moz-transition: color 0.1s ease-in, background 0.1s ease-in;
+    -ms-transition: color 0.1s ease-in, background 0.1s ease-in;
+    -o-transition: color 0.1s ease-in, background 0.1s ease-in;
+    transition: color 0.1s ease-in, background 0.1s ease-in;
+}
+
+ hr {
+    display: block;
+    height: 1px;
+    border: 0;
+    border-top: 1px solid #efefef;
+    margin: 1em 0;
+    padding: 0;
+}
+
+.profile-picture{
+  border-radius: 50%;
+  border: 4px solid #2a9f9f;
+  -webkit-box-shadow: 0px 0px 29px 1px rgba(0,0,0,0.32);
+  -moz-box-shadow: 0px 0px 29px 1px rgba(0,0,0,0.32);
+  box-shadow: 0px 0px 29px 1px rgba(0,0,0,0.32);
+  height: 208px;
+  width: 208px;
+}
+
+.btn-primary {
+  color: #fff;
+  background-color: #2a9f9f;
+  border-color: #2a9f9f;
+}
+
+.btn-primary:hover {
+  color: #fff;
+  background-color: #1f7a7a;
+  border-color: #1f7a7a;
+}
+
+.party-card {
+  padding-top: 20px;
+  min-height: 400px;
+}
+
+.shadow-1:hover {
+  -webkit-box-shadow: 1px 2px 61px -14px #3498db;
+  -moz-box-shadow: 1px 2px 61px -14px #3498db;
+  box-shadow: 1px 2px 61px -14px #3498db;
+}
+
+.shadow-2:hover {
+  -webkit-box-shadow: 1px 2px 61px -14px #db3434;
+  -moz-box-shadow: 1px 2px 61px -14px #db3434;
+  box-shadow: 1px 2px 61px -14px #db3434;
+}
+
+.shadow-3:hover {
+  -webkit-box-shadow: 1px 2px 61px -14px #f29534;
+  -moz-box-shadow: 1px 2px 61px -14px #f29534;
+  box-shadow: 1px 2px 61px -14px #f29534;
+}
+
+.shadow-4:hover {
+  -webkit-box-shadow: 1px 2px 61px -14px #9c1cd1;
+  -moz-box-shadow: 1px 2px 61px -14px #9c1cd1;
+  box-shadow: 1px 2px 61px -14px #9c1cd1;
+}
+
+.tag {
+  font-size: 14px;
+  white-space: nowrap;
+  color: #dfdfdf;"
+}
+
+.hovereParty1:hover {
+  color: #3498db;
+}
+
+.hovereParty2:hover {
+  color: #db3434;
+}
+
+.hovereParty3:hover {
+  color: #f29534;
+}
+
+.hovereParty4:hover {
+  color: #9c1cd1;
+}
+
+.borderless tbody tr td, .borderless tbody tr th, .borderless thead tr th {
+    border: none;
+}
+
+.borderless {
+    margin-bottom: 0;
+}
+
+.tag {
+  overflow: hidden;
+  display: inline-block;
+  font-size: 24px;
+}
+
+.test-fade-bg {
+    /* background-image: linear-gradient(rgba(167, 206, 224, 0.88), #f2f2f2), url('/img/header-bg.jpg'); */
+}
+
+.panel-group{
+  border-bottom: 1px solid #efefef;
+}
+
+.borderbox {
+  border: 1px solid #efefef;
+  border-bottom: 0;
+}
+
+.progress-bar-sopty {
+  background-color: #d56060;"
+}
+
+.panel-group .panel-heading+.panel-collapse>.list-group, .panel-group .panel-heading+.panel-collapse>.panel-body {
+  border-top: none;
+}
+
+.padd-side {
+  padding-right: 35px;
+  padding-left: 35px;
+}
+
+.navbar {
+  margin-bottom: 0px;
+}
+
+.navbar-custom {
+  border: 0px;
+  border-radius: 0px;
+}
+
+.navbar-default {
+  background-color: #2a9f9f;
+}
+
+.navbar-default .navbar-nav>li>a {
+    color: #ededed;
+  }
+
+.navbar-default .navbar-brand {
+  color: #fff;
+  font-weight: 700;
+}
+
+.navbar-default .navbar-nav > .active > a {
+  min-height: 56px;
+  background-color: #bd986d;
+  font-weight: 700;
+  color: #fff;
+}
+
+.navbar-default .navbar-nav > .active > a:hover {
+  background-color: #9c7d59;
+  font-weight: 700;
+  color: #fff;
+}
+
+/*TILT*/
+.tilt {
+  -webkit-transition: all 0.5s ease;
+     -moz-transition: all 0.5s ease;
+       -o-transition: all 0.5s ease;
+      -ms-transition: all 0.5s ease;
+          transition: all 0.5s ease;
+}
+
+.tilt:hover {
+  -webkit-transform: rotate(-10deg);
+     -moz-transform: rotate(-10deg);
+       -o-transform: rotate(-10deg);
+      -ms-transform: rotate(-10deg);
+          transform: rotate(-10deg);
+}
+
+.col-pad {
+  padding-top: 15px;
+  padding-bottom: 15px;
+}
+
+/* ==========================================================================
+   Wrap Sections
+   ========================================================================== */
+
+#headerwrap {
+	background: url(../img/header-joy.jpg) no-repeat center top;
+	padding: 15px;
+	text-align:center;
+	background-attachment: relative;
+	background-position: center center;
+	height: 380px;
+	width: 100%;
+  margin-bottom: -140px;
+
+  -webkit-background-size: 100%;
+  -moz-background-size: 100%;
+  -o-background-size: 100%;
+  background-size: 100%;
+
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+}
+
+#headerwrap h1 {
+	margin-top: 36px;
+	color: white;
+	font-size: 60px;
+	font-weight: 300;
+	letter-spacing: 3px;
+}
+
+#headerwrap h2 {
+	color: white;
+	font-size: 40px;
+	font-weight: 700;
+	letter-spacing: 2px;
+	text-transform: uppercase;
+}
+
+/* Dark Grey Wrap */
+#dg {
+	background: #e0e0e0;
+	padding-top: 70px;
+	padding-bottom: 70px;
+	text-align: center;
+}
+
+#dg h4 {
+	font-weight: 700;
+}
+
+/* Light Grey */
+#lg {
+	background: #ebebeb;
+	padding-top: 70px;
+	padding-bottom: 70px;
+	text-align: center;
+}
+
+#lg h4 {
+	font-weight: 700;
+}
+
+
+/* Red Wrap */
+#r {
+	background: #ff7878;
+	padding-top: 35px;
+	padding-bottom: 35px;
+}
+
+#r h4 {
+	color: white;
+	font-weight: 700;
+}
+
+#r p {
+	color: white;
+}
+
+/* Blue Wrap */
+
+#blue {
+	background: #3498db;
+	padding-top: 35px;
+	padding-bottom: 35px;
+}
+
+#blue h4 {
+	color: white;
+	font-weight: 700;
+}
+
+#blue p {
+	color: white;
+}
+
+
+
+/* Footer Wrap */
+#f {
+	background: #2d2d2d;
+	padding-top: 30px;
+	padding-bottom: 30px;
+}
+
+#f i {
+	color: #bdbdbd;
+	font-size: 30px;
+	padding: 20px;
+}
+
+#f i:hover {
+	color: #2a9f9f;
+}
+
+/****** SECTIONS *****/
+
+.w {
+	padding-top: 35px;
+}
+
+.w h4 {
+	font-weight: 700;
+}
+
+.w i {
+	color: #555;
+	font-size: 30px;
+}
+
+
+.wb {
+	padding-top: 35px;
+	margin-bottom: 0px;
+}
+
+.wb h4 {
+	font-weight: 700;
+}
+
+.desc {
+	padding-top: 35px;
+}
+
+.desc h4 {
+	font-weight: 700;
+}
+
+.desc i {
+	color: #ff7878;
+	font-size: 12px;
+	padding: 5px;
+}
+
+/***** MODAL CONTACT *****/
+.modal-content {
+	border-radius: 0px;
+
+}
+
+.modal-header {
+	background: #bdbdbd;
+	color: white;
+}
+
+.modal-header h4 {
+	font-weight: 700;
+}
+
+.modal-body {
+	background: #f2f2f2;
+    font-family: "Lato";
+    font-weight: 300;
+    font-size: 16px;
+    color: #555;
+}
+
+.modal-footer {
+	background: #f2f2f2;
+	margin-top: 0px;
+}
+
+/* ==========================================================================
+   Pricing Tables
+   ========================================================================== */
+
+.pricing-option {
+    padding-bottom: 40px;
+}
+
+.pricing-option .pricing-top {
+    position: relative;
+    background: #222;
+    color: white;
+    text-align: center;
+    font-weight: bold;
+
+    padding: 40px 20px 30px 20px;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+}
+
+.pricing-option .pricing-top .special-label {
+    display: block;
+    width: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    background: #1abc9c;
+    text-transform: uppercase;
+    font-size: 15px;
+    font-weight: bold;
+    padding: 3px 0;
+}
+
+.special .pricing-top {
+    background: black;
+}
+
+.pricing-option .pricing-edition {
+    text-transform: uppercase;
+    display: block;
+    font-size: 25px;
+    letter-spacing: 8px;
+}
+
+.pricing-option .price {
+    display: inline-block;
+    position: relative;
+}
+
+.pricing-option .price sup {
+    position: absolute;
+    top: 50px;
+    left: -10px;
+    font-size: 24px;
+}
+
+.pricing-option .price .price-amount {
+    font-size: 108px;
+    letter-spacing: -4px;
+}
+
+.pricing-option .price small {
+    position: relative;
+    left: -10px;
+    font-size: 18px;
+}
+
+.pricing-option ul {
+    list-style: none;
+    margin: 0;
+    background: #eee;
+    text-align: center;
+    padding-left: 0px;
+}
+
+.pricing-option ul li {
+    border-bottom: solid 1px #e1e1e1;
+    padding-top: 20px;
+    padding-bottom: 20px;
+}
+
+.pricing-option .pricing-signup {
+    display: block;
+    text-align: center;
+    font-size: 18px;
+    font-weight: bold;
+    padding: 15px 10px;
+    color: white;
+    background: #1abc9c;
+}
+
+.pricing-option .pricing-signup:hover {
+    background: #ff7878;
+}

@@ -1,0 +1,199 @@
+
+<br><br>
+
+<div class="container" id="ExplorerForm" style="text-align: center;">
+  <br>
+  <div id="myCarousel" class="carousel slide" data-ride="carousel" data-interval="false">
+    <!-- Indicators -->
+    <ol class="carousel-indicators">
+      <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
+      <li data-target="#myCarousel" data-slide-to="1"></li>
+      <li data-target="#myCarousel" data-slide-to="2"></li>
+      <li data-target="#myCarousel" data-slide-to="3"></li>
+      <li data-target="#myCarousel" data-slide-to="4"></li>
+    </ol>
+
+    <!-- Wrapper for slides -->
+    <div class="carousel-inner" role="listbox">
+
+      <div class="item active">
+        <div>
+          <img src="img/sampleExplorer0.png">
+        </div>
+        <div class="slider-container">
+          <table class="table borderless">
+            <tbody>
+              <tr>
+                <td><input class="slider"></td>
+                <td><input class="slider"></td>
+                <td><input class="slider"></td>
+                <td><input class="slider"></td>
+              </tr>
+              <tr>
+                <td>Baddassness</td>
+                <td>Righteousness</td>
+                <td>Inspiring</td>
+                <td>Pinkness</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <div class="item">
+        <div>
+          <img src="img/sampleExplorer1.png">
+        </div>
+        <div class="slider-container">
+          <table class="table borderless">
+            <tbody>
+              <tr>
+                <td><input class="slider"></td>
+                <td><input class="slider"></td>
+                <td><input class="slider"></td>
+                <td><input class="slider"></td>
+              </tr>
+              <tr>
+                <td>Baddassness</td>
+                <td>Righteousness</td>
+                <td>Inspiring</td>
+                <td>Pinkness</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <div class="item">
+        <div>
+          <img src="img/sampleExplorer2.png">
+        </div>
+        <div class="slider-container">
+          <table class="table borderless">
+            <tbody>
+              <tr>
+                <td><input class="slider"></td>
+                <td><input class="slider"></td>
+                <td><input class="slider"></td>
+                <td><input class="slider"></td>
+              </tr>
+              <tr>
+                <td>Baddassness</td>
+                <td>Righteousness</td>
+                <td>Inspiring</td>
+                <td>Pinkness</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <div class="item">
+        <div>
+          <img src="img/sampleExplorer3.png">
+        </div>
+        <div class="slider-container">
+          <table class="table borderless">
+            <tbody>
+              <tr>
+                <td><input class="slider"></td>
+                <td><input class="slider"></td>
+                <td><input class="slider"></td>
+                <td><input class="slider"></td>
+              </tr>
+              <tr>
+                <td>Baddassness</td>
+                <td>Righteousness</td>
+                <td>Inspiring</td>
+                <td>Pinkness</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <div class="item">
+        <div>
+          <img src="img/sampleExplorer4.png">
+        </div>
+        <div class="slider-container">
+          <table class="table borderless">
+            <tbody>
+              <tr>
+                <td><input class="slider"></td>
+                <td><input class="slider"></td>
+                <td><input class="slider"></td>
+                <td><input class="slider"></td>
+              </tr>
+              <tr>
+                <td>Baddassness</td>
+                <td>Righteousness</td>
+                <td>Inspiring</td>
+                <td>Pinkness</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- Left and right controls -->
+    <a class="left carousel-control" href="#myCarousel" role="button" data-slide="prev">
+      <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
+      <span class="sr-only">Previous</span>
+    </a>
+    <a class="right carousel-control" href="#myCarousel" role="button" data-slide="next">
+      <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
+      <span class="sr-only">Next</span>
+    </a>
+  </div>
+</div>
+
+This is not going to change right know. It is just a placeholder. Will this be shown on completion? Will it be refreshed as the user moves the slides?
+
+<table class="table borderless">
+  <thead>
+    <tr>
+      <th width="200px;"></th>
+      <th></th>
+      <th width="200px;"></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><span style="font-size: 18px;">Conserver</span></td>
+      <td>
+        <div class="progress" style="background-color: #2a9f9f;">
+          <div class="progress-bar progress-bar-sopty" role="progressbar" aria-valuenow="70" aria-valuemin="0" aria-valuemax="100" style="width:<%= conserver %>%">
+           <span class="sr-only"></span>
+          </div>
+        </div>
+      </td>
+      <td><span style="font-size: 18px;">Explorer</span></td>
+    </tr>
+  </tbody>
+</table>
+</div>
+
+<div class="row centered">
+  <div class="col-lg-12">
+    <div id="Homebound">
+      <div style="margin-top: 20px;">
+        <button class="btn btn-primary" style="font-size:32px;" onclick="load('/explorer','#Explorer')">Let me look into your mind...</button>
+      </div>
+    </div>
+  </div>
+  <br><br>
+</div><!-- row -->
+
+<script>
+// Instantiate a slider
+var mySlider = $("input.slider").slider({
+  min:0,
+  max:100,
+  step:1,
+  orientation:'vertical',
+  reversed:true,
+});
+</script>
