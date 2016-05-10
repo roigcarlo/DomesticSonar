@@ -16,38 +16,75 @@ function calculateConserver() {
   return 25
 }
 
-function displayComfort(res, sTerm, lTerm) {
+function displayComfort(res, sTerm, mTerm) {
+
+  // This can be tweaked to match the desired behaviour
+  var MAX_SHORT_LENGHT = 1
+  var MAX_MEDIUM_LENGHT = 5
+  var MATCHES_THRESHLD = 0.6
+
+  // Results
+  var isHomebound = 'Homebound'       // We actually don't need this :(
+  var homeboundVsTastemaker = 0
+
   // for now, make the calculations server-side. This can be moved to the
   // client later on
+  genresShort = []
+  genresMedium = []
 
-  var comfortSongs = 0
-  var comfortGenreS = 0
-  var comfortGenreL = 0
-  var popuS = 0
-  var popuL = 0
-
-  var statistics = {}
-      statistics['r_songs'] = []
-
-  var numSongs = 0
-
-  // Sample code that does nothing
-
-  for(var s in sTerm) {
-    numSongs += 1
-    for(var l in lTerm) {
-      if(sTerm[s].name == lTerm[l].name) {
-        statistics['r_songs'].push(sTerm[s].name)
-        comfortSongs += 1
-      }
+  // Make the list with the short term artists genres
+  for( var a in sTerm) {
+    for( var ag in sTerm[a]['genres']) {
+      genresShort.push(sTerm[a]['genres'][ag])
+    }
+  }
+  // Make the list with the medium term artists genres
+  for( var a in mTerm) {
+    for( var ag in mTerm[a]['genres']) {
+      genresMedium.push(mTerm[a]['genres'][ag])
     }
   }
 
-  // And finally assign an score
+  // Remove duplicities
+  var genresShortUnique = genresShort.filter(function(item, pos) {
+    return genresShort.indexOf(item) == pos
+  })
+
+  var genresMediumUnique = genresMedium.filter(function(item, pos) {
+    return genresMedium.indexOf(item) == pos
+  })
+
+  // Appply the formulas
+  if( genresShortUnique.length <= MAX_SHORT_LENGHT ) {
+    isHomebound = 'Homebound'
+    homeboundVsTastemaker = 1 // I Assume this is the absolute case
+  } else if (genresMediumUnique.length <= MAX_MEDIUM_LENGHT ) {
+    isHomebound = 'Homebound'
+    homeboundVsTastemaker = 1 // I Assume this is the absolute case
+  } else {
+    var genresShortInMedium = genresShortUnique.filter(function(item, pos) {
+      return genresMediumUnique.indexOf(item) > -1
+    })
+
+    var matches = genresShortInMedium.length / genresMediumUnique.length
+
+    if( matches >= MATCHES_THRESHLD ) {
+      isHomebound = 'Homebound'
+    } else {
+      isHomebound = 'Tastemaker'
+    }
+
+    homeboundVsTastemaker = matches
+  }
+
+  // Retun the view with the data
   return res.view('forms/homebound', {
-    tracksS:sTerm,
-    tracksL:lTerm,
-    homebound:calculateHomebound(),
+    genresS:genresShortUnique,
+    genresM:genresMediumUnique,
+    homebound:{
+      result:isHomebound,
+      value:homeboundVsTastemaker
+    }
   });
 }
 
@@ -147,44 +184,42 @@ module.exports = {
 		var access_token = req.session.access_token
 		var refresh_token = req.session.refresh_token
 
-		var topTracksShort = req.session.topTracksShort
-    var topTracksShort = req.session.topTracksShort
+		var topAristsShort = req.session.topArtistsShort
+    var topAristsMedium = req.session.topArtistsMedium
 
     var NUM_SONGS = 20
 
-		if(topTracksShort && topTracksShort) {
+		if(topAristsShort && topAristsMedium) {
 			console.log('using cached track data')
       displayComfort(
         res,
-        req.session.topTracksShort,
-        req.session.topTracksLong
+        req.session.topArtistsShort,
+        req.session.topArtistsMedium
       )
 			// return res.view('forms/tracks', {tracksShort:topTracks});
 		} else {
 			console.log('Fetching topTracks data')
 			var options_short = {
-				url: 'https://api.spotify.com/v1/me/top/tracks?limit='+NUM_SONGS+'&time_range=short_term',
+				url: 'https://api.spotify.com/v1/me/top/artists?limit='+NUM_SONGS+'&time_range=short_term',
 				headers: { 'Authorization': 'Bearer ' + access_token },
 				json: true
 			};
 
-      var options_long = {
-        url: 'https://api.spotify.com/v1/me/top/tracks?limit='+NUM_SONGS+'&time_range=long_term',
+      var options_medium = {
+        url: 'https://api.spotify.com/v1/me/top/artists?limit='+NUM_SONGS+'&time_range=medium_term',
         headers: { 'Authorization': 'Bearer ' + access_token },
         json: true
       };
 
 			// use the access token to access the Spotify Web API
 			request.get(options_short, function(error, response, bodyShort) {
-        request.get(options_long, function(error, response, bodyLong) {
-          req.session.topTracksShort = bodyShort.items
-          req.session.topTracksLong = bodyLong.items
-          console.log(bodyShort)
-          console.log(bodyLong)
+        request.get(options_medium, function(error, response, bodyMedium) {
+          req.session.topArtistsShort = bodyShort.items
+          req.session.topArtistsMedium = bodyMedium.items
           displayComfort(
             res,
-            req.session.topTracksShort,
-            req.session.topTracksLong
+            req.session.topArtistsShort,
+            req.session.topArtistsMedium
           )
         })
       });

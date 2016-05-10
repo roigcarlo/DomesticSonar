@@ -1,3 +1,5 @@
+<h2>You are a <%= homebound['result'] %> !</h2>
+
 <table class="table borderless">
   <thead>
     <tr>
@@ -11,7 +13,7 @@
       <td><span style="font-size: 18px;">Homebound</span></td>
       <td>
         <div class="progress" style="background-color: #2a9f9f;">
-          <div class="progress-bar progress-bar-sopty" role="progressbar" aria-valuenow="70" aria-valuemin="0" aria-valuemax="100" style="width:<%= homebound %>%">
+          <div class="progress-bar progress-bar-sopty" role="progressbar" aria-valuenow="70" aria-valuemin="0" aria-valuemax="100" style="width:<%= homebound['value']*100%>%">
            <span class="sr-only"></span>
           </div>
         </div>
@@ -21,52 +23,26 @@
   </tbody>
 </table>
 
-<br>
-
 <h2>Why is that so?</h1>
 
 <span>Put a contaienr here with a brief description about the formula and how the user's score has been computed</span>
 
 <h3>If you want to know more...</h3>
-This will be filled with some info and maybe tracks? Printing 3/20 as example
+This will be filled with some info and maybe genres
 <br>
 
-<% var l = 0 %>
-<% var r = 0 %>
-
-<div class="row">
+<div class="row" style="text-align:left;">
   <div class="col-md-6">
-    <% tracksS.forEach(function (track) { if (l < 3) {%>
-      <div class="row"  style="text-align:right">
-        <div class="col-md-8">
-          <h3><span style="color: #2a9f9f"><%= track.name %></span></h4>
-          <h4><%= track.album.name %></h3>
-          <h5><%= track.artists[0].name %></h5>
-        </div><!-- col-lg-2 -->
-        <div class="col-md-4">
-          <img src="<%= track.album.images[0].url %>" style="margin-top: 20px; max-width:100%; max-height:100%"></img>
-        </div><!-- col-lg-2 -->
-      </div><!-- row -->
-      </br>
-      <hr style="border-color: #2a9f9f">
-    <% l++}})%>
+    <h3>The list of your most recent listen genres</h3>
+    <% genresS.forEach(function (genre) { %>
+      <li><h4><%= genre %></h4></li>
+    <% })%>
   </div>
-
   <div class="col-md-6">
-    <% tracksL.forEach(function (track) { if (r < 3) {%>
-      <div class="row"  style="text-align:left">
-        <div class="col-md-4">
-          <img src="<%= track.album.images[0].url %>" style="margin-top: 20px; max-width:100%; max-height:100%"></img>
-        </div><!-- col-lg-2 -->
-        <div class="col-md-8">
-          <h3><span style="color: #2a9f9f"><%= track.name %></span></h4>
-          <h4><%= track.album.name %></h3>
-          <h5><%= track.artists[0].name %></h5>
-        </div><!-- col-lg-2 -->
-      </div><!-- row -->
-      </br>
-      <hr style="border-color: #2a9f9f">
-    <% r++}})%>
+    <h3>The list of your mid term listen genres</h3>
+    <% genresM.forEach(function (genre) { %>
+      <li><h4><%= genre %></h4></li>
+    <% })%>
   </div>
 </div>
 
