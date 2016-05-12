@@ -76,4 +76,9 @@ module.exports.routes = {
     action: 'desire'
   },
 
+  '/getExplorerScore': {
+    controller: 'Experience',
+    action: 'getExplorerScore'
+  },
+
 };

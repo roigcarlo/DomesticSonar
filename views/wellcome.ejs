@@ -125,6 +125,31 @@
           $(where).html(data)
         });
       }
+
+      function updateScore(where) {
+
+        var images = ['#explorerImage0', '#explorerImage1', '#explorerImage2', '#explorerImage3']
+        var data = {}
+
+        for(var i in images) {
+          data[images[i]] = {}
+          $(images[i]+' input.slider').each(function(){
+            data[images[i]][$(this).attr('name')] = $(this).attr('value')
+          })
+        }
+
+        $.ajax({
+          url: '/getExplorerScore',
+          data: JSON.stringify(data),
+          method: 'POST',
+          headers: {
+            'content-type': 'application/json'
+          },
+        })
+        .done(function( data ) {
+          $(where).html(data)
+        });
+      }
     </script>
   </body>
 </html>

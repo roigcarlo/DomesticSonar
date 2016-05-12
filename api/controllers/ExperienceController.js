@@ -12,8 +12,23 @@ function calculateHomebound() {
   return 75
 }
 
-function calculateConserver() {
-  return 25
+function calculateExplorer(data) {
+
+  var value = 0
+
+  // Formula is wrong. For the results you want it should be
+  // (C1/100 + C2/100 + C3/100 + (1-C4/100))/4
+  // Otherwise the value will never be 1
+  for(var i in data) {
+    value += (
+            parseInt(data[i]['Amazing']) +
+            parseInt(data[i]['Chills' ]) +
+            parseInt(data[i]['Intense']) +
+      100 - parseInt(data[i]['Boring' ])
+    )/16.0
+  }
+
+  return value
 }
 
 function displayComfort(res, sTerm, mTerm) {
@@ -232,6 +247,17 @@ module.exports = {
 
   desire: function(req, res) {
     return res.view('forms/desire', {response:'body'});
+  }, // desire
+
+  getExplorerScore: function(req, res) {
+
+    console.log(req.body)
+
+    return res.view('forms/scoreBar', {
+      left:'Conserver',
+      right:'Explorer',
+      value: calculateExplorer(req.body)
+    });
   }, // desire
 
 };
