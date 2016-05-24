@@ -35,7 +35,7 @@ module.exports = {
   login: function (req, res) {
 
 		var state = generateRandomString(16);
-		var scope = 'user-read-private user-read-email user-top-read';
+		var scope = 'user-read-private user-read-email user-top-read playlist-read-private playlist-read-collaborative';
 
 		res.cookie(stateKey, state);
 

@@ -81,4 +81,9 @@ module.exports.routes = {
     action: 'getExplorerScore'
   },
 
+  '/calculateSong': {
+    controller: 'Experience',
+    action: 'calculateSong'
+  }
+
 };
