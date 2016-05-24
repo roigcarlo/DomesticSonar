@@ -89,6 +89,27 @@
       </div>
     </div><!-- row -->
 
+    <div class="row centered">
+      <div class="col-lg-12">
+        <div style="margin-top: 20px;">
+          <button class="btn btn-primary" style="font-size:32px;" onclick="calculateSong(1,1,'#Song')">Test song H C</button>
+          <button class="btn btn-primary" style="font-size:32px;" onclick="calculateSong(1,0,'#Song')">Test song H E</button>
+          <button class="btn btn-primary" style="font-size:32px;" onclick="calculateSong(0,1,'#Song')">Test song T C</button>
+          <button class="btn btn-primary" style="font-size:32px;" onclick="calculateSong(0,0,'#Song')">Test song T E</button>
+        </div>
+      </div>
+    </div>
+    
+    <br>
+
+    <div class="row centered">
+      <div class="well">
+        <div id="Song">
+          Here goes the song
+        </div>
+      </div>
+    </div><!-- row -->
+
 		<br><br>
 
 	</div><!-- container -->
@@ -141,6 +162,21 @@
         $.ajax({
           url: '/getExplorerScore',
           data: JSON.stringify(data),
+          method: 'POST',
+          headers: {
+            'content-type': 'application/json'
+          },
+        })
+        .done(function( data ) {
+          $(where).html(data)
+        });
+      }
+
+      function calculateSong(hvt,cve,where) {
+
+        $.ajax({
+          url: '/calculateSong',
+          data: JSON.stringify({hvt:hvt,cve:cve}),
           method: 'POST',
           headers: {
             'content-type': 'application/json'
