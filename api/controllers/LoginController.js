@@ -45,7 +45,8 @@ module.exports = {
 	      client_id: SpotifyService.clientId,
 	      scope: scope,
 	      redirect_uri: SpotifyService.redirectUri,
-	      state: state
+	      state: state,
+        show_dialog: true
 	    }));
 
   }

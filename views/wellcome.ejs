@@ -99,7 +99,17 @@
         </div>
       </div>
     </div>
-    
+
+    <div class="row centered">
+      <div class="col-lg-12">
+        <div id="Desire">
+          <div style="margin-top: 20px;">
+            <button class="btn btn-primary" style="font-size:32px;" onclick="logout()">Logout</button>
+          </div>
+        </div>
+      </div>
+    </div><!-- row -->
+
     <br>
 
     <div class="row centered">
@@ -136,7 +146,7 @@
 
     <!-- page specific -->
     <script src="js/test.js"></script>
-
+<script src="//connect.facebook.net/en_US/all.js"></script>
     <script>
       function load(what, where) {
         $.ajax({
@@ -186,6 +196,38 @@
           $(where).html(data)
         });
       }
+
+      function logout() {
+        FB.init({
+          appId  : '141788499567539',
+        });
+
+      console.log("HOLA??????")
+
+        FB.getLoginStatus(function(response) {
+          if (response.status === 'connected') {
+            console.log('1',response)
+            // the user is logged in and has authenticated your
+            // app, and response.authResponse supplies
+            // the user's ID, a valid access token, a signed
+            // request, and the time the access token
+            // and signed request each expire
+            var uid = response.authResponse.userID;
+            var accessToken = response.authResponse.accessToken;
+          } else if (response.status === 'not_authorized') {
+            console.log('2',response)
+            // the user is logged in to Facebook,
+            // but has not authenticated your app
+          } else {
+            console.log('3',response)
+            // the user isn't logged in to Facebook.
+          }
+         });
+
+        // window.location = "/";
+
+
+    }
     </script>
   </body>
 </html>

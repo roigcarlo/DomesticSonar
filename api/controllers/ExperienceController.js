@@ -151,6 +151,8 @@ module.exports = {
 					req.session.access_token = body.access_token
 					req.session.refresh_token = body.refresh_token
 
+          console.log(req.session.access_token)
+
 					res.redirect('/experience')
 
 					//return res.view('wellcome', {response:body});
@@ -171,8 +173,9 @@ module.exports = {
 		var refresh_token = req.session.refresh_token
 
 		var profileCache = req.session.profileCache
+    var validProfile = req.session.validProfile
 
-    console.log(profileCache)
+    console.log("Cache profile: ", profileCache)
 
 		if(profileCache) {
 			console.log('Using cache data')
@@ -187,9 +190,16 @@ module.exports = {
 
 			// use the access token to access the Spotify Web API
 			request.get(options, function(error, response, body) {
-				 console.log(body);
-				 req.session.profileCache = body
-				 return res.view('wellcome', {response:body});
+        if(!error && response.statusCode === 200) {
+				   req.session.profileCache = body
+				   return res.view('wellcome', {response:body});
+        }
+        else {
+          res.redirect('/error' +
+            querystring.stringify({
+              error: 'invalid_profile'
+            }));
+        }
 			});
 		}
 	}, // wellcome

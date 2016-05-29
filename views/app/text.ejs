@@ -1,0 +1,217 @@
+<!-- Header top -->
+<style>
+.typed-cursor{
+    opacity: 1;
+    -webkit-animation: blink 0.7s infinite;
+    -moz-animation: blink 0.7s infinite;
+    animation: blink 0.7s infinite;
+}
+@keyframes blink{
+    0% { opacity:1; }
+    50% { opacity:0; }
+    100% { opacity:1; }
+}
+@-webkit-keyframes blink{
+    0% { opacity:1; }
+    50% { opacity:0; }
+    100% { opacity:1; }
+}
+@-moz-keyframes blink{
+    0% { opacity:1; }
+    50% { opacity:0; }
+    100% { opacity:1; }
+}
+
+.typed-text-container {
+    margin-top: 15%;
+    color: white;
+    padding: 5%;
+    font-size: 8vw;
+    width:100%;
+    line-height: 110%;
+}
+
+.typed-text {
+    font-weight: bold;
+}
+
+.spotygreen {
+    color:rgb(57, 194, 95);
+}
+
+#typed-name {
+  font-size: 5vw;
+  line-height: 50%;
+}
+
+.footer-text {
+  font-weight: bold;
+  font-size: 5vw;
+  color:rgb(57, 194, 95);
+}
+
+html,
+body {
+  height: 100%;
+  /* The html and body elements cannot have any padding or margin. */
+}
+
+/* Wrapper for page content to push down footer */
+#wrap {
+  min-height: 100%;
+  height: auto !important;
+  height: 100vh;
+  /* Negative indent footer by it's height */
+  margin: 0 auto -15vh;
+}
+
+.allport {
+  min-height: 100vh;
+  height: auto !important;
+  height: 100vh;
+  background-color: black;
+}
+
+/* Set the fixed height of the footer here */
+#push,
+#footer {
+  height: 15vh;
+}
+#footer {
+}
+
+.overlay {
+  background-color: rgba(25, 25, 28, 0.67);
+  width: 100vw;
+  height: 100vh;"
+}
+
+/* Lastly, apply responsive CSS fixes as necessary */
+@media (max-width: 767px) {
+  #footer {
+    margin-left: -20px;
+    margin-right: -20px;
+    padding-left: 20px;
+    padding-right: 20px;
+  }
+}
+
+#VContainer {
+    width: 100%;
+    height: 100%;
+    position: relative;
+    overflow: hidden;
+}
+
+#VContainer video {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    /* The following will size the video to fit the full container. Not necessary, just nice.*/
+    min-width: 100%;
+    min-height: 100%;
+    -webkit-transform: translate(-50%,-50%);
+    -moz-transform: translate(-50%,-50%);
+    -ms-transform: translate(-50%,-50%);
+    transform: translate(-50%,-50%);
+    z-index: 0;
+}
+
+#VContainer div {
+    position: relative;
+    z-index: 1;
+}
+
+</style>
+
+<!-- Slider main container -->
+<div class="swiper-container">
+
+    <!-- Additional required wrapper -->
+    <div class="swiper-wrapper">
+        <!-- Slides -->
+        <div class="swiper-slide">
+          <div id="VContainer">
+            <video id="videobk" class="vjs-tech" loop="" autobuffer>
+              <source src="BigBuck.m4v">
+              <source src="BigBuck.webm" type="video/webm">
+              <source src="BigBuck.theora.ogv" type="video/ogg">
+              <!-- <source src="http://static-p.iuqo.com/media/home/home/video/cloud.mp4"> -->
+            </video>
+
+            <div id="wrap">
+              <div class="overlay">
+                <div class="row" style="margin:0px;">
+                  <div class="col-xs-3" style="padding:3%; text-align: left;">
+                    <img src="img/dds_w.png" height="100%" width="100%">
+                  </div>
+                  <div class="col-xs-6">
+                  </div>
+                  <div class="col-xs-3" style="padding:3%; text-align: right;">
+                    <img src="img/spotify_w.png" height="100%" width="100%">
+                  </div>
+                </div><!-- row -->
+                <div class="typed-text-container">
+                  <span id="message1">
+                </div>
+              </div>
+            </div> <!-- Wrapp -->
+
+            <div id="footer" class="footer-text">
+              <div class="container centered">
+                <span id="linkPlay" onclick="playv()">Slide to continue</span>
+              </div>
+            </div>
+
+          </div>
+        </div>
+        <div class="swiper-slide">
+          <div class="allport footer-text">
+            We're only here to make you go
+          </div>
+        </div>
+        <div class="swiper-slide">
+          <div class="allport footer-text">
+           5 minutos for the minute of pain
+          </div>
+        </div>
+    </div>
+
+</div>
+
+
+
+
+
+<script src="https://code.jquery.com/jquery-1.10.2.min.js"></script>
+<script src="js/typed.js"></script>
+
+<script>
+  $(function(){
+      $("#message1").typed({
+        strings: ['<span class="typed-text spotygreen">Hello </span> <span id="typed-name">Peppa</span>  <br> <span class="typed-text">Your are about to <br> create a future <br> memory and become <br> part of a scientific <br> resarch on human <br> behaviours.</span>'],
+        contentType: 'html',
+        typeSpeed: 10,
+        showCursor: false,
+        callback: function () {
+          $("#typed-name").typed({
+            strings: ['Obama', 'Charlio', 'Juan de las nieves', 'Daenerys Targaryen', 'Darkness my old friend'],
+            contentType: 'html',
+            typeSpeed: 10,
+            loop: true,
+            showCursor: true,
+            cursorChar: '_'
+          });
+        }
+      });
+  });
+
+  function playv() {
+      document.getElementById('videobk').play();
+  }
+
+  $(document).ready(function () {
+    playv();
+  })
+
+</script>

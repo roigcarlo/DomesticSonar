@@ -84,6 +84,10 @@ module.exports.routes = {
   '/calculateSong': {
     controller: 'Experience',
     action: 'calculateSong'
-  }
+  },
+
+  '/test': {
+    view: 'app/text'
+  },
 
 };

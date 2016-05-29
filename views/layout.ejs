@@ -31,8 +31,12 @@
     <!--STYLES-->
     <link rel="stylesheet" href="/styles/bootstrap-slider.min.css">
     <link rel="stylesheet" href="/styles/bootstrap.min.css">
+    <link rel="stylesheet" href="/styles/font-awesome.min.css">
     <link rel="stylesheet" href="/styles/importer.css">
+    <link rel="stylesheet" href="/styles/jquery.fullpage.min.css">
     <link rel="stylesheet" href="/styles/main.css">
+    <link rel="stylesheet" href="/styles/swiper.css">
+    <link rel="stylesheet" href="/styles/swiper.min.css">
     <!--STYLES END-->
   </head>
 
@@ -91,10 +95,96 @@
     -->
 
     <!--SCRIPTS-->
+    <script src="https://code.jquery.com/jquery-1.10.2.min.js"></script>
     <script src="/js/dependencies/sails.io.js"></script>
+    <script src="/js/Chart.js"></script>
     <script src="/js/bootstrap-slider.min.js"></script>
     <script src="/js/bootstrap.min.js"></script>
+    <script src="/js/clean-blog.min.js"></script>
+    <script src="/js/fullpage/jquery.fullpage.js"></script>
+    <script src="/js/qrcode.js"></script>
+    <script src="/js/qrcode.min.js"></script>
+    <script src="/js/swiper.jquery.js"></script>
     <script src="/js/test.js"></script>
+    <script src="/js/typed.js"></script>
     <!--SCRIPTS END-->
+
+    <script>
+
+    $(document).ready(function () {
+    //initialize swiper when document ready
+    var mySwiper = new Swiper ('.swiper-container', {
+      // Optional parameters
+      direction: 'horizontal',
+      loop: false,
+      effect: 'slide',
+    })
+  });
+    // $(document).ready(function() {
+    //     $('#fullpage').fullpage();
+    // });
+
+    // $(document).ready(function() {
+    //   $('#fullpage').fullpage({
+    //       //Navigation
+    //       // menu: '#menu',
+    //       // lockAnchors: false,
+    //       // anchors:['firstPage', 'secondPage'],
+    //       // navigation: false,
+    //       // navigationPosition: 'right',
+    //       // navigationTooltips: ['firstSlide', 'secondSlide'],
+    //       // showActiveTooltip: false,
+    //       // slidesNavigation: true,
+    //       // slidesNavPosition: 'bottom',
+    //
+    //       // //Scrolling
+    //       // css3: true,
+    //       // scrollingSpeed: 700,
+    //       // autoScrolling: true,
+    //       // fitToSection: true,
+    //       // fitToSectionDelay: 1000,
+    //       // scrollBar: false,
+    //       // easing: 'easeInOutCubic',
+    //       // easingcss3: 'ease',
+    //       // loopBottom: false,
+    //       // loopTop: false,
+    //       // loopHorizontal: true,
+    //       // continuousVertical: false,
+    //       // normalScrollElements: '#element1, .element2',
+    //       // scrollOverflow: false,
+    //       // scrollOverflowOptions: null,
+    //       // touchSensitivity: 15,
+    //       // normalScrollElementTouchThreshold: 5,
+    //
+    //       //Accessibility
+    //       // keyboardScrolling: true,
+    //       // animateAnchor: true,
+    //       // recordHistory: true,
+    //       //
+    //       // //Design
+    //       // controlArrows: true,
+    //       // verticalCentered: true,
+    //       // sectionsColor : ['#ccc', '#fff'],
+    //       // paddingTop: '3em',
+    //       // paddingBottom: '10px',
+    //       // fixedElements: '#header, .footer',
+    //       // responsiveWidth: 0,
+    //       // responsiveHeight: 0,
+    //       //
+    //       // //Custom selectors
+    //       // sectionSelector: '.section',
+    //       // slideSelector: '.slide',
+    //
+    //       //events
+    //       // onLeave: function(index, nextIndex, direction){},
+    //       // afterLoad: function(anchorLink, index){},
+    //       // afterRender: function(){},
+    //       // afterResize: function(){},
+    //       // afterSlideLoad: function(anchorLink, index, slideAnchor, slideIndex){},
+    //       // onSlideLeave: function(anchorLink, index, slideIndex, direction, nextSlideIndex){}
+    //   });
+    // });
+    </script>
+
   </body>
 </html>

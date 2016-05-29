@@ -9,6 +9,27 @@ setTimeout(function sunrise () {
     document.getElementsByClassName('header')[0].style.backgroundColor = '#118798';
 }, 0);
 </script>
+<!-- <script>window.top.location = 'https://www.facebook.com';</script> -->
+
+<script src="https://spotify.com/us/logout"></script>
+<script src="//connect.facebook.net/en_US/all.js"></script>
+<script>
+  // function facebookLogout(){
+  //       FB.getLoginStatus(function(response) {
+  //           console.log(response)
+  //               FB.logout(function(response) {
+  //                   // this part just clears the $_SESSION var
+  //                   // replace with your own code
+  //                   $.post("/logout").done(function() {
+  //                       $('#status').html('<p>Logged out.</p>');
+  //                   });
+  //               });
+  //
+  //       });
+  //   }
+  //
+  //   facebookLogout();
+</script>
 
 <div class="default-page">
     <div class="header">
@@ -75,3 +96,20 @@ setTimeout(function sunrise () {
         </div>
     </div>
 </div>
+
+<div id="qrcode"></div>
+
+<script src="https://code.jquery.com/jquery-1.10.2.min.js"></script>
+<script src="/js/qrcode.js"></script>
+<script src="/js/qrcode.min.js"></script>
+<script type="text/javascript">
+
+  new QRCode("qrcode", {
+    text: "http://192.168.1.6:1337/",
+    width: 256,
+    height: 256,
+    colorDark : "#000000",
+    colorLight : "#ffffff",
+    correctLevel : QRCode.CorrectLevel.H
+})
+</script>
