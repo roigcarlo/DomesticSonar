@@ -90,4 +90,13 @@ module.exports.routes = {
     view: 'app/text'
   },
 
+  '/testTrack': {
+    view: 'test/trackFeatures'
+  },
+
+  '/sendTrackFeatures': {
+    controller: 'Track',
+    action: 'sendTrackFeatures'
+  },
+
 };

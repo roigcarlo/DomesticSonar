@@ -1,0 +1,34 @@
+Track-uri: <input id="track" value="0eGsygTp906u18L0Oimnem"></input>
+Host: <input id="host" value="localhost"></input>
+Port: <input id="port" value="5005"></input>
+Fs: <input id="fs" value="1"></input>
+
+<button class="btn" onClick="sendTrackFeatures('#res')">Send track features</button>
+
+<div id="res"></div>
+
+
+<script src="https://code.jquery.com/jquery-1.10.2.min.js"></script>
+<script>
+
+function sendTrackFeatures(where) {
+  const track = $('#track').val()
+  const host = $('#host').val()
+  const port = $('#port').val()
+  const fs = $('#fs').val()
+
+  $.ajax({
+    url: '/sendTrackFeatures',
+    data: {
+      track: track,
+      host: host,
+      port: port,
+      fs: fs,
+    },
+    method: 'POST',
+  })
+  .done(function( data ) {
+    $(where).html(data)
+  });
+}
+</script>
