@@ -48,7 +48,8 @@ module.exports = {
       if(forceScape == 3)
         toSend = toSend.replace(/"/g, '\\\"')
 
-      client.send(toSend, 0, toSend.length, port, host, function (err) {
+      var message = new Buffer(toSend);
+      client.send(message, 0, message.length, port, host, function (err) {
         client.close();
         console.log(toSend)
       });
