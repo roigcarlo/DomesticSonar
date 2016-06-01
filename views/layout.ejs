@@ -67,7 +67,7 @@
     -->
 
     <!--TEMPLATES-->
-    
+
     <!--TEMPLATES END-->
 
 
@@ -109,81 +109,56 @@
     <!--SCRIPTS END-->
 
     <script>
+      $(document).ready(function () {
+        //initialize swiper when document ready
+        var mySwiper = new Swiper ('.swiper-container', {
+          // Optional parameters
+          direction: 'horizontal',
+          loop: false,
+          effect: 'slide',
+          shortSwipes: false,
+          allowSwipeToPrev: false,
+        })
 
-    $(document).ready(function () {
-    //initialize swiper when document ready
-    var mySwiper = new Swiper ('.swiper-container', {
-      // Optional parameters
-      direction: 'horizontal',
-      loop: false,
-      effect: 'slide',
-    })
-  });
-    // $(document).ready(function() {
-    //     $('#fullpage').fullpage();
-    // });
+        var typetexts = {
+          'app-1': {
+            strings: ['<span class="typed-text spotygreen">Hello </span> <span id="typed-name">Peppa</span>  <br> <span class="typed-text">Your are about to <br> create a future <br> memory and become <br> part of a scientific <br> resarch on human <br> behaviours.</span>'],
+            contentType: 'html',
+            typeSpeed: 20,
+            showCursor: false,
+            callback: function () {
+              $("#typed-name").typed({
+                strings: ['Obama', 'Charlio', 'Juan de las nieves', 'Daenerys Targaryen', 'Darkness my old friend'],
+                contentType: 'html',
+                typeSpeed: 20,
+                loop: true,
+                showCursor: true,
+                cursorChar: '_'
+              });
+            }
+          },
+          'app-2':{
+            strings: ['<span id="message2">In order to create a <br> future memory you <br> need to know a bit <br> more about your <br> present self. <br><br> Today you will be able <br> to discover your own <br> musical habits and <br> personality traits.</span>'],
+            contentType: 'html',
+            typeSpeed: 20,
+            showCursor: false,
+            showCursor: true,
+            startDelay: 1000,
+            cursorChar: '_'
+          }
+        }
 
-    // $(document).ready(function() {
-    //   $('#fullpage').fullpage({
-    //       //Navigation
-    //       // menu: '#menu',
-    //       // lockAnchors: false,
-    //       // anchors:['firstPage', 'secondPage'],
-    //       // navigation: false,
-    //       // navigationPosition: 'right',
-    //       // navigationTooltips: ['firstSlide', 'secondSlide'],
-    //       // showActiveTooltip: false,
-    //       // slidesNavigation: true,
-    //       // slidesNavPosition: 'bottom',
-    //
-    //       // //Scrolling
-    //       // css3: true,
-    //       // scrollingSpeed: 700,
-    //       // autoScrolling: true,
-    //       // fitToSection: true,
-    //       // fitToSectionDelay: 1000,
-    //       // scrollBar: false,
-    //       // easing: 'easeInOutCubic',
-    //       // easingcss3: 'ease',
-    //       // loopBottom: false,
-    //       // loopTop: false,
-    //       // loopHorizontal: true,
-    //       // continuousVertical: false,
-    //       // normalScrollElements: '#element1, .element2',
-    //       // scrollOverflow: false,
-    //       // scrollOverflowOptions: null,
-    //       // touchSensitivity: 15,
-    //       // normalScrollElementTouchThreshold: 5,
-    //
-    //       //Accessibility
-    //       // keyboardScrolling: true,
-    //       // animateAnchor: true,
-    //       // recordHistory: true,
-    //       //
-    //       // //Design
-    //       // controlArrows: true,
-    //       // verticalCentered: true,
-    //       // sectionsColor : ['#ccc', '#fff'],
-    //       // paddingTop: '3em',
-    //       // paddingBottom: '10px',
-    //       // fixedElements: '#header, .footer',
-    //       // responsiveWidth: 0,
-    //       // responsiveHeight: 0,
-    //       //
-    //       // //Custom selectors
-    //       // sectionSelector: '.section',
-    //       // slideSelector: '.slide',
-    //
-    //       //events
-    //       // onLeave: function(index, nextIndex, direction){},
-    //       // afterLoad: function(anchorLink, index){},
-    //       // afterRender: function(){},
-    //       // afterResize: function(){},
-    //       // afterSlideLoad: function(anchorLink, index, slideAnchor, slideIndex){},
-    //       // onSlideLeave: function(anchorLink, index, slideIndex, direction, nextSlideIndex){}
-    //   });
-    // });
+        mySwiper.on('onTransitionStart', function () {
+          $(".swiper-slide.swiper-slide-next #message").typed('reset')
+        });
+
+        mySwiper.on('onTransitionStart', function () {
+          var slide_href = $('.swiper-slide.swiper-slide-active').attr('href')
+          $(".swiper-slide.swiper-slide-active #message").typed(
+            typetexts[slide_href]
+          );
+        });
+      });
     </script>
-
   </body>
 </html>

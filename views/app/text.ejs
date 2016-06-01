@@ -65,6 +65,20 @@ body {
   margin: 0 auto -15vh;
 }
 
+#up-half-wrap {
+  min-height: 50vh;
+  height: 50vh;
+  /* Negative indent footer by it's height */
+  margin: 0 auto -15%;
+}
+
+#bot-half-wrap {
+  min-height: 50vh;
+  height: 50vh;
+  /* Negative indent footer by it's height */
+  margin: 0 auto -15vh;
+}
+
 .allport {
   min-height: 100vh;
   height: auto !important;
@@ -130,50 +144,20 @@ body {
     <!-- Additional required wrapper -->
     <div class="swiper-wrapper">
         <!-- Slides -->
-        <div class="swiper-slide">
-          <div id="VContainer">
-            <video id="videobk" class="vjs-tech" loop="" autobuffer>
-              <source src="BigBuck.m4v">
-              <source src="BigBuck.webm" type="video/webm">
-              <source src="BigBuck.theora.ogv" type="video/ogg">
-              <!-- <source src="http://static-p.iuqo.com/media/home/home/video/cloud.mp4"> -->
-            </video>
-
-            <div id="wrap">
-              <div class="overlay">
-                <div class="row" style="margin:0px;">
-                  <div class="col-xs-3" style="padding:3%; text-align: left;">
-                    <img src="img/dds_w.png" height="100%" width="100%">
-                  </div>
-                  <div class="col-xs-6">
-                  </div>
-                  <div class="col-xs-3" style="padding:3%; text-align: right;">
-                    <img src="img/spotify_w.png" height="100%" width="100%">
-                  </div>
-                </div><!-- row -->
-                <div class="typed-text-container">
-                  <span id="message1">
-                </div>
-              </div>
-            </div> <!-- Wrapp -->
-
-            <div id="footer" class="footer-text">
-              <div class="container centered">
-                <span id="linkPlay" onclick="playv()">Slide to continue</span>
-              </div>
-            </div>
-
-          </div>
+        <div class="swiper-slide" href="app-1">
+          <%- include app-1 %>
         </div>
-        <div class="swiper-slide">
-          <div class="allport footer-text">
-            We're only here to make you go
-          </div>
+        <div class="swiper-slide" href="app-2">
+          <%- include app-2 %>
         </div>
-        <div class="swiper-slide">
-          <div class="allport footer-text">
-           5 minutos for the minute of pain
-          </div>
+        <div class="swiper-slide" href="app-3">
+          <%- include app-3 %>
+        </div>
+        <div class="swiper-slide" href="app-4">
+        </div>
+        <div class="swiper-slide" href="fakeLoad">
+        </div>
+        <div class="swiper-slide" href="app-5">
         </div>
     </div>
 
@@ -187,6 +171,7 @@ body {
 <script src="js/typed.js"></script>
 
 <script>
+
   $(function(){
       $("#message1").typed({
         strings: ['<span class="typed-text spotygreen">Hello </span> <span id="typed-name">Peppa</span>  <br> <span class="typed-text">Your are about to <br> create a future <br> memory and become <br> part of a scientific <br> resarch on human <br> behaviours.</span>'],
