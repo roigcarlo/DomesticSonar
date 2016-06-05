@@ -1,0 +1,50 @@
+.noUi-vertical .noUi-handle {
+  width: 10vw;
+  height: 10vw;
+  background: url('../img/button2.png') no-repeat 50%;
+  background-size: contain;
+  border: none;
+  cursor: pointer;
+  top: -5vw;
+  left: -4.2vw;
+}
+
+.noUi-handle:after, .noUi-handle:before {
+  display: none;
+}
+
+.noUi-target {
+  border: none;
+}
+
+.noUi-vertical {
+    width: 2vw;
+}
+
+.noUi-handle {
+  box-shadow: none;
+}
+
+.sliders {
+  height:25vh; display: inline-block;
+}
+
+.sliders-text {
+  padding-top: 15%;
+}
+
+.noUi-background {
+  background: black;
+}
+
+.noUi-connect {
+  background: black;
+}
+
+.noUi-target {
+  border-radius: 50vw
+}
+
+.noUi-origin {
+  border-radius: 50vw
+}
