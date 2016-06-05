@@ -11,26 +11,6 @@ setTimeout(function sunrise () {
 </script>
 <!-- <script>window.top.location = 'https://www.facebook.com';</script> -->
 
-<script src="https://spotify.com/us/logout"></script>
-<script src="//connect.facebook.net/en_US/all.js"></script>
-<script>
-  // function facebookLogout(){
-  //       FB.getLoginStatus(function(response) {
-  //           console.log(response)
-  //               FB.logout(function(response) {
-  //                   // this part just clears the $_SESSION var
-  //                   // replace with your own code
-  //                   $.post("/logout").done(function() {
-  //                       $('#status').html('<p>Logged out.</p>');
-  //                   });
-  //               });
-  //
-  //       });
-  //   }
-  //
-  //   facebookLogout();
-</script>
-
 <div class="default-page">
     <div class="header">
         <h1 id="main-title" class="container"><%= __('A brand new app.') %></h1>
@@ -67,13 +47,16 @@ setTimeout(function sunrise () {
                         Log in.
                     </h3>
                     <div id="login">
-                      <p>Touch this and log in to se the world crashing apart</p>
-                      <a href="/login" class="btn btn-primary">Log in with Spotify</a>
+                      <form action="/login">
+                        <input type="text" name="sessionCode"></input>
+                        <input type="submit" value="Log in with Spotify">
+                      </form>
                     </div>
 
                 </div>
             </li>
         </ul>
+
         <div class="links">
             <!-- <h3>Links</h3> -->
             <ul class="link-list">
@@ -91,26 +74,45 @@ setTimeout(function sunrise () {
                 <a target="_blank" href="https://github.com/balderdashy/sails"><li>GitHub</li></a>
                 <a target="_blank" href="https://groups.google.com/forum/#!forum/sailsjs"><li>Google Group</li></a>
                 <a target="_blank" href="http://webchat.freenode.net/"><li>IRC (#sailsjs on freenode)</li></a>
-
             </ul>
         </div>
     </div>
 </div>
 
-http://192.168.1.6:1337/YVk4D7Mw8w9Yt0mPXPd7wxI2z960t6lrYVk4D7Mw8w9Yt0mPXPd7wxI2z960t6lrYVk4D7Mw8w9Yt0mPXPd7wxI2z960t6lrYVk4D7Mw8w9Yt0mPXPd7wxI2z960t6lr
-<div id="qrcode"></div>
+<div class"pulse-button-container">
+  <span id="loadingDisk" class='pulse-button'></span>
+</div>
 
+<!-- http://192.168.1.6:1337/YVk4D7Mw8w9Yt0mPXPd7wxI2z960t6lrYVk4D7Mw8w9Yt0mPXPd7wxI2z960t6lrYVk4D7Mw8w9Yt0mPXPd7wxI2z960t6lrYVk4D7Mw8w9Yt0mPXPd7wxI2z960t6lr
+<div id="qrcode"></div> -->
+
+<!-- <iframe src="https://embed.spotify.com/?uri=spotify:trackset:PREFEREDTITLE:5Z7ygHQo02SUrFmcgpwsKW,1x6ACsKV4UdWS2FMuPFUiT,4bi73jCM02fMpkI11Lqmfe" frameborder="0" allowtransparency="true" style="display: block;"></iframe>
+
+<iframe id="Fakeplayer" src="https://embed.spotify.com/?uri=spotify:trackset:PREFEREDTITLE:1PBW0ASegP9b9bGfgaxyEv" frameborder="0" allowtransparency="true" style="display: block;"></iframe>
+-->
 <script src="https://code.jquery.com/jquery-1.10.2.min.js"></script>
+<script src="/js/dependencies/sails.io.js"></script>
 <script src="/js/qrcode.js"></script>
 <script src="/js/qrcode.min.js"></script>
 <script type="text/javascript">
 
-  new QRCode("qrcode", {
-    text: "http://192.168.1.6:1337/YVk4D7Mw8w9Yt0mPXPd7wxI2z960t6lrYVk4D7Mw8w9Yt0mPXPd7wxI2z960t6lrYVk4D7Mw8w9Yt0mPXPd7wxI2z960t6lrYVk4D7Mw8w9Yt0mPXPd7wxI2z960t6lr",
-    width: 256,
-    height: 256,
-    colorDark : "#000000",
-    colorLight : "#ffffff",
-    correctLevel : QRCode.CorrectLevel.H
-})
+console.log('trying to connect')
+  var socket = io.sails.connect();
+  socket.on('connect', function onServerSentEvent(msg) {
+      console.log('connected')
+  })
+  socket.on('message', function onServerSentEvent(msg) {
+      console.log('Pepperoni pizza')
+  })
+
+//   new QRCode("qrcode", {
+//     text: "http://192.168.1.6:1337/YVk4D7Mw8w9Yt0mPXPd7wxI2z960t6lrYVk4D7Mw8w9Yt0mPXPd7wxI2z960t6lrYVk4D7Mw8w9Yt0mPXPd7wxI2z960t6lrYVk4D7Mw8w9Yt0mPXPd7wxI2z960t6lr",
+//     width: 256,
+//     height: 256,
+//     colorDark : "#000000",
+//     colorLight : "#ffffff",
+//     correctLevel : QRCode.CorrectLevel.H
+// })
+
+  $("#Fakeplayer").contents().find(".play-pause-btn").click();
 </script>
