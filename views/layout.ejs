@@ -6,7 +6,6 @@
     <!-- Viewport mobile tag for sensible mobile support -->
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 
-
     <!--
         Stylesheets and Preprocessors
         ==============================
@@ -33,10 +32,14 @@
     <link rel="stylesheet" href="/styles/bootstrap.min.css">
     <link rel="stylesheet" href="/styles/font-awesome.min.css">
     <link rel="stylesheet" href="/styles/importer.css">
+    <link rel="stylesheet" href="/styles/jquery-ui.min.css">
+    <link rel="stylesheet" href="/styles/jquery-ui.structure.min.css">
+    <link rel="stylesheet" href="/styles/jquery-ui.theme.min.css">
     <link rel="stylesheet" href="/styles/jquery.fullpage.min.css">
     <link rel="stylesheet" href="/styles/main.css">
-    <link rel="stylesheet" href="/styles/swiper.css">
+    <link rel="stylesheet" href="/styles/nouislider.min.css">
     <link rel="stylesheet" href="/styles/swiper.min.css">
+    <link rel="stylesheet" href="/styles/zzz.css">
     <!--STYLES END-->
   </head>
 
@@ -67,7 +70,7 @@
     -->
 
     <!--TEMPLATES-->
-
+    
     <!--TEMPLATES END-->
 
 
@@ -96,30 +99,32 @@
 
     <!--SCRIPTS-->
     <script src="/js/dependencies/sails.io.js"></script>
-    <script src="/js/Chart.js"></script>
     <script src="/js/bootstrap-slider.min.js"></script>
     <script src="/js/bootstrap.min.js"></script>
-    <script src="/js/clean-blog.min.js"></script>
     <script src="/js/fullpage/jquery.fullpage.js"></script>
-    <script src="/js/qrcode.js"></script>
-    <script src="/js/qrcode.min.js"></script>
+    <script src="/js/jquery-ui.min.js"></script>
+    <script src="/js/nouislider.min.js"></script>
     <script src="/js/swiper.jquery.js"></script>
     <script src="/js/test.js"></script>
     <script src="/js/typed.js"></script>
     <!--SCRIPTS END-->
 
     <script>
-      $(document).ready(function () {
-        //initialize swiper when document ready
-        var mySwiper = new Swiper ('.swiper-container', {
-          // Optional parameters
-          direction: 'horizontal',
-          loop: false,
-          effect: 'slide',
-          shortSwipes: false,
-          allowSwipeToPrev: false,
-        })
+      // Socket to communicate with the server
+      var socket = io.sails.connect();
 
+      // Swipper ofr the transitions
+      var mySwiper = new Swiper ('.swiper-container', {
+        // Optional parameters
+        direction: 'horizontal',
+        loop: false,
+        effect: 'slide',
+        allowSwipeToPrev: false,
+      })
+
+      $(document).ready(function () {
+
+        // Texts for typer
         var typetexts = {
           'app-1': {
             strings: ['<span class="typed-text spotygreen">Hello </span> <span id="typed-name">Peppa</span>  <br> <span class="typed-text">Your are about to <br> create a future <br> memory and become <br> part of a scientific <br> resarch on human <br> behaviours.</span>'],
@@ -148,16 +153,147 @@
           }
         }
 
+        // Initialize swiper events
         mySwiper.on('onTransitionStart', function () {
-          $(".swiper-slide.swiper-slide-next #message").typed('reset')
-        });
 
-        mySwiper.on('onTransitionStart', function () {
+          // Reset Typer for the next slide
           var slide_href = $('.swiper-slide.swiper-slide-active').attr('href')
+          $(".swiper-slide.swiper-slide-next #message").typed('reset')
           $(".swiper-slide.swiper-slide-active #message").typed(
             typetexts[slide_href]
-          );
+          )
         });
+
+        $('.sliders').each(function(index) {
+          noUiSlider.create($(this)[0], {
+            start: 100,
+            connect: "lower",
+            orientation: "vertical",
+            range: {
+              'min': 0,
+              'max': 100
+            },
+          });
+        });
+
+        // Initialize swiper events
+        mySwiper.on('onSlideChangeEnd', function (swiper) {
+
+          // Reset Typer for the next slide
+          var slide_href = $('.swiper-slide.swiper-slide-active').attr('href')
+          console.log('Transition to slide: ', slide_href, 'has ended')
+
+          // Block the login slide
+          if(slide_href == 'app-3') {
+            console.log('Lock')
+            swiper.lockSwipeToNext()
+
+            $.ajax({
+              url: '/createNewSession',
+              method: 'POST',
+            })
+            .done(function( data ) {
+              $('#sessionCode').html(data)
+            });
+          }
+
+          // Loading disk
+          if(slide_href == 'fakeLoad') {
+            swiper.lockSwipeToNext()
+
+            var progress = 0
+            var interval = setInterval(function() {
+              progress += 1;
+              $('#loadingDisk').html(progress)
+              if (progress >= 100) {
+                clearInterval(interval);
+                $('#loadingDisk').html(progress)
+                mySwiper.unlockSwipeToNext()
+                mySwiper.slideNext(true, 1000)
+              }
+            }, 50);
+          }
+
+          // Block the login slide
+          // if(slide_href == 'app-5') {
+          //   console.log('Lock')
+          //   swiper.lockSwipeToNext()
+          //
+          //   $.ajax({
+          //     url: '/startPhase1',
+          //     method: 'POST',
+          //   })
+          // }
+
+          // Update the backend to it know in which view we are
+          // $.ajax({
+          //   url: '/updateStage',
+          //   data: {stage:slide_href}
+          //   method: 'POST',
+          // })
+          // .done(function( data ) {
+          //   // We do not need any feedback
+          // });
+        });
+
+        // Subscribe to the server
+        socket.on('connect', function onServerSentEvent(msg) {
+            console.log('connected')
+        })
+
+        // Listen for messages
+        socket.on('message', function onServerSentEvent(msg) {
+
+          // Debug
+          console.log('Received Interruption with code:', msg['code'])
+
+          ///////////////////
+          // Loggin events //
+          ///////////////////
+
+          // If someone has logged in, the server already has its information
+          // We show in in the app a confirmation and ulock the slide
+          if(msg['code'] == 'RemoteLoginAction') {
+            var slide_href = $('.swiper-slide.swiper-slide-active').attr('href')
+            if(slide_href == 'app-3') {
+              console.log('UnLock')
+              mySwiper.unlockSwipeToNext()
+              mySwiper.slideNext(true, 1000)
+            }
+          }
+
+          ///////////////////
+          // Interruptions //
+          ///////////////////
+
+          // A song is playing
+          if(msg['code'] == 'SongPlaying') {
+          }
+
+          // A song ends to play
+          if(msg['code'] == 'SongPlaying') {
+
+          }
+        })
+
+        // $.ajax({
+        //   url: '/getExplorerScore',
+        //   data: JSON.stringify(data),
+        //   method: 'POST',
+        //   headers: {
+        //     'content-type': 'application/json'
+        //   },
+        // })
+        // .done(function( data ) {
+        //   $(where).html(data)
+        // });
+
+        // mySwiper.on('onTransitionStart', function () {
+        //   var slide_href = $('.swiper-slide.swiper-slide-active').attr('href')
+        //   $(".swiper-slide.swiper-slide-active #message").typed(
+        //     typetexts[slide_href]
+        //   );
+        // });
       });
     </script>
   </body>
