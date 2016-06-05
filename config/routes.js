@@ -46,19 +46,65 @@ module.exports.routes = {
   *                                                                          *
   ***************************************************************************/
 
+  /**************************************************************************/
+  /* Interruptions from the time-keeper                                     */
+  /**************************************************************************/
+
+  '/startPhase1': {
+    controller: 'Interrupt',
+    action: 'startPhase1'
+  },
+
+  '/startPhase2': {
+    controller: 'Interrupt',
+    action: 'startPhase2'
+  },
+
+  '/startPhase3': {
+    controller: 'Interrupt',
+    action: 'startPhase3'
+  },
+
+  '/startPhase4': {
+    controller: 'Interrupt',
+    action: 'startPhase4'
+  },
+
+  /**************************************************************************/
+  /* Events from the App                                                    */
+  /**************************************************************************/
+
+  '/createNewSession': {
+    controller: 'Interrupt',
+    action: 'createNewSession'
+  },
+
+  /**************************************************************************/
+  /* front-end UserSide                                                     */
+  /**************************************************************************/
+
   '/login': {
     controller: 'Login',
     action: 'login'
   },
 
   '/callback': {
-    controller: 'Experience',
+    controller: 'Login',
     action: 'callback'
   },
 
+  '/reward': {
+    controller: 'experience',
+    action: 'reward'
+  },
+
+  /**************************************************************************/
+  /* front-end AppSide                                                      */
+  /**************************************************************************/
+
   '/experience': {
     controller: 'Experience',
-    action: 'wellcome'
+    action: 'reward'
   },
 
   '/homebound': {
