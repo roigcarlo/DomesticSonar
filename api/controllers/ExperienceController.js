@@ -105,69 +105,7 @@ function displayComfort(res, sTerm, mTerm) {
 
 module.exports = {
 
-  /**
-   * `ExperienceController.wellcome()`
-   */
-  callback: function (req, res) {
-
-		// your application requests refresh and access tokens
-	  // after checking the state parameter
-		var stateKey = 'spotify_auth_state';
-
-	  var code = req.query.code || null;
-	  var state = req.query.state || null;
-	  var storedState = req.cookies ? req.cookies[stateKey] : null;
-
-		console.log('code: '+code)
-		console.log('state: '+state)
-		console.log('storedState: '+storedState)
-
-	  if (state === null || state !== storedState) {
-	    res.redirect('/#' +
-	      querystring.stringify({
-	        error: 'state_mismatch'
-	      }));
-	  } else {
-	    res.clearCookie(stateKey);
-
-			var authOptions = {
-	      url: 'https://accounts.spotify.com/api/token',
-	      form: {
-	        code: code,
-	        redirect_uri: SpotifyService.redirectUri,
-	        grant_type: 'authorization_code'
-	      },
-	      headers: {
-	        'Authorization': 'Basic ' + (new Buffer(SpotifyService.clientId + ':' + SpotifyService.clientSecret).toString('base64'))
-	      },
-	      json: true
-	    };
-
-	    request.post(authOptions, function(error, response, body) {
-	      if (!error && response.statusCode === 200) {
-
-					console.log('Requesting new access token')
-
-					req.session.access_token = body.access_token
-					req.session.refresh_token = body.refresh_token
-
-          console.log(req.session.access_token)
-
-					res.redirect('/experience')
-
-					//return res.view('wellcome', {response:body});
-	      } else {
-	        res.redirect('/error' +
-	          querystring.stringify({
-	            error: 'invalid_token'
-	          }));
-	      }
-	    }); // request end
-
-	  }
-  }, // callback
-
-	wellcome: function(req, res) {
+	reward: function(req, res) {
 
 		var access_token = req.session.access_token
 		var refresh_token = req.session.refresh_token
