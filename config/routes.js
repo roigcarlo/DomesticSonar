@@ -107,9 +107,18 @@ module.exports.routes = {
     action: 'reward'
   },
 
-  '/homebound': {
+  /**************************************************************************/
+  /* Calculate parameters                                                   */
+  /**************************************************************************/
+
+  '/calculateHomeboundness': {
     controller: 'Experience',
-    action: 'homebound'
+    action: 'calculateHomeboundness'
+  },
+
+  '/calculateExplorerness': {
+    controller: 'Experience',
+    action: 'calculateExplorerness'
   },
 
   '/explorer': {
@@ -122,14 +131,9 @@ module.exports.routes = {
     action: 'desire'
   },
 
-  '/getExplorerScore': {
+  '/calculateDesireSong': {
     controller: 'Experience',
-    action: 'getExplorerScore'
-  },
-
-  '/calculateSong': {
-    controller: 'Experience',
-    action: 'calculateSong'
+    action: 'calculateDesireSong'
   },
 
   '/test': {

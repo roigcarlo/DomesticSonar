@@ -8,30 +8,9 @@
 var request = require('request')
 var querystring = require('querystring')
 
-function calculateHomebound() {
-  return 75
-}
+function compueteHomeboundness(res, sTerm, mTerm, userId) {
 
-function calculateExplorer(data) {
-
-  var value = 0
-
-  // Formula is wrong. For the results you want it should be
-  // (C1/100 + C2/100 + C3/100 + (1-C4/100))/4
-  // Otherwise the value will never be 1
-  for(var i in data) {
-    value += (
-            parseInt(data[i]['Amazing']) +
-            parseInt(data[i]['Chills' ]) +
-            parseInt(data[i]['Intense']) +
-      100 - parseInt(data[i]['Boring' ])
-    )/16.0
-  }
-
-  return value
-}
-
-function displayComfort(res, sTerm, mTerm) {
+  console.log('computing value...')
 
   // This can be tweaked to match the desired behaviour
   var MAX_SHORT_LENGHT = 1
@@ -39,7 +18,7 @@ function displayComfort(res, sTerm, mTerm) {
   var MATCHES_THRESHLD = 0.6
 
   // Results
-  var isHomebound = 'Homebound'       // We actually don't need this :(
+  // var isHomebound = 'Homebound'       // We actually don't need this :(
   var homeboundVsTastemaker = 0
 
   // for now, make the calculations server-side. This can be moved to the
@@ -53,6 +32,7 @@ function displayComfort(res, sTerm, mTerm) {
       genresShort.push(sTerm[a]['genres'][ag])
     }
   }
+
   // Make the list with the medium term artists genres
   for( var a in mTerm) {
     for( var ag in mTerm[a]['genres']) {
@@ -71,10 +51,8 @@ function displayComfort(res, sTerm, mTerm) {
 
   // Appply the formulas
   if( genresShortUnique.length <= MAX_SHORT_LENGHT ) {
-    isHomebound = 'Homebound'
     homeboundVsTastemaker = 1 // I Assume this is the absolute case
   } else if (genresMediumUnique.length <= MAX_MEDIUM_LENGHT ) {
-    isHomebound = 'Homebound'
     homeboundVsTastemaker = 1 // I Assume this is the absolute case
   } else {
     var genresShortInMedium = genresShortUnique.filter(function(item, pos) {
@@ -83,24 +61,44 @@ function displayComfort(res, sTerm, mTerm) {
 
     var matches = genresShortInMedium.length / genresMediumUnique.length
 
-    if( matches >= MATCHES_THRESHLD ) {
-      isHomebound = 'Homebound'
-    } else {
-      isHomebound = 'Tastemaker'
-    }
+    matches = matches < 0 ? 0 : matches
+    matches = matches > 1 ? 1 : matches
 
     homeboundVsTastemaker = matches
   }
 
-  // Retun the view with the data
-  return res.view('forms/homebound', {
-    genresS:genresShortUnique,
-    genresM:genresMediumUnique,
-    homebound:{
-      result:isHomebound,
-      value:homeboundVsTastemaker
-    }
-  });
+  homeboundVsTastemaker *= 100
+
+  User.update({id:userId},{homebound:homeboundVsTastemaker}).exec(function (err, updated) {
+    console.log('Updated user Homeboundness:')
+    console.log(updated)
+    res.ok(homeboundVsTastemaker);
+  })
+}
+
+function computeExploreness(res, data, userId) {
+
+  console.log('computing value...')
+
+  var value = 0
+
+  // Formula is wrong. For the results you want it should be
+  // (C1/100 + C2/100 + C3/100 + (1-C4/100))/4
+  // Otherwise the value will never be 1
+  for(var i in data) {
+    value += (
+            parseInt(data[i]['Amazing']) +
+            parseInt(data[i]['Chills' ]) +
+            parseInt(data[i]['Intense']) +
+      100 - parseInt(data[i]['Boring' ])
+    )/16.0
+  }
+
+  User.update({id:userId},{explorer:value}).exec(function (err, updated) {
+    console.log('Updated user Exploreness:')
+    console.log(updated)
+    res.ok(value);
+  })
 }
 
 module.exports = {
@@ -113,102 +111,102 @@ module.exports = {
 		var profileCache = req.session.profileCache
     var validProfile = req.session.validProfile
 
-    console.log("Cache profile: ", profileCache)
-
-		if(profileCache) {
-			console.log('Using cache data')
-			return res.view('wellcome', {response:profileCache});
-		} else {
-			console.log('Fetching new data')
-			var options = {
-				url: 'https://api.spotify.com/v1/me',
-				headers: { 'Authorization': 'Bearer ' + access_token },
-				json: true
-			};
-
-			// use the access token to access the Spotify Web API
-			request.get(options, function(error, response, body) {
-        if(!error && response.statusCode === 200) {
-				   req.session.profileCache = body
-				   return res.view('wellcome', {response:body});
-        }
-        else {
-          res.redirect('/error' +
-            querystring.stringify({
-              error: 'invalid_profile'
-            }));
-        }
-			});
+		var options = {
+			url: 'https://api.spotify.com/v1/me',
+			headers: { 'Authorization': 'Bearer ' + access_token },
+			json: true
 		}
-	}, // wellcome
 
-	homebound: function(req, res) {
+		// use the access token to access the Spotify Web API
+		request.get(options, function(error, response, body) {
+      if(!error && response.statusCode === 200) {
+			   req.session.profileCache = body
+			   return res.view('wellcome', {response:body});
+      }
+      else {
+        res.redirect('/error' +
+          querystring.stringify({
+            error: 'invalid_profile'
+          }))
+      }
+		})
 
-		var access_token = req.session.access_token
-		var refresh_token = req.session.refresh_token
+	},
 
-		var topAristsShort = req.session.topArtistsShort
-    var topAristsMedium = req.session.topArtistsMedium
+	calculateHomeboundness: function(req, res) {
 
-    var NUM_SONGS = 20
+    console.log('Calculating Homeboundness')
 
-		if(topAristsShort && topAristsMedium) {
-			console.log('using cached track data')
-      displayComfort(
-        res,
-        req.session.topArtistsShort,
-        req.session.topArtistsMedium
-      )
-			// return res.view('forms/tracks', {tracksShort:topTracks});
-		} else {
-			console.log('Fetching topTracks data')
-			var options_short = {
-				url: 'https://api.spotify.com/v1/me/top/artists?limit='+NUM_SONGS+'&time_range=short_term',
-				headers: { 'Authorization': 'Bearer ' + access_token },
-				json: true
-			};
+    Status.findOne({id:1}).exec(function checkSessionCode(err, entryStatus) {
+      if(err || entryStatus == undefined) {
+        console.log('No user is bind to the session')
+      } else {
+        entryStatus.currentUser
+        User.findOne({id:entryStatus.currentUser}).exec(function checkSessionCode(err, entryUser) {
+          if(err || entryUser == undefined) {
+            console.log('User dosn\'t exists')
+          } else {
 
-      var options_medium = {
-        url: 'https://api.spotify.com/v1/me/top/artists?limit='+NUM_SONGS+'&time_range=medium_term',
-        headers: { 'Authorization': 'Bearer ' + access_token },
-        json: true
-      };
+            const NUM_SONGS = 20
 
-			// use the access token to access the Spotify Web API
-			request.get(options_short, function(error, response, bodyShort) {
-        request.get(options_medium, function(error, response, bodyMedium) {
-          req.session.topArtistsShort = bodyShort.items
-          req.session.topArtistsMedium = bodyMedium.items
-          displayComfort(
-            res,
-            req.session.topArtistsShort,
-            req.session.topArtistsMedium
-          )
+            var options_short = {
+      				url: 'https://api.spotify.com/v1/me/top/artists?limit='+NUM_SONGS+'&time_range=short_term',
+      				headers: { 'Authorization': 'Bearer ' + entryUser.accessToken },
+      				json: true
+      			};
+
+            var options_medium = {
+              url: 'https://api.spotify.com/v1/me/top/artists?limit='+NUM_SONGS+'&time_range=medium_term',
+              headers: { 'Authorization': 'Bearer ' + entryUser.accessToken },
+              json: true
+            };
+
+            // Use the access token to access the Spotify Web API
+            request.get(options_short, function(error, response, bodyShort) {
+              request.get(options_medium, function(error, response, bodyMedium) {
+                req.session.topArtistsShort = bodyShort.items
+                req.session.topArtistsMedium = bodyMedium.items
+
+                console.log('Fetched user artist preferences')
+
+                compueteHomeboundness(res,
+                  req.session.topArtistsShort,
+                  req.session.topArtistsMedium,
+                  entryStatus.currentUser
+                )
+
+              })
+            })
+          }
         })
-      });
-		}
-	}, // homebound
+      }
+    })
 
-  explorer: function(req, res) {
-    return res.view('forms/explorer', {conserver:33});
-	}, // explorer
+	}, // calculateHomeboundness
 
-  desire: function(req, res) {
-    return res.view('forms/desire', {response:'body'});
-  }, // desire
+  calculateExplorerness: function(req, res) {
 
-  getExplorerScore: function(req, res) {
+    console.log('Calculating Exploreness')
 
-    console.log(req.body)
+    Status.findOne({id:1}).exec(function checkSessionCode(err, entryStatus) {
+      if(err || entryStatus == undefined) {
+        console.log('No user is bind to the session')
+      } else {
+        entryStatus.currentUser
+        User.findOne({id:entryStatus.currentUser}).exec(function checkSessionCode(err, entryUser) {
+          if(err || entryUser == undefined) {
+            console.log('User dosn\'t exists')
+          } else {
+            computeExploreness(res, req.body, entryStatus.currentUser)
+          }
+        })
+      }
+    })
 
-    return res.view('forms/scoreBar', {
-      left:'Conserver',
-      right:'Explorer',
-      value: calculateExplorer(req.body)
-    });
-  }, // desire
+  },
 
-  calculateSong: function calculateSong(req, res) {
+  // Don't use this yet.
+  calculateDesireSong: function calculateDesireSong(req, res) {
 
     var hvt = parseInt(req.body['hvt'])
     var cve = parseInt(req.body['cve'])
@@ -334,6 +332,16 @@ module.exports = {
       });
 
     }
-  }
+  },
+
+  // Unused. Legacy
+  explorer: function(req, res) {
+    return res.view('forms/explorer', {conserver:33});
+	}, // explorer
+
+  // Unused. Legacy
+  desire: function(req, res) {
+    return res.view('forms/desire', {response:'body'});
+  }, // desire
 
 };

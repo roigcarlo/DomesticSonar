@@ -145,7 +145,7 @@ module.exports = {
                       if('sessionId' in entry && entry.sessionId == sessionCode) {
                         // If the session is valid
                         sails.sockets.blast('message', { code: 'RemoteLoginAction' });
-                        Status.findOrCreate({id:1},{currentUser:entry.id,}).exec(function checkSessionCode(err, entry) {
+                        Status.update({id:1},{currentUser:entry.id,}).exec(function checkSessionCode(err, entry) {
                           console.log('UserRemotelyLogged')
                           res.redirect('/experience')
                         })
