@@ -30,7 +30,7 @@
 }
 
 .sliders-text {
-  padding-top: 15%;
+  padding-top: 25%;
 }
 
 .noUi-background {
@@ -39,12 +39,18 @@
 
 .noUi-connect {
   background: black;
+  -webkit-transition: background 750ms;
+  transition: background 750ms;
 }
 
 .noUi-target {
-  border-radius: 50vw
+  border-radius: 50vw;
 }
 
 .noUi-origin {
-  border-radius: 50vw
+  border-radius: 50vw;
+}
+
+[disabled] .noUi-connect, [disabled].noUi-connect {
+    background: white;
 }
