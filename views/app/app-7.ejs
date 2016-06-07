@@ -1,4 +1,4 @@
-<div id="up-half-wrap" style="margin-bottom: 0px; min-height: 50vh; background: url(img/explorer<%=pictureId%>.jpeg); background-size: cover;">
+<div class="up-half-wrap" style="margin-bottom: 0px; min-height: 50vh; background: url(img/explorer<%=pictureId%>.jpeg); background-size: cover;">
 
     <div class="row" style="margin:0px;">
       <div class="col-xs-3" style="padding:3%; text-align: left;">
@@ -13,19 +13,19 @@
 
 
 </div> <!-- Wrapp -->
-<div id="bot-half-wrap" style="background-color: grey; text-align: center;">
-  <div style="padding-top: 7.5%">
+<div class="bot-half-wrap" style="background-color: grey; text-align: center;">
+  <div style="padding-top: 10.5%">
     <table class="table borderless">
       <tbody>
-        <tr>
+        <tr id="explorerImage<%=pictureId%>">
           <!-- <td style="width:25%" ><div class="flat-slider" id="flat-slider<%=pictureId%>1"></div></td>
           <td style="width:25%" ><div class="flat-slider" id="flat-slider<%=pictureId%>2"></div></td>
           <td style="width:25%" ><div class="flat-slider" id="flat-slider<%=pictureId%>3"></div></td>
           <td style="width:25%" ><div class="flat-slider" id="flat-slider<%=pictureId%>4"></div></td> -->
-          <td style="width:25%" ><div class="sliders" id="flat-slider<%=pictureId%>1"></div></td>
-          <td style="width:25%" ><div class="sliders" id="flat-slider<%=pictureId%>2"></div></td>
-          <td style="width:25%" ><div class="sliders" id="flat-slider<%=pictureId%>3"></div></td>
-          <td style="width:25%" ><div class="sliders" id="flat-slider<%=pictureId%>4"></div></td>
+          <td style="width:25%" ><div class="sliders" id="flat-slider<%=pictureId%>1" picID="<%=pictureId%>" sliderID="1" name="Amazing"></div></td>
+          <td style="width:25%" ><div class="sliders" id="flat-slider<%=pictureId%>2" picID="<%=pictureId%>" sliderID="2" name="Intense"></div></td>
+          <td style="width:25%" ><div class="sliders" id="flat-slider<%=pictureId%>3" picID="<%=pictureId%>" sliderID="3" name="Chills"></div></td>
+          <td style="width:25%" ><div class="sliders" id="flat-slider<%=pictureId%>4" picID="<%=pictureId%>" sliderID="4" name="Boring"></div></td>
         </tr>
         <tr style="font-size: 3vw; font-weight: bold; color:white">
           <td><div class="sliders-text">Amazing</div></td>

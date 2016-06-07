@@ -44,10 +44,19 @@
   line-height: 50%;
 }
 
+
+
+@-webkit-keyframes fade-in{
+  0%   {opacity:1}
+  50%  {opacity:0}
+  100% {opacity:1}
+}
+
 .footer-text {
   font-weight: bold;
   font-size: 5vw;
   color:rgb(57, 194, 95);
+  -webkit-animation:fade-in 3s infinite;
 }
 
 html,
@@ -65,14 +74,14 @@ body {
   margin: 0 auto -15vh;
 }
 
-#up-half-wrap {
+.up-half-wrap {
   min-height: 50vh;
   height: 50vh;
   /* Negative indent footer by it's height */
   margin: 0 auto -15%;
 }
 
-#bot-half-wrap {
+.bot-half-wrap {
   min-height: 50vh;
   height: 50vh;
   /* Negative indent footer by it's height */
@@ -144,6 +153,7 @@ body {
     <!-- Additional required wrapper -->
     <div class="swiper-wrapper">
 
+
         <!-- Slides -->
         <div class="swiper-slide" href="app-1">
           <%- include app-1 %>
@@ -204,28 +214,8 @@ body {
 </div>
 
 <script src="https://code.jquery.com/jquery-1.10.2.min.js"></script>
-<script src="js/typed.js"></script>
 
 <script>
-
-  $(function(){
-      $("#message1").typed({
-        strings: ['<span class="typed-text spotygreen">Hello </span> <span id="typed-name">Peppa</span>  <br> <span class="typed-text">Your are about to <br> create a future <br> memory and become <br> part of a scientific <br> resarch on human <br> behaviours.</span>'],
-        contentType: 'html',
-        typeSpeed: 10,
-        showCursor: false,
-        callback: function () {
-          $("#typed-name").typed({
-            strings: ['Obama', 'Charlio', 'Juan de las nieves', 'Daenerys Targaryen', 'Darkness my old friend'],
-            contentType: 'html',
-            typeSpeed: 10,
-            loop: true,
-            showCursor: true,
-            cursorChar: '_'
-          });
-        }
-      });
-  });
 
   function playv() {
       document.getElementById('videobk').play();
