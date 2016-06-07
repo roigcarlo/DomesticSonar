@@ -6,295 +6,34 @@
     <!-- Viewport mobile tag for sensible mobile support -->
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 
-    <!--
-        Stylesheets and Preprocessors
-        ==============================
-
-        You can always bring in CSS files manually with `<link>` tags, or asynchronously
-        using a solution like AMD (RequireJS).  Or, if you like, you can take advantage
-        of Sails' conventional asset pipeline (boilerplate Gruntfile).
-
-        By default, stylesheets from your `assets/styles` folder are included
-        here automatically (between STYLES and STYLES END). Both CSS (.css) and LESS (.less)
-        are supported. In production, your styles will be minified and concatenated into
-        a single file.
-
-        To customize any part of the built-in behavior, just edit `tasks/pipeline.js`.
-        For example, here are a few things you could do:
-
-            + Change the order of your CSS files
-            + Import stylesheets from other directories
-            + Use a different or additional preprocessor, like SASS, SCSS or Stylus
-    -->
-
     <!--STYLES-->
-    <link rel="stylesheet" href="/styles/bootstrap-slider.min.css">
     <link rel="stylesheet" href="/styles/bootstrap.min.css">
     <link rel="stylesheet" href="/styles/font-awesome.min.css">
     <link rel="stylesheet" href="/styles/importer.css">
-    <link rel="stylesheet" href="/styles/jquery-ui.min.css">
-    <link rel="stylesheet" href="/styles/jquery-ui.structure.min.css">
-    <link rel="stylesheet" href="/styles/jquery-ui.theme.min.css">
-    <link rel="stylesheet" href="/styles/jquery.fullpage.min.css">
     <link rel="stylesheet" href="/styles/main.css">
     <link rel="stylesheet" href="/styles/nouislider.min.css">
     <link rel="stylesheet" href="/styles/swiper.min.css">
     <link rel="stylesheet" href="/styles/zzz.css">
     <!--STYLES END-->
+
   </head>
 
   <body>
     <%- body %>
 
-
-
-    <!--
-        Client-side Templates
-        ========================
-
-        HTML templates are important prerequisites of modern, rich client applications.
-        To work their magic, frameworks like Backbone, Angular, Ember, and Knockout require
-        that you load these templates client-side.
-
-        By default, your Gruntfile is configured to automatically load and precompile
-        client-side JST templates in your `assets/templates` folder, then
-        include them here automatically (between TEMPLATES and TEMPLATES END).
-
-        To customize this behavior to fit your needs, just edit `tasks/pipeline.js`.
-        For example, here are a few things you could do:
-
-            + Import templates from other directories
-            + Use a different template engine (handlebars, jade, dust, etc.)
-            + Internationalize your client-side templates using a server-side
-              stringfile before they're served.
-    -->
-
     <!--TEMPLATES-->
-    
+
     <!--TEMPLATES END-->
-
-
-    <!--
-
-      Client-side Javascript
-      ========================
-
-      You can always bring in JS files manually with `script` tags, or asynchronously
-      on the client using a solution like AMD (RequireJS).  Or, if you like, you can
-      take advantage of Sails' conventional asset pipeline (boilerplate Gruntfile).
-
-      By default, files in your `assets/js` folder are included here
-      automatically (between SCRIPTS and SCRIPTS END).  Both JavaScript (.js) and
-      CoffeeScript (.coffee) are supported. In production, your scripts will be minified
-      and concatenated into a single file.
-
-      To customize any part of the built-in behavior, just edit `tasks/pipeline.js`.
-      For example, here are a few things you could do:
-
-          + Change the order of your scripts
-          + Import scripts from other directories
-          + Use a different preprocessor, like TypeScript
-
-    -->
 
     <!--SCRIPTS-->
     <script src="/js/dependencies/sails.io.js"></script>
-    <script src="/js/bootstrap-slider.min.js"></script>
-    <script src="/js/bootstrap.min.js"></script>
-    <script src="/js/fullpage/jquery.fullpage.js"></script>
-    <script src="/js/jquery-ui.min.js"></script>
-    <script src="/js/nouislider.min.js"></script>
-    <script src="/js/swiper.jquery.js"></script>
-    <script src="/js/test.js"></script>
-    <script src="/js/typed.js"></script>
+    <script src="/js/dependencies/bootstrap.min.js"></script>
+    <script src="/js/dependencies/nouislider.min.js"></script>
+    <script src="/js/dependencies/swiper.jquery.js"></script>
+    <script src="/js/dependencies/test.js"></script>
+    <script src="/js/dependencies/typed.js"></script>
+    <script src="/js/application.js"></script>
     <!--SCRIPTS END-->
-
-    <script>
-      // Socket to communicate with the server
-      var socket = io.sails.connect();
-
-      // Swipper ofr the transitions
-      var mySwiper = new Swiper ('.swiper-container', {
-        // Optional parameters
-        direction: 'horizontal',
-        loop: false,
-        effect: 'slide',
-        allowSwipeToPrev: false,
-      })
-
-      $(document).ready(function () {
-
-        // Texts for typer
-        var typetexts = {
-          'app-1': {
-            strings: ['<span class="typed-text spotygreen">Hello </span> <span id="typed-name">Peppa</span>  <br> <span class="typed-text">Your are about to <br> create a future <br> memory and become <br> part of a scientific <br> resarch on human <br> behaviours.</span>'],
-            contentType: 'html',
-            typeSpeed: 20,
-            showCursor: false,
-            callback: function () {
-              $("#typed-name").typed({
-                strings: ['Obama', 'Charlio', 'Juan de las nieves', 'Daenerys Targaryen', 'Darkness my old friend'],
-                contentType: 'html',
-                typeSpeed: 20,
-                loop: true,
-                showCursor: true,
-                cursorChar: '_'
-              });
-            }
-          },
-          'app-2':{
-            strings: ['<span id="message2">In order to create a <br> future memory you <br> need to know a bit <br> more about your <br> present self. <br><br> Today you will be able <br> to discover your own <br> musical habits and <br> personality traits.</span>'],
-            contentType: 'html',
-            typeSpeed: 20,
-            showCursor: false,
-            showCursor: true,
-            startDelay: 1000,
-            cursorChar: '_'
-          }
-        }
-
-        // Initialize swiper events
-        mySwiper.on('onTransitionStart', function () {
-
-          // Reset Typer for the next slide
-          var slide_href = $('.swiper-slide.swiper-slide-active').attr('href')
-          $(".swiper-slide.swiper-slide-next #message").typed('reset')
-          $(".swiper-slide.swiper-slide-active #message").typed(
-            typetexts[slide_href]
-          )
-        });
-
-        $('.sliders').each(function(index) {
-          noUiSlider.create($(this)[0], {
-            start: 100,
-            connect: "lower",
-            orientation: "vertical",
-            range: {
-              'min': 0,
-              'max': 100
-            },
-          });
-        });
-
-        // Initialize swiper events
-        mySwiper.on('onSlideChangeEnd', function (swiper) {
-
-          // Reset Typer for the next slide
-          var slide_href = $('.swiper-slide.swiper-slide-active').attr('href')
-          console.log('Transition to slide: ', slide_href, 'has ended')
-
-          // Block the login slide
-          if(slide_href == 'app-3') {
-            console.log('Lock')
-            swiper.lockSwipeToNext()
-
-            $.ajax({
-              url: '/createNewSession',
-              method: 'POST',
-            })
-            .done(function( data ) {
-              $('#sessionCode').html(data)
-            });
-          }
-
-          // Loading disk
-          if(slide_href == 'fakeLoad') {
-            swiper.lockSwipeToNext()
-
-            var progress = 0
-            var interval = setInterval(function() {
-              progress += 1;
-              $('#loadingDisk').html(progress)
-              if (progress >= 100) {
-                clearInterval(interval);
-                $('#loadingDisk').html(progress)
-                mySwiper.unlockSwipeToNext()
-                mySwiper.slideNext(true, 1000)
-              }
-            }, 50);
-          }
-
-          // Block the login slide
-          // if(slide_href == 'app-5') {
-          //   console.log('Lock')
-          //   swiper.lockSwipeToNext()
-          //
-          //   $.ajax({
-          //     url: '/startPhase1',
-          //     method: 'POST',
-          //   })
-          // }
-
-          // Update the backend to it know in which view we are
-          // $.ajax({
-          //   url: '/updateStage',
-          //   data: {stage:slide_href}
-          //   method: 'POST',
-          // })
-          // .done(function( data ) {
-          //   // We do not need any feedback
-          // });
-        });
-
-        // Subscribe to the server
-        socket.on('connect', function onServerSentEvent(msg) {
-            console.log('connected')
-        })
-
-        // Listen for messages
-        socket.on('message', function onServerSentEvent(msg) {
-
-          // Debug
-          console.log('Received Interruption with code:', msg['code'])
-
-          ///////////////////
-          // Loggin events //
-          ///////////////////
-
-          // If someone has logged in, the server already has its information
-          // We show in in the app a confirmation and ulock the slide
-          if(msg['code'] == 'RemoteLoginAction') {
-            var slide_href = $('.swiper-slide.swiper-slide-active').attr('href')
-            if(slide_href == 'app-3') {
-              console.log('UnLock')
-              mySwiper.unlockSwipeToNext()
-              mySwiper.slideNext(true, 1000)
-            }
-          }
-
-          ///////////////////
-          // Interruptions //
-          ///////////////////
-
-          // A song is playing
-          if(msg['code'] == 'SongPlaying') {
-          }
-
-          // A song ends to play
-          if(msg['code'] == 'SongPlaying') {
-
-          }
-        })
-
-        // $.ajax({
-        //   url: '/getExplorerScore',
-        //   data: JSON.stringify(data),
-        //   method: 'POST',
-        //   headers: {
-        //     'content-type': 'application/json'
-        //   },
-        // })
-        // .done(function( data ) {
-        //   $(where).html(data)
-        // });
-
-        // mySwiper.on('onTransitionStart', function () {
-        //   var slide_href = $('.swiper-slide.swiper-slide-active').attr('href')
-        //   $(".swiper-slide.swiper-slide-active #message").typed(
-        //     typetexts[slide_href]
-        //   );
-        // });
-      });
-    </script>
+    
   </body>
 </html>
