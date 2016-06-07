@@ -1,3 +1,89 @@
+function getTyped() {
+
+  var hvt  = homebound < 60 ? 'Homebound' : 'Tastemaker'
+  var hvtd = homebound < 60 ? 'you <br> like to listen the same <br> music again and again' : 'you <br> are not afraid to <br> try new musical tastes'
+
+  var evc  = explorer > 50 ? 'Explorer' : 'Conserver'
+  var evcd = explorer > 50 ? 'nose, ja direu que ficar' : 'las rosas son rojas y el mar azul'
+
+  return {
+
+    'app-1': {
+      strings: ['<span class="typed-text spotygreen">Hello </span> <span id="typed-name">Peppa</span>  <br> <span class="typed-text">Your are about to <br> create a future <br> memory and become <br> part of a scientific <br> resarch on human <br> behaviours.</span>'],
+      contentType: 'html',
+      typeSpeed: 20,
+      showCursor: false,
+      callback: function () {
+        $("#typed-name").typed({
+          strings: ['Obama', 'Charlio', 'Juan de las nieves', 'Daenerys Targaryen', 'Darkness my old friend'],
+          contentType: 'html',
+          typeSpeed: 20,
+          loop: true,
+          showCursor: true,
+          cursorChar: '_'
+        });
+
+        mySwiper.unlockSwipeToNext()
+        console.log($('#footer-1-content'))
+        $('#footer-1-content').show()
+      }
+    },
+
+    'app-2':{
+      strings: ['<span> In order to create a <br> future memory you <br> need to know a bit <br> more about your <br> present self. <br> <br> Today you will be able <br> to discover your own <br> musical habits and <br> personality traits. </span>'],
+      contentType: 'html',
+      typeSpeed: 20,
+      showCursor: false,
+      showCursor: true,
+      startDelay: 1000,
+      cursorChar: '_',
+      callback: function () {
+        mySwiper.unlockSwipeToNext()
+      }
+    },
+
+    'app-6':{
+      strings: ['<span> Let\'s find now more about <br> your personal traits <br> You will go through the <br> </span> <span class="typed-text spotygreen"> Five Factor Model Test </span> <span> a <br> crazy shit that <br> psychologists uses to <br> better understand human <br> behaviour </span>'],
+      contentType: 'html',
+      typeSpeed: 20,
+      showCursor: false,
+      showCursor: true,
+      startDelay: 1000,
+      cursorChar: '_',
+      callback: function () {
+        mySwiper.unlockSwipeToNext()
+      }
+    },
+
+    'app-9':{
+      strings: ['<span> In terms of life you are a </span> <br> <span class="typed-text spotygreen"> '+ hvt +' </span> <span> because '+ hvtd +' </span>'],
+      contentType: 'html',
+      typeSpeed: 20,
+      showCursor: false,
+      showCursor: true,
+      startDelay: 1000,
+      cursorChar: '_',
+      callback: function () {
+        mySwiper.unlockSwipeToNext()
+      }
+    },
+
+    'app-10':{
+      strings: ['<span> Muscially speaking you are </span> <span class="typed-text spotygreen"> '+ evc +' </span> <span> because '+ evcd +' </span>'],
+      contentType: 'html',
+      typeSpeed: 20,
+      showCursor: false,
+      showCursor: true,
+      startDelay: 1000,
+      cursorChar: '_',
+      callback: function () {
+        mySwiper.unlockSwipeToNext()
+      }
+    },
+
+  }
+}
+
 function initialize(swiper) {
     var prev = $('.swiper-slide.swiper-slide-active').attr('href')
     var actv = $('.swiper-slide.swiper-slide-active').attr('href')
@@ -7,7 +93,10 @@ function initialize(swiper) {
 
     resetTyped(prev, actv, next)
     initTyped( prev, actv, next)
-    lockSlide(prev, actv, next, swiper, ['app-1', 'app-2', 'app-3', 'app-4', 'fakeLoad', 'app-7'])
+    lockSlide(prev, actv, next, swiper, [
+      'app-1', 'app-2', 'app-3', 'app-4', 'fakeLoad',
+      'app-6', 'app-7', 'app-9', 'app-10'
+    ])
 }
 
 function resetTyped(prev, actv, next) {
@@ -21,7 +110,7 @@ function resetWheel(prev, actv, next, swiper, onSlide) {
 }
 
 function initTyped(prev, actv, next) {
-  $(".swiper-slide.swiper-slide-active #message").typed(typetexts[actv])
+  $(".swiper-slide.swiper-slide-active #message").typed(getTyped()[actv])
 }
 
 function initWheel(prev, actv, next, swiper, onSlide) {
@@ -70,9 +159,12 @@ $(document).ready(function () {
 
     initTyped(prev, actv, next, swiper);
     initWheel(prev, actv, next, swiper, ['fakeLoad'])
-    lockSlide(prev, actv, next, swiper, ['app-1', 'app-2', 'app-3', 'app-4', 'fakeLoad', 'app-7'])
+    lockSlide(prev, actv, next, swiper, [
+      'app-1', 'app-2', 'app-3', 'app-4', 'fakeLoad',
+      'app-6', 'app-7', 'app-9', 'app-10'
+    ])
 
-    // Send info
+    // Create an ephimerous session. The remote callback unlocks the app
     if(actv == 'app-3') {
       $.ajax({
         url: '/createNewSession',
@@ -82,6 +174,42 @@ $(document).ready(function () {
         $('#sessionCode').html(data)
       });
     }
+
+    // CalculateHomeboundness, can be done asynchronously, no need to wait.
+    if(actv == 'app-4') {
+      $.ajax({
+        url: '/calculateHomeboundness',
+        method: 'POST',
+      }).done(function( data ) {
+        homebound = data
+      });
+    }
+
+    // CalculateExploreness, can be done asynchronously, no need to wait.
+    if(actv == 'app-8') {
+      var images = ['#explorerImage0', '#explorerImage1', '#explorerImage2', '#explorerImage3']
+      var data = {}
+
+      for(var i in images) {
+        data[images[i]] = {}
+        $(images[i]+' .sliders').each(function(){
+          data[images[i]][$(this).attr('name')] = $(this)[0].noUiSlider.get();
+        })
+      }
+
+      $.ajax({
+        url: '/calculateExplorerness',
+        data: JSON.stringify(data),
+        method: 'POST',
+        headers: {
+          'content-type': 'application/json'
+        },
+      })
+      .done(function( data ) {
+        explorer = data
+      });
+    }
+
   })
 
   ///////////////////
@@ -187,6 +315,9 @@ $(document).ready(function () {
 var playingTrack = 0
 var locks = Array(4).fill(0)
 
+var homebound = 0
+var explorer = 0
+
 // Socket to communicate with the server
 var socket = io.sails.connect();
 
@@ -202,40 +333,3 @@ var mySwiper = new Swiper ('.swiper-container', {
 ///////////////////
 // Typed Texts   //
 ///////////////////
-var typetexts = {
-
-  'app-1': {
-    strings: ['<span class="typed-text spotygreen">Hello </span> <span id="typed-name">Peppa</span>  <br> <span class="typed-text">Your are about to <br> create a future <br> memory and become <br> part of a scientific <br> resarch on human <br> behaviours.</span>'],
-    contentType: 'html',
-    typeSpeed: 20,
-    showCursor: false,
-    callback: function () {
-      $("#typed-name").typed({
-        strings: ['Obama', 'Charlio', 'Juan de las nieves', 'Daenerys Targaryen', 'Darkness my old friend'],
-        contentType: 'html',
-        typeSpeed: 20,
-        loop: true,
-        showCursor: true,
-        cursorChar: '_'
-      });
-
-      mySwiper.unlockSwipeToNext()
-      console.log($('#footer-1-content'))
-      $('#footer-1-content').show()
-    }
-  },
-
-  'app-2':{
-    strings: ['<span id="message2">In order to create a <br> future memory you <br> need to know a bit <br> more about your <br> present self. <br> <br> Today you will be able <br> to discover your own <br> musical habits and <br> personality traits.</span>'],
-    contentType: 'html',
-    typeSpeed: 20,
-    showCursor: false,
-    showCursor: true,
-    startDelay: 1000,
-    cursorChar: '_',
-    callback: function () {
-      mySwiper.unlockSwipeToNext()
-    }
-  }
-
-}
