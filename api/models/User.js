@@ -1,7 +1,7 @@
 /**
  * User.js
  *
- * @description :: TODO: You might write a short summary of how this model works and what it represents here.
+ * @description :: TODO: User information
  * @docs        :: http://sailsjs.org/documentation/concepts/models-and-orm/models
  */
 
@@ -11,26 +11,42 @@ module.exports = {
     name: {
       type: 'string'
     },
-    accessToken: {
-      type: 'string',
+    mail: {
+      type: 'string'
     },
-    expiresOn: {
-      type: 'date',
+    accessToken: {
+      type: 'string'
     },
     refreshToken: {
-      type: 'string',
+      type: 'string'
     },
-    mail: {
-      type: 'string',
-    },
-    releaseOn: {
-      type: 'date',
+    expiresOn: {
+      type: 'date'
     },
     homebound: {
-      type: 'boolean'
+      type: 'float'
     },
     explorer: {
-      type: 'boolean'
+      type: 'float'
+    },
+    questionOn: {
+      type: 'date'
+    },
+    questionWhere: {
+      type: 'string'
+    },
+    questionWith: {
+      type: 'string'
+    },
+    questionDoing: {
+      type: 'string'
+    },
+    questionFeeling: {
+      type: 'string'
+    },
+    releaseOn: {
+      type: 'date'
     },
   }
+
 };
