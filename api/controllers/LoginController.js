@@ -125,33 +125,32 @@ module.exports = {
                   accessToken: authBody.access_token,
                   refreshToken: authBody.refresh_token,
                 }
-              ).exec(function checkUser(err, entry) {
+              ).exec(function checkUser(err, entryUser) {
                 if (err) {
                   console.log('Error')
-                  return;
+                  res.redirect('/error')
                 } else {
-
                   // If the user already has finished his experience, the status does not
                   // matter and key is not used
-                  if('releaseOn' in entry && entry.releaseOn != null) {
+                  if('releaseOn' in entryUser && entryUser.releaseOn != null) {
+                    console.log('User already performed the test')
                     res.redirect('/experience')
                   } else {
                     // A session must always exitst, but just in case we create an invalid
                     // session if not
-                    Status.findOrCreate({id:1},{id:1,}).exec(function checkSessionCode(err, entry) {
+                    Status.findOrCreate({id:1},{id:1,}).exec(function checkSessionCode(err, entryStatus) {
                       console.log('CheckSessionCode')
-
                       // If the user is logged and the slot requested is available
-                      if('sessionId' in entry && entry.sessionId == sessionCode) {
+                      if('sessionId' in entryStatus && entryStatus.sessionId == sessionCode) {
                         // If the session is valid
                         sails.sockets.blast('message', { code: 'RemoteLoginAction' });
-                        Status.update({id:1},{currentUser:entry.id,}).exec(function checkSessionCode(err, entry) {
+                        Status.update({id:1},{currentUser:entryUser.id,}).exec(function checkSessionCode(err, updated) {
                           console.log('UserRemotelyLogged')
                           res.redirect('/experience')
                         })
                       } else {
                         // Otherwise
-                        console.log('session code E,I:',entry.sessionId,sessionCode)
+                        console.log('session code E,I:',entryStatus.sessionId,sessionCode)
                         res.redirect('/error')
                       }
                     });

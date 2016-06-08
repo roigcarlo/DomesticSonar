@@ -24,8 +24,7 @@ function getTyped() {
         });
 
         mySwiper.unlockSwipeToNext()
-        console.log($('#footer-1-content'))
-        $('#footer-1-content').show()
+        $('.swiper-slide.swiper-slide-active .footer-inside').show()
       }
     },
 
@@ -39,6 +38,7 @@ function getTyped() {
       cursorChar: '_',
       callback: function () {
         mySwiper.unlockSwipeToNext()
+        $('.swiper-slide.swiper-slide-active .footer-inside').show()
       }
     },
 
@@ -52,6 +52,7 @@ function getTyped() {
       cursorChar: '_',
       callback: function () {
         mySwiper.unlockSwipeToNext()
+        $('.swiper-slide.swiper-slide-active .footer-inside').show()
       }
     },
 
@@ -65,6 +66,7 @@ function getTyped() {
       cursorChar: '_',
       callback: function () {
         mySwiper.unlockSwipeToNext()
+        $('.swiper-slide.swiper-slide-active .footer-inside').show()
       }
     },
 
@@ -78,6 +80,7 @@ function getTyped() {
       cursorChar: '_',
       callback: function () {
         mySwiper.unlockSwipeToNext()
+        $('.swiper-slide.swiper-slide-active .footer-inside').show()
       }
     },
 
