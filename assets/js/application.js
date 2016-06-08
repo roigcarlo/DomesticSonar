@@ -187,6 +187,7 @@ $(document).ready(function () {
         url: '/calculateHomeboundness',
         method: 'POST',
       }).done(function( data ) {
+        console.log('Homebound data from server', data)
         homebound = data
       });
     }
@@ -212,6 +213,7 @@ $(document).ready(function () {
         },
       })
       .done(function( data ) {
+        console.log('Explorer data from server', data)
         explorer = data
       });
     }
