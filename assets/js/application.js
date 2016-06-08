@@ -189,7 +189,10 @@ $(document).ready(function () {
       }).done(function( data ) {
         console.log('Homebound data from server', data)
         homebound = data
-      });
+      }).fail(function (data ) {
+        console.log('Fail Homebound data from server', data)
+        explorer = data
+      });;
     }
 
     // CalculateExploreness, can be done asynchronously, no need to wait.
@@ -214,6 +217,9 @@ $(document).ready(function () {
       })
       .done(function( data ) {
         console.log('Explorer data from server', data)
+        explorer = data
+      }).fail(function (data ) {
+        console.log('Fail Explorer data from server', data)
         explorer = data
       });
     }
