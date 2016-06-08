@@ -3,8 +3,8 @@ var explorer = 0
 
 function getTyped() {
 
-  var hvt  = homebound < 60 ? 'Homebound' : 'Tastemaker'
-  var hvtd = homebound < 60 ? 'you <br> like to listen the same <br> music again and again' : 'you <br> are not afraid to <br> try new musical tastes'
+  var hvt  = homebound > 60 ? 'Homebound' : 'Tastemaker'
+  var hvtd = homebound > 60 ? 'you <br> like to listen the same <br> music again and again' : 'you <br> are not afraid to <br> try new musical tastes'
 
   var evc  = explorer > 50 ? 'Explorer' : 'Conserver'
   var evcd = explorer > 50 ? 'nose, ja direu que ficar' : 'las rosas son rojas y el mar azul'
