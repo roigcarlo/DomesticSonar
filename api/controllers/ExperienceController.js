@@ -72,7 +72,7 @@ function compueteHomeboundness(res, sTerm, mTerm, userId) {
   User.update({id:userId},{homebound:homeboundVsTastemaker}).exec(function (err, updated) {
     console.log('Updated user Homeboundness:')
     console.log(updated)
-    res.ok(homeboundVsTastemaker);
+    res.send(200, homeboundVsTastemaker);
   })
 }
 
@@ -97,7 +97,7 @@ function computeExploreness(res, data, userId) {
   User.update({id:userId},{explorer:value}).exec(function (err, updated) {
     console.log('Updated user Exploreness:')
     console.log(updated)
-    res.ok(value);
+    res.send(200, value);
   })
 }
 
