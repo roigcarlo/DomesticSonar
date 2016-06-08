@@ -1,3 +1,6 @@
+var homebound = 0
+var explorer = 0
+
 function getTyped() {
 
   var hvt  = homebound < 60 ? 'Homebound' : 'Tastemaker'
@@ -92,7 +95,7 @@ function initialize(swiper) {
     var actv = $('.swiper-slide.swiper-slide-active').attr('href')
     var next = $('.swiper-slide.swiper-slide-active').attr('href')
 
-    $('#footer').children().hide()
+    $('.footer-inside').hide()
 
     resetTyped(prev, actv, next)
     initTyped( prev, actv, next)
@@ -317,9 +320,6 @@ $(document).ready(function () {
 ///////////////////
 var playingTrack = 0
 var locks = Array(4).fill(0)
-
-var homebound = 0
-var explorer = 0
 
 // Socket to communicate with the server
 var socket = io.sails.connect();
