@@ -109,9 +109,15 @@ function resetTyped(prev, actv, next) {
   $(".swiper-slide.swiper-slide-next #message").typed('reset')
 }
 
-function resetWheel(prev, actv, next, swiper, onSlide) {
+function resetWheel(prev, actv, next, swiper, onSlide, drawProgress) {
   if(onSlide.indexOf(actv) >= 0) {
-    $('.loading-disk').html(0)
+    var $pCaption = $('.progress-wheel p');
+    var iProgress = $('.inactiveProgress');
+  	var aProgress = $('.activeProgress');
+
+    aProgress.each(function() {
+      drawProgress(this, 0, $pCaption);
+    })
   }
 }
 
@@ -119,32 +125,108 @@ function initTyped(prev, actv, next) {
   $(".swiper-slide.swiper-slide-active #message").typed(getTyped()[actv])
 }
 
-function initWheel(prev, actv, next, swiper, onSlide) {
+function initWheel(prev, actv, next, swiper, onSlide, drawProgress) {
   if(onSlide.indexOf(actv) >= 0) {
+
+    var $pCaption = $('.progress-wheel p');
+    var iProgress = $('.inactiveProgress');
+    var aProgress = $('.activeProgress');
+
+    var progress = 0
+
+    aProgress.each(function() {
+      drawProgress(this, 0, $pCaption);
+    })
+
     var progress = 0
     var interval = setInterval(function() {
-      progress += 1;
-      $('.loading-disk').html(progress)
+      progress += 0.50;
+      aProgress.each(function() {
+        drawProgress(this, progress/100, $pCaption);
+      })
       if (progress >= 100) {
         clearInterval(interval);
-        $('.loading-disk').html(progress)
-        swiper.unlockSwipeToNext()
-        swiper.slideNext(true, 1000)
+        aProgress.each(function() {
+          drawProgress(this, 100/100, $pCaption);
+        })
         setTimeout(function () {
-          $('.loading-disk').html(progress)
-        }, 10)
+          swiper.unlockSwipeToNext()
+          // swiper.slideNext(true, 1000)
+        }, 100)
       }
-    }, 50)
+    }, 25)
   }
 }
 
 function lockSlide(prev, actv, next, swiper, onSlide) {
   if(onSlide.indexOf(actv) >= 0) {
-    swiper.lockSwipeToNext()
+    //swiper.lockSwipeToNext()
   }
 }
 
 $(document).ready(function () {
+
+  ///////////////////
+  // Wheel         //
+  ///////////////////
+  var $pCaption = $('.progress-wheel p');
+	var iProgress = $('.inactiveProgress');
+	var aProgress = $('.activeProgress');
+
+  iProgress.each(function() {
+    var iProgressCTX = this.getContext('2d');
+    drawInactive(iProgressCTX);
+  })
+
+	function drawInactive(iProgressCTX){
+		iProgressCTX.lineCap = 'square';
+
+		//outer ring
+		iProgressCTX.beginPath();
+		iProgressCTX.lineWidth = 17;
+		iProgressCTX.strokeStyle = '#e1e1e1';
+		iProgressCTX.arc(137.5,137.5,129,0,2*Math.PI);
+		iProgressCTX.stroke();
+
+		//progress bar
+		iProgressCTX.beginPath();
+		iProgressCTX.lineWidth = 0;
+		iProgressCTX.fillStyle = '#e6e6e6';
+		iProgressCTX.arc(137.5,137.5,121,0,2*Math.PI);
+		iProgressCTX.fill();
+
+		//progressbar caption
+		iProgressCTX.beginPath();
+		iProgressCTX.lineWidth = 0;
+		iProgressCTX.fillStyle = '#fff';
+		iProgressCTX.arc(137.5,137.5,100,0,2*Math.PI);
+		iProgressCTX.fill();
+
+	}
+
+	function drawProgress(bar, percentage, $pCaption){
+		var barCTX = bar.getContext("2d");
+		var quarterTurn = Math.PI / 2;
+		var endingAngle = ((2*percentage) * Math.PI) - quarterTurn;
+		var startingAngle = 0 - quarterTurn;
+
+		bar.width = bar.width;
+		barCTX.lineCap = 'square';
+
+		barCTX.beginPath();
+		barCTX.lineWidth = 20;
+		barCTX.strokeStyle = 'rgb(57, 194, 95)';
+		barCTX.arc(137.5,137.5,111,startingAngle, endingAngle);
+		barCTX.stroke();
+
+		$pCaption.text( (parseInt(percentage * 100, 10)) + '%');
+	}
+
+  aProgress.each(function() {
+    var percentage = 0 / 100;
+    console.log(this)
+    drawProgress(this, percentage, $pCaption);
+  })
 
   ///////////////////
   // Swiper events //
@@ -155,7 +237,7 @@ $(document).ready(function () {
     var next = $('.swiper-slide.swiper-slide-active').attr('href')
 
     resetTyped(prev, actv, next, swiper);
-    resetWheel(prev, actv, next, swiper, ['app-3', 'app-7']);
+    resetWheel(prev, actv, next, swiper, ['app-3', 'app-7'], drawProgress);
   })
 
   mySwiper.on('onSlideChangeEnd', function (swiper) {
@@ -164,7 +246,7 @@ $(document).ready(function () {
     var next = $('.swiper-slide.swiper-slide-active').attr('href')
 
     initTyped(prev, actv, next, swiper);
-    initWheel(prev, actv, next, swiper, ['fakeLoad'])
+    initWheel(prev, actv, next, swiper, ['fakeLoad'], drawProgress)
     lockSlide(prev, actv, next, swiper, [
       'app-1', 'app-2', 'app-3', 'app-4', 'fakeLoad',
       'app-6', 'app-7', 'app-9', 'app-10'
@@ -339,8 +421,7 @@ var mySwiper = new Swiper ('.swiper-container', {
   loop: false,
   effect: 'slide',
   allowSwipeToPrev: false,
+  pagination: '.swiper-pagination',
+  paginationType: 'progress',
+  longSwipes: false,
 })
-
-///////////////////
-// Typed Texts   //
-///////////////////
