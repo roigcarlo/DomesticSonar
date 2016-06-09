@@ -315,7 +315,7 @@ $(document).ready(function () {
   // Initialize
   $('.sliders').each(function(index) {
     noUiSlider.create($(this)[0], {
-      start: 0,
+      start: 50,
       connect: "lower",
       direction: 'rtl',
       orientation: "vertical",
