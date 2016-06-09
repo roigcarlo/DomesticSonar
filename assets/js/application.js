@@ -1,3 +1,5 @@
+const TEXT_SPEED = 7
+
 var homebound = 0
 var explorer = 0
 
@@ -14,13 +16,13 @@ function getTyped() {
     'app-1': {
       strings: ['<span class="typed-text spotygreen">Hello </span> <span id="typed-name">Peppa</span>  <br> <span class="typed-text">Your are about to <br> create a future <br> memory and become <br> part of a scientific <br> resarch on human <br> behaviours.</span>'],
       contentType: 'html',
-      typeSpeed: 20,
+      typeSpeed: TEXT_SPEED,
       showCursor: false,
       callback: function () {
         $("#typed-name").typed({
           strings: ['Obama', 'Charlio', 'Juan de las nieves', 'Daenerys Targaryen', 'Darkness my old friend'],
           contentType: 'html',
-          typeSpeed: 20,
+          typeSpeed: TEXT_SPEED,
           loop: true,
           showCursor: true,
           cursorChar: '_'
@@ -34,7 +36,7 @@ function getTyped() {
     'app-2':{
       strings: ['<span> In order to create a <br> future memory you <br> need to know a bit <br> more about your <br> present self. <br> <br> Today you will be able <br> to discover your own <br> musical habits and <br> personality traits. </span>'],
       contentType: 'html',
-      typeSpeed: 20,
+      typeSpeed: TEXT_SPEED,
       showCursor: false,
       showCursor: true,
       startDelay: 1000,
@@ -48,7 +50,7 @@ function getTyped() {
     'app-6':{
       strings: ['<span> Let\'s find now more about <br> your personal traits <br> You will go through the <br> </span> <span class="typed-text spotygreen"> Five Factor Model Test </span> <span> a <br> crazy shit that <br> psychologists uses to <br> better understand human <br> behaviour </span>'],
       contentType: 'html',
-      typeSpeed: 20,
+      typeSpeed: TEXT_SPEED,
       showCursor: false,
       showCursor: true,
       startDelay: 1000,
@@ -62,7 +64,7 @@ function getTyped() {
     'app-9':{
       strings: ['<span> In terms of life you are a </span> <br> <span class="typed-text spotygreen"> '+ hvt +' </span> <span> because '+ hvtd +' </span>'],
       contentType: 'html',
-      typeSpeed: 20,
+      typeSpeed: TEXT_SPEED,
       showCursor: false,
       showCursor: true,
       startDelay: 1000,
@@ -76,7 +78,7 @@ function getTyped() {
     'app-10':{
       strings: ['<span> Muscially speaking you are </span> <span class="typed-text spotygreen"> '+ evc +' </span> <span> because '+ evcd +' </span>'],
       contentType: 'html',
-      typeSpeed: 20,
+      typeSpeed: TEXT_SPEED,
       showCursor: false,
       showCursor: true,
       startDelay: 1000,
