@@ -58,3 +58,10 @@
 .swiper-pagination-progress .swiper-pagination-progressbar {
   background: rgb(57, 194, 95);
 }
+
+.sliders-heading {
+  font-size: 3vw;
+  font-weight: bold;
+  color: white;
+  padding: 5%;
+}
