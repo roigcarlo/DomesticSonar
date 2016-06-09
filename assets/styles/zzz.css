@@ -54,3 +54,7 @@
 [disabled] .noUi-connect, [disabled].noUi-connect {
     background: white;
 }
+
+.swiper-pagination-progress .swiper-pagination-progressbar {
+  background: rgb(57, 194, 95);
+}
