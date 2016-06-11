@@ -15,11 +15,6 @@ Player:
 <script>
   $('document').ready(function() {
     $('#PlayerContainer').html('<iframe id="Fakeplayer" src="https://embed.spotify.com/?uri=spotify:trackset:PREFEREDTITLE:<%= trackID %>" frameborder="0" allowtransparency="true" style="display: block;"></iframe>')
-
     $("#Fakeplayer").contents().find(".play-pause-btn").click();
   })
-
-  function changeSong() {
-    $('#PlayerContainer').html('<iframe id="Fakeplayer" src="https://embed.spotify.com/?uri=spotify:trackset:PREFEREDTITLE:2DTn07zuRxnrTSQhubEHWf" frameborder="0" allowtransparency="true" style="display: block;"></iframe>')
-  }
 </script>

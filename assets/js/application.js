@@ -1,4 +1,4 @@
-const TEXT_SPEED = 7
+const TEXT_SPEED = -20
 
 var homebound = 0
 var explorer = 0
@@ -20,7 +20,7 @@ function getTyped() {
 
   return {
     'app-1': {
-      strings: ['<span class="typed-text spotygreen">Hello </span> <span id="typed-name">Mark</span>  <br> <span class="typed-text">You are about to create a <br> future moment while <br> becoming part of a collective <br> scientific experiment on <br> human behaviors.</span>'],
+      strings: ['<span class="typed-text spotygreen">Hello </span> <span id="typed-name">Mark</span>  <br> <span class="typed-text">You are about to <br> create a future moment <br> while becoming part of a collective <br> scientific experiment on <br> human behaviors.</span>'],
       contentType: 'html',
       typeSpeed: TEXT_SPEED,
       showCursor: false,
@@ -31,7 +31,8 @@ function getTyped() {
           typeSpeed: TEXT_SPEED,
           loop: true,
           showCursor: true,
-          cursorChar: '_'
+          cursorChar: '_',
+          backDelay: 2500,
         });
 
         mySwiper.unlockSwipeToNext()
@@ -148,7 +149,7 @@ function initWheel(prev, actv, next, swiper, onSlide, drawProgress) {
 
     var progress = 0
     var interval = setInterval(function() {
-      progress += 0.50;
+      progress += 0.80;
       aProgress.each(function() {
         drawProgress(this, progress/100, $pCaption);
       })
@@ -162,13 +163,13 @@ function initWheel(prev, actv, next, swiper, onSlide, drawProgress) {
           swiper.slideNext(true, 1000)
         }, 100)
       }
-    }, 25)
+    }, 7.5)
   }
 }
 
 function lockSlide(prev, actv, next, swiper, onSlide) {
   if(onSlide.indexOf(actv) >= 0) {
-    swiper.lockSwipeToNext()
+    // swiper.lockSwipeToNext()
   }
 }
 
@@ -263,102 +264,105 @@ $(document).ready(function () {
   ///////////////////
   // Swiper events //
   ///////////////////
-  mySwiper.on('onSlideChangeStart', function (swiper) {
-    var prev = $('.swiper-slide.swiper-slide-prev').attr('href')
-    var actv = $('.swiper-slide.swiper-slide-active').attr('href')
-    var next = $('.swiper-slide.swiper-slide-next').attr('href')
+  console.log(mySwiper.on)
+  if(mySwiper.on) {
+    mySwiper.on('onSlideChangeStart', function (swiper) {
+      var prev = $('.swiper-slide.swiper-slide-prev').attr('href')
+      var actv = $('.swiper-slide.swiper-slide-active').attr('href')
+      var next = $('.swiper-slide.swiper-slide-next').attr('href')
 
-    resetTyped(prev, actv, next, swiper);
-    resetWheel(prev, actv, next, swiper, ['app-3', 'app-7'], drawProgress);
-  })
+      resetTyped(prev, actv, next, swiper);
+      resetWheel(prev, actv, next, swiper, ['app-3', 'app-7'], drawProgress);
+    })
 
-  mySwiper.on('onSlideChangeEnd', function (swiper) {
-    var prev = $('.swiper-slide.swiper-slide-prev').attr('href')
-    var actv = $('.swiper-slide.swiper-slide-active').attr('href')
-    var next = $('.swiper-slide.swiper-slide-next').attr('href')
+    mySwiper.on('onSlideChangeEnd', function (swiper) {
+      var prev = $('.swiper-slide.swiper-slide-prev').attr('href')
+      var actv = $('.swiper-slide.swiper-slide-active').attr('href')
+      var next = $('.swiper-slide.swiper-slide-next').attr('href')
 
-    initTyped(prev, actv, next, swiper);
-    initWheel(prev, actv, next, swiper, ['fakeLoad'], drawProgress)
-    lockSlide(prev, actv, next, swiper, [
-      'app-1', 'app-2', 'app-3', 'app-4', 'fakeLoad',
-      'app-6', 'app-9', 'app-10'
-    ])
+      initTyped(prev, actv, next, swiper);
+      initWheel(prev, actv, next, swiper, ['fakeLoad'], drawProgress)
+      lockSlide(prev, actv, next, swiper, [
+        'app-1', 'app-2', 'app-3', 'app-4', 'fakeLoad',
+        'app-6', 'app-9', 'app-10'
+      ])
 
-    // Create an ephimerous session. The remote callback unlocks the app
-    if(actv == 'app-3') {
-      $.ajax({
-        url: '/createNewSession',
-        method: 'POST',
-      })
-      .done(function( data ) {
-        $('#sessionCode').html(data)
-      });
-    }
-
-    // Calculate Homeboundness, can be done asynchronously, no need to wait.
-    if(actv == 'app-4') {
-      $.ajax({
-        url: '/calculateHomeboundness',
-        method: 'POST',
-      }).done(function( data ) {
-        console.log('Homebound data from server', data)
-        homebound = data
-      }).fail(function (data ) {
-        console.log('Fail Homebound data from server', data)
-        explorer = data
-      });;
-    }
-
-    // Start the timer
-    if(actv == 'app-7') {
-      clearInterval(TimeOutEvent);
-      var seconds = 0
-
-      $('.swiper-slide.swiper-slide-prev .pic-counter').html(seconds)
-      $('.swiper-slide.swiper-slide-active .pic-counter').html(seconds)
-
-      TimeOutEvent = setInterval(function() {
-        seconds += 1;
-        $('.swiper-slide.swiper-slide-active .pic-counter').html(seconds)
-        if (seconds == 25) {
-          $('.swiper-slide.swiper-slide-active .up-half-wrap-tohide').toggleClass('up-half-wrap-hide')
-        }
-        if(seconds >= 30) {
-          clearInterval(TimeOutEvent);
-        }
-      }, 1000)
-    }
-
-    // CalculateExploreness, can be done asynchronously, no need to wait.
-    if(actv == 'app-8') {
-      var images = ['#explorerImage0', '#explorerImage1', '#explorerImage2', '#explorerImage3']
-      var data = {}
-
-      for(var i in images) {
-        data[images[i]] = {}
-        $(images[i]+' .sliders').each(function(){
-          data[images[i]][$(this).attr('name')] = $(this)[0].noUiSlider.get();
+      // Create an ephimerous session. The remote callback unlocks the app
+      if(actv == 'app-3') {
+        $.ajax({
+          url: '/createNewSession',
+          method: 'POST',
         })
+        .done(function( data ) {
+          $('#sessionCode').html(data)
+        });
       }
 
-      $.ajax({
-        url: '/calculateExplorerness',
-        data: JSON.stringify(data),
-        method: 'POST',
-        headers: {
-          'content-type': 'application/json'
-        },
-      })
-      .done(function( data ) {
-        console.log('Explorer data from server', data)
-        explorer = data
-      }).fail(function (data ) {
-        console.log('Fail Explorer data from server', data)
-        explorer = data
-      });
-    }
+      // Calculate Homeboundness, can be done asynchronously, no need to wait.
+      if(actv == 'app-4') {
+        $.ajax({
+          url: '/calculateHomeboundness',
+          method: 'POST',
+        }).done(function( data ) {
+          console.log('Homebound data from server', data)
+          homebound = data
+        }).fail(function (data ) {
+          console.log('Fail Homebound data from server', data)
+          explorer = data
+        });;
+      }
 
-  })
+      // Start the timer
+      if(actv == 'app-7') {
+        clearInterval(TimeOutEvent);
+        var seconds = 0
+
+        $('.swiper-slide.swiper-slide-prev .pic-counter').html(seconds)
+        $('.swiper-slide.swiper-slide-active .pic-counter').html(seconds)
+
+        TimeOutEvent = setInterval(function() {
+          seconds += 1;
+          $('.swiper-slide.swiper-slide-active .pic-counter').html(seconds)
+          if (seconds == 25) {
+            $('.swiper-slide.swiper-slide-active .up-half-wrap-tohide').toggleClass('up-half-wrap-hide')
+          }
+          if(seconds >= 30) {
+            clearInterval(TimeOutEvent);
+          }
+        }, 1000)
+      }
+
+      // CalculateExploreness, can be done asynchronously, no need to wait.
+      if(actv == 'app-8') {
+        var images = ['#explorerImage0', '#explorerImage1', '#explorerImage2', '#explorerImage3']
+        var data = {}
+
+        for(var i in images) {
+          data[images[i]] = {}
+          $(images[i]+' .sliders').each(function(){
+            data[images[i]][$(this).attr('name')] = $(this)[0].noUiSlider.get();
+          })
+        }
+
+        $.ajax({
+          url: '/calculateExplorerness',
+          data: JSON.stringify(data),
+          method: 'POST',
+          headers: {
+            'content-type': 'application/json'
+          },
+        })
+        .done(function( data ) {
+          console.log('Explorer data from server', data)
+          explorer = data
+        }).fail(function (data ) {
+          console.log('Fail Explorer data from server', data)
+          explorer = data
+        });
+      }
+
+    })
+  }
 
   ///////////////////
   // Slider events //
@@ -449,6 +453,11 @@ $(document).ready(function () {
     // A song ends to play
     if(msg['code'] == 'SongStopPlaying') {
       playingTrack = false
+    }
+
+    // A song ends to play
+    if(msg['code'] == 'changeSong') {
+        $('#PlayerContainer').html('<iframe id="Fakeplayer" src="https://embed.spotify.com/?uri=spotify:trackset:PREFEREDTITLE:'+msg['data']+'" frameborder="0" allowtransparency="true" style="display: block;"></iframe>')
     }
   })
 
