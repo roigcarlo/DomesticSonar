@@ -166,6 +166,27 @@ function lockSlide(prev, actv, next, swiper, onSlide) {
   }
 }
 
+function SendFormTK() {
+  var data = {}
+
+  $('#tk-data input').each(function() {
+    data[this.id] = this.value
+  })
+
+  $.ajax({
+    url: '/sendTrackFeatures',
+    data: data,
+    method: 'POST',
+  })
+  .done(function( data ) {
+    console.log('Explorer data from server', data)
+    explorer = data
+  }).fail(function (data ) {
+    console.log('Fail Explorer data from server', data)
+    explorer = data
+  });
+}
+
 $(document).ready(function () {
 
   ///////////////////
