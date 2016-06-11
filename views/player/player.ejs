@@ -5,7 +5,12 @@ Player:
 <script src="https://code.jquery.com/jquery-1.10.2.min.js"></script>
 <script>
   $('document').ready(function() {
-    $('#PlayerContainer').html('<iframe id="Fakeplayer" src="https://embed.spotify.com/?uri=spotify:trackset:PREFEREDTITLE:<%= trackID %>" frameborder="0" allowtransparency="true" style="display: block;"></iframe>')
-    $("#Fakeplayer").contents().find(".play-pause-btn").click();
+    $('#PlayerContainer').html('<iframe id="Fakeplayer" frameborder="0" allowtransparency="true" style="display: block;"></iframe>')
+    $('#Fakeplayer').load(function(){
+      setTimeout(function(){
+        $("#Fakeplayer").contents().find(".play-pause-btn").click();
+      }, 5000)
+    })
+    $('#Fakeplayer').attr('src','https://embed.spotify.com/?uri=spotify:trackset:PREFEREDTITLE:<%= trackID %>' )
   })
 </script>

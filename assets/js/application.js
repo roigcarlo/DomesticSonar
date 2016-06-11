@@ -457,8 +457,7 @@ $(document).ready(function () {
 
     // A song ends to play
     if(msg['code'] == 'changeSong') {
-        $('#PlayerContainer').html('<iframe id="Fakeplayer" src="https://embed.spotify.com/?uri=spotify:trackset:PREFEREDTITLE:'+msg['data']+'" frameborder="0" allowtransparency="true" style="display: block;"></iframe>')
-        $("#Fakeplayer").contents().find(".play-pause-btn").click();
+        $('#Fakeplayer').attr('src','https://embed.spotify.com/?uri=spotify:trackset:PREFEREDTITLE:'+msg['data'] )
     }
   })
 
