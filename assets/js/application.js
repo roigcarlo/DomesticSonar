@@ -159,7 +159,7 @@ function initWheel(prev, actv, next, swiper, onSlide, drawProgress) {
         })
         setTimeout(function () {
           swiper.unlockSwipeToNext()
-          // swiper.slideNext(true, 1000)
+          swiper.slideNext(true, 1000)
         }, 100)
       }
     }, 25)
