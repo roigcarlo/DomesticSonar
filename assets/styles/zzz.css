@@ -65,3 +65,175 @@
   color: white;
   padding: 5%;
 }
+
+.pic-counter:before {
+  position: absolute;
+  color: white;
+  margin-bottom: -100%;
+  font-size: 5vw;
+  text-align: right;
+  padding: 5vw;
+  top: 45%;
+}
+
+.typed-cursor{
+    opacity: 1;
+    -webkit-animation: blink 0.7s infinite;
+    -moz-animation: blink 0.7s infinite;
+    animation: blink 0.7s infinite;
+}
+@keyframes blink{
+    0% { opacity:1; }
+    50% { opacity:0; }
+    100% { opacity:1; }
+}
+@-webkit-keyframes blink{
+    0% { opacity:1; }
+    50% { opacity:0; }
+    100% { opacity:1; }
+}
+@-moz-keyframes blink{
+    0% { opacity:1; }
+    50% { opacity:0; }
+    100% { opacity:1; }
+}
+
+.typed-text-container {
+    margin-top: 15%;
+    color: white;
+    padding: 5%;
+    font-size: 8vw;
+    width:100%;
+    line-height: 110%;
+}
+
+.typed-text {
+    font-weight: bold;
+}
+
+.spotygreen {
+    color:rgb(57, 194, 95);
+}
+
+#typed-name {
+  font-size: 5vw;
+  line-height: 50%;
+}
+
+
+
+@-webkit-keyframes fade-in{
+  0%   {opacity:1}
+  50%  {opacity:0}
+  100% {opacity:1}
+}
+
+.footer-text {
+  font-weight: bold;
+  font-size: 5vw;
+  color:rgb(57, 194, 95);
+  -webkit-animation:fade-in 3s infinite;
+}
+
+html,
+body {
+  height: 100%;
+  /* The html and body elements cannot have any padding or margin. */
+}
+
+/* Wrapper for page content to push down footer */
+#wrap {
+  min-height: 100%;
+  height: auto !important;
+  height: 100vh;
+  /* Negative indent footer by it's height */
+  margin: 0 auto -15vh;
+}
+
+.up-half-wrap {
+  min-height: 50vh;
+  height: 50vh;
+  /* Negative indent footer by it's height */
+  margin: 0 auto -15%;
+}
+
+@-webkit-keyframes fade {
+  from {background-color: rgba(0,0,0,0);}
+  to {background-color: rgba(0,0,0,1);}
+}
+
+.up-half-wrap-hide:before {
+  position: absolute;
+  top: 0; right: 0; bottom: 0; left: 0;
+  background-color: inherit;
+  content: ' ';
+  height: 50vh;
+  transition: background-color 5s;
+  background-color: rgba(0,0,0,1);
+  animation-name: fade;
+  animation-duration: 5s;
+}
+
+.bot-half-wrap {
+  min-height: 50vh;
+  height: 50vh;
+  /* Negative indent footer by it's height */
+  margin: 0 auto -15vh;
+}
+
+.allport {
+  min-height: 100vh;
+  height: auto !important;
+  height: 100vh;
+  background-color: black;
+}
+
+/* Set the fixed height of the footer here */
+#push,
+#footer {
+  height: 15vh;
+}
+#footer {
+}
+
+.overlay {
+  background-color: rgba(25, 25, 28, 0.67);
+  width: 100vw;
+  height: 100vh;"
+}
+
+/* Lastly, apply responsive CSS fixes as necessary */
+@media (max-width: 767px) {
+  #footer {
+    margin-left: -20px;
+    margin-right: -20px;
+    padding-left: 20px;
+    padding-right: 20px;
+  }
+}
+
+#VContainer {
+    width: 100%;
+    height: 100%;
+    position: relative;
+    overflow: hidden;
+}
+
+#VContainer video {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    /* The following will size the video to fit the full container. Not necessary, just nice.*/
+    min-width: 100%;
+    min-height: 100%;
+    -webkit-transform: translate(-50%,-50%);
+    -moz-transform: translate(-50%,-50%);
+    -ms-transform: translate(-50%,-50%);
+    transform: translate(-50%,-50%);
+    z-index: 0;
+}
+
+#VContainer div {
+    position: relative;
+    z-index: 1;
+}

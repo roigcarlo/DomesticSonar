@@ -5,22 +5,28 @@ var explorer = 0
 
 function getTyped() {
 
-  var hvt  = homebound > 60 ? 'Homebound' : 'Tastemaker'
-  var hvtd = homebound > 60 ? 'you <br> like to listen the same <br> music again and again' : 'you <br> are not afraid to <br> try new musical tastes'
+  var evc = explorer > 50
+    ? '<span> You know what you like and you know where you can find it. That\'s why you like to stay in your area of comfort, making you a great </span> <span class="typed-text spotygreen"> Traditionalist </span>'
+    : '<span> Where to next? Always looking for something else, you are good with words like change, shift or mutation, you are an </span> <span class="typed-text spotygreen"> Explorer. </span>'
 
-  var evc  = explorer > 50 ? 'Explorer' : 'Conserver'
-  var evcd = explorer > 50 ? 'nose, ja direu que ficar' : 'las rosas son rojas y el mar azul'
+  var hvt = homebound > 60
+    ? '<span> Hey there </span> <span class="typed-text spotygreen"> Homebound! </span> <span> Seems like you\'ve got your music taste pretty clear, you like to listen to the same kind of music all the time, staying in a tune comfort zone.  Play on repeat! </span>'
+    : '<span> Here there </span> <span class="typed-text spotygreen"> Tastemaker! </span> Seems like you like exploring new tunes, constantly in search of new musical expriences.  Shuffle mode on! </span>'
+
+  var names = [
+    'Jordi', 'Sam', 'Carles', 'Frank', 'Dani', 'Pau', 'Iolanda', 'Chus', 'Lotte', 'Sharon', 'Edgar', 'Alex', 'Pol', 'Oscar', 'Mariona', 'Alexandra', 'Axel', 'Charlie',
+    'Joan', 'Rouse', 'Jackie chan', 'Drake', 'Harry potter', 'Han solo', 'Chewaka', 'Marty McFly', 'Mark'
+  ]
 
   return {
-
     'app-1': {
-      strings: ['<span class="typed-text spotygreen">Hello </span> <span id="typed-name">Peppa</span>  <br> <span class="typed-text">Your are about to <br> create a future <br> memory and become <br> part of a scientific <br> resarch on human <br> behaviours.</span>'],
+      strings: ['<span class="typed-text spotygreen">Hello </span> <span id="typed-name">Mark</span>  <br> <span class="typed-text">You are about to create a future moment while becoming part of a collective scientific experiment on human behaviors.</span>'],
       contentType: 'html',
       typeSpeed: TEXT_SPEED,
       showCursor: false,
       callback: function () {
         $("#typed-name").typed({
-          strings: ['Obama', 'Charlio', 'Juan de las nieves', 'Daenerys Targaryen', 'Darkness my old friend'],
+          strings: names,
           contentType: 'html',
           typeSpeed: TEXT_SPEED,
           loop: true,
@@ -34,7 +40,7 @@ function getTyped() {
     },
 
     'app-2':{
-      strings: ['<span> In order to create a <br> future memory you <br> need to know a bit <br> more about your <br> present self. <br> <br> Today you will be able <br> to discover your own <br> musical habits and <br> personality traits. </span>'],
+      strings: ['<span> In order to be able to <br> curate a perfect song for <br> your future moment first <br> we need to know a bit <br> more about you. <br> <br> Ready to reveal your <br> musical habits and <br> personality traits? <br> Here we go!  </span>'],
       contentType: 'html',
       typeSpeed: TEXT_SPEED,
       showCursor: false,
@@ -48,7 +54,7 @@ function getTyped() {
     },
 
     'app-6':{
-      strings: ['<span> Let\'s find now more about <br> your personal traits <br> You will go through the <br> </span> <span class="typed-text spotygreen"> Five Factor Model Test </span> <span> a <br> crazy shit that <br> psychologists uses to <br> better understand human <br> behaviour </span>'],
+      strings: ['<span> Time for the <br> </span> <span class="typed-text spotygreen"> Five Factor Model Test </span> <span> <br> a crazy test that <br> psychologists use to <br> understand humman <br> behavior. </span>'],
       contentType: 'html',
       typeSpeed: TEXT_SPEED,
       showCursor: false,
@@ -62,7 +68,7 @@ function getTyped() {
     },
 
     'app-9':{
-      strings: ['<span> In terms of life you are a </span> <br> <span class="typed-text spotygreen"> '+ hvt +' </span> <span> because '+ hvtd +' </span>'],
+      strings: [evc],
       contentType: 'html',
       typeSpeed: TEXT_SPEED,
       showCursor: false,
@@ -76,7 +82,7 @@ function getTyped() {
     },
 
     'app-10':{
-      strings: ['<span> Muscially speaking you are </span> <span class="typed-text spotygreen"> '+ evc +' </span> <span> because '+ evcd +' </span>'],
+      strings: [hvt],
       contentType: 'html',
       typeSpeed: TEXT_SPEED,
       showCursor: false,
@@ -93,15 +99,15 @@ function getTyped() {
 }
 
 function initialize(swiper) {
-    var prev = $('.swiper-slide.swiper-slide-active').attr('href')
+    var prev = $('.swiper-slide.swiper-slide-prev').attr('href')
     var actv = $('.swiper-slide.swiper-slide-active').attr('href')
-    var next = $('.swiper-slide.swiper-slide-active').attr('href')
+    var next = $('.swiper-slide.swiper-slide-next').attr('href')
 
     $('.footer-inside').hide()
 
     resetTyped(prev, actv, next)
     initTyped( prev, actv, next)
-    lockSlide(prev, actv, next, swiper, [
+    lockSlide( prev, actv, next, swiper, [
       'app-1', 'app-2', 'app-3', 'app-4', 'fakeLoad',
       'app-6', 'app-7', 'app-9', 'app-10'
     ])
@@ -196,6 +202,9 @@ $(document).ready(function () {
 	var iProgress = $('.inactiveProgress');
 	var aProgress = $('.activeProgress');
 
+  var SlideTimer = 0
+  var TimeOutEvent = undefined
+
   iProgress.each(function() {
     var iProgressCTX = this.getContext('2d');
     drawInactive(iProgressCTX);
@@ -255,18 +264,18 @@ $(document).ready(function () {
   // Swiper events //
   ///////////////////
   mySwiper.on('onSlideChangeStart', function (swiper) {
-    var prev = $('.swiper-slide.swiper-slide-active').attr('href')
+    var prev = $('.swiper-slide.swiper-slide-prev').attr('href')
     var actv = $('.swiper-slide.swiper-slide-active').attr('href')
-    var next = $('.swiper-slide.swiper-slide-active').attr('href')
+    var next = $('.swiper-slide.swiper-slide-next').attr('href')
 
     resetTyped(prev, actv, next, swiper);
     resetWheel(prev, actv, next, swiper, ['app-3', 'app-7'], drawProgress);
   })
 
   mySwiper.on('onSlideChangeEnd', function (swiper) {
-    var prev = $('.swiper-slide.swiper-slide-active').attr('href')
+    var prev = $('.swiper-slide.swiper-slide-prev').attr('href')
     var actv = $('.swiper-slide.swiper-slide-active').attr('href')
-    var next = $('.swiper-slide.swiper-slide-active').attr('href')
+    var next = $('.swiper-slide.swiper-slide-next').attr('href')
 
     initTyped(prev, actv, next, swiper);
     initWheel(prev, actv, next, swiper, ['fakeLoad'], drawProgress)
@@ -298,6 +307,26 @@ $(document).ready(function () {
         console.log('Fail Homebound data from server', data)
         explorer = data
       });;
+    }
+
+    // Start the timer
+    if(actv == 'app-7') {
+      clearInterval(TimeOutEvent);
+      var seconds = 0
+
+      $('.swiper-slide.swiper-slide-prev .pic-counter').html(seconds)
+      $('.swiper-slide.swiper-slide-active .pic-counter').html(seconds)
+
+      TimeOutEvent = setInterval(function() {
+        seconds += 1;
+        $('.swiper-slide.swiper-slide-active .pic-counter').html(seconds)
+        if (seconds == 5) {
+          $('.swiper-slide.swiper-slide-active .up-half-wrap-tohide').toggleClass('up-half-wrap-hide')
+        }
+        if(seconds >= 30) {
+          clearInterval(TimeOutEvent);
+        }
+      }, 1000)
     }
 
     // CalculateExploreness, can be done asynchronously, no need to wait.
@@ -367,6 +396,7 @@ $(document).ready(function () {
 
       if(locks[slideID] == 4) {
         setTimeout(function () {
+          clearInterval(TimeOutEvent);
           mySwiper.unlockSwipeToNext()
           mySwiper.slideNext(true, 1000)
         }, 750);
