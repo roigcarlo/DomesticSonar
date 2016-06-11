@@ -1,0 +1,25 @@
+Player:
+<div id="PlayerContainer">
+  <!-- <iframe id="Fakeplayer" src="https://embed.spotify.com/?uri=spotify:trackset:PREFEREDTITLE:1PBW0ASegP9b9bGfgaxyEv" frameborder="0" allowtransparency="true" style="display: block;"></iframe> -->
+</div>
+
+<!-- http://192.168.1.6:1337/YVk4D7Mw8w9Yt0mPXPd7wxI2z960t6lrYVk4D7Mw8w9Yt0mPXPd7wxI2z960t6lrYVk4D7Mw8w9Yt0mPXPd7wxI2z960t6lrYVk4D7Mw8w9Yt0mPXPd7wxI2z960t6lr
+<div id="qrcode"></div> -->
+
+<!-- <iframe src="https://embed.spotify.com/?uri=spotify:trackset:PREFEREDTITLE:5Z7ygHQo02SUrFmcgpwsKW,1x6ACsKV4UdWS2FMuPFUiT,4bi73jCM02fMpkI11Lqmfe" frameborder="0" allowtransparency="true" style="display: block;"></iframe>
+
+<iframe id="Fakeplayer" src="https://embed.spotify.com/?uri=spotify:trackset:PREFEREDTITLE:1PBW0ASegP9b9bGfgaxyEv" frameborder="0" allowtransparency="true" style="display: block;"></iframe>
+-->
+
+<script src="https://code.jquery.com/jquery-1.10.2.min.js"></script>
+<script>
+  $('document').ready(function() {
+    $('#PlayerContainer').html('<iframe id="Fakeplayer" src="https://embed.spotify.com/?uri=spotify:trackset:PREFEREDTITLE:<%= trackID %>" frameborder="0" allowtransparency="true" style="display: block;"></iframe>')
+
+    $("#Fakeplayer").contents().find(".play-pause-btn").click();
+  })
+
+  function changeSong() {
+    $('#PlayerContainer').html('<iframe id="Fakeplayer" src="https://embed.spotify.com/?uri=spotify:trackset:PREFEREDTITLE:2DTn07zuRxnrTSQhubEHWf" frameborder="0" allowtransparency="true" style="display: block;"></iframe>')
+  }
+</script>
