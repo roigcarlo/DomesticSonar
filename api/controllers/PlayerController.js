@@ -17,10 +17,16 @@ module.exports = {
 	 * Initiales the login request using Spotify credentials
    */
   player: function (req, res) {
-
     const track = req.param('trackID')
-
-    return res.view('player/player.ejs', {trackID:track});
+    return res.view('player/player.ejs', {trackID:track})
   },
+
+  changeSong: function(req, res) {
+    const track = req.param('trackID')
+    sails.sockets.blast('message', { code: 'changeSong', data: track})
+    return res.ok()
+  },
+
+
 
 };
