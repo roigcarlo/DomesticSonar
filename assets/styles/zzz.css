@@ -66,14 +66,13 @@
   padding: 5%;
 }
 
-.pic-counter:before {
-  position: absolute;
+.pic-counter {
   color: white;
   margin-bottom: -100%;
   font-size: 5vw;
   text-align: right;
-  padding: 5vw;
-  top: 45%;
+  padding: 1%;
+  font-weight: 900;
 }
 
 .typed-cursor{
@@ -99,10 +98,10 @@
 }
 
 .typed-text-container {
-    margin-top: 15%;
+    margin-top: 10%;
     color: white;
     padding: 5%;
-    font-size: 8vw;
+    font-size: 7vw;
     width:100%;
     line-height: 110%;
 }
@@ -147,14 +146,35 @@ body {
   height: auto !important;
   height: 100vh;
   /* Negative indent footer by it's height */
-  margin: 0 auto -15vh;
+  margin: 0 auto -10vh;
 }
 
 .up-half-wrap {
   min-height: 50vh;
   height: 50vh;
   /* Negative indent footer by it's height */
-  margin: 0 auto -15%;
+  margin: 0 auto -10%;
+}
+
+.up-img-wrap {
+  min-height: 40vh;
+  height: 40vh;
+  /* Negative indent footer by it's height */
+  margin: 0 auto -10%;
+}
+
+.bot-half-wrap {
+  min-height: 50vh;
+  height: 50vh;
+  /* Negative indent footer by it's height */
+  margin: 0 auto -10vh;
+}
+
+.bot-img-wrap {
+  min-height: 60vh;
+  height: 60vh;
+  /* Negative indent footer by it's height */
+  margin: 0 auto -10vh;
 }
 
 @-webkit-keyframes fade {
@@ -167,18 +187,11 @@ body {
   top: 0; right: 0; bottom: 0; left: 0;
   background-color: inherit;
   content: ' ';
-  height: 50vh;
+  height: 40vh;
   transition: background-color 5s;
   background-color: rgba(0,0,0,1);
   animation-name: fade;
   animation-duration: 5s;
-}
-
-.bot-half-wrap {
-  min-height: 50vh;
-  height: 50vh;
-  /* Negative indent footer by it's height */
-  margin: 0 auto -15vh;
 }
 
 .allport {
@@ -191,7 +204,7 @@ body {
 /* Set the fixed height of the footer here */
 #push,
 #footer {
-  height: 15vh;
+  height: 10vh;
 }
 #footer {
 }

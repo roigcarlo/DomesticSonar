@@ -10,8 +10,8 @@ function getTyped() {
     : '<span> Where to next? Always looking for something else, you are good with words like change, shift or mutation, you are an </span> <span class="typed-text spotygreen"> Explorer. </span>'
 
   var hvt = homebound > 60
-    ? '<span> Hey there </span> <span class="typed-text spotygreen"> Homebound! </span> <span> Seems like you\'ve got your music taste pretty clear, you like to listen to the same kind of music all the time, staying in a tune comfort zone.  Play on repeat! </span>'
-    : '<span> Here there </span> <span class="typed-text spotygreen"> Tastemaker! </span> Seems like you like exploring new tunes, constantly in search of new musical expriences.  Shuffle mode on! </span>'
+    ? '<span> Hey there </span> <span class="typed-text spotygreen"> Homebound! </span> <br> <span> Seems like you\'ve got your <br> music taste pretty clear, <br> you like to listen to the same <br> kind of music all the time, <br> staying in a tune comfort zone. <br> Play on repeat! </span>'
+    : '<span> Hey there </span> <span class="typed-text spotygreen"> Tastemaker! </span> <br> Seems like you like exploring <br> new tunes, constantly in <br> search of new musical <br> expriences.  Shuffle mode on! </span>'
 
   var names = [
     'Jordi', 'Sam', 'Carles', 'Frank', 'Dani', 'Pau', 'Iolanda', 'Chus', 'Lotte', 'Sharon', 'Edgar', 'Alex', 'Pol', 'Oscar', 'Mariona', 'Alexandra', 'Axel', 'Charlie',
@@ -20,7 +20,7 @@ function getTyped() {
 
   return {
     'app-1': {
-      strings: ['<span class="typed-text spotygreen">Hello </span> <span id="typed-name">Mark</span>  <br> <span class="typed-text">You are about to create a future moment while becoming part of a collective scientific experiment on human behaviors.</span>'],
+      strings: ['<span class="typed-text spotygreen">Hello </span> <span id="typed-name">Mark</span>  <br> <span class="typed-text">You are about to create a <br> future moment while <br> becoming part of a collective <br> scientific experiment on <br> human behaviors.</span>'],
       contentType: 'html',
       typeSpeed: TEXT_SPEED,
       showCursor: false,
@@ -168,7 +168,7 @@ function initWheel(prev, actv, next, swiper, onSlide, drawProgress) {
 
 function lockSlide(prev, actv, next, swiper, onSlide) {
   if(onSlide.indexOf(actv) >= 0) {
-    //swiper.lockSwipeToNext()
+    swiper.lockSwipeToNext()
   }
 }
 
@@ -281,7 +281,7 @@ $(document).ready(function () {
     initWheel(prev, actv, next, swiper, ['fakeLoad'], drawProgress)
     lockSlide(prev, actv, next, swiper, [
       'app-1', 'app-2', 'app-3', 'app-4', 'fakeLoad',
-      'app-6', 'app-7', 'app-9', 'app-10'
+      'app-6', 'app-9', 'app-10'
     ])
 
     // Create an ephimerous session. The remote callback unlocks the app
@@ -295,7 +295,7 @@ $(document).ready(function () {
       });
     }
 
-    // CalculateHomeboundness, can be done asynchronously, no need to wait.
+    // Calculate Homeboundness, can be done asynchronously, no need to wait.
     if(actv == 'app-4') {
       $.ajax({
         url: '/calculateHomeboundness',
@@ -320,7 +320,7 @@ $(document).ready(function () {
       TimeOutEvent = setInterval(function() {
         seconds += 1;
         $('.swiper-slide.swiper-slide-active .pic-counter').html(seconds)
-        if (seconds == 5) {
+        if (seconds == 25) {
           $('.swiper-slide.swiper-slide-active .up-half-wrap-tohide').toggleClass('up-half-wrap-hide')
         }
         if(seconds >= 30) {
@@ -386,22 +386,22 @@ $(document).ready(function () {
 
     var slideID = $(this).attr('picID')
 
-    $(this)[0].noUiSlider.on('set', function(index) {
-      // Change color of the slider
-      blockTarget.attr('disabled',true)
-      blockOrigin.attr('disabled',true)
-
-      locks[slideID] += 1
-      console.log(slideID, locks[slideID])
-
-      if(locks[slideID] == 4) {
-        setTimeout(function () {
-          clearInterval(TimeOutEvent);
-          mySwiper.unlockSwipeToNext()
-          mySwiper.slideNext(true, 1000)
-        }, 750);
-      }
-    })
+    // $(this)[0].noUiSlider.on('set', function(index) {
+    //   // Change color of the slider
+    //   // blockTarget.attr('disabled',true)
+    //   // blockOrigin.attr('disabled',true)
+    //
+    //   locks[slideID] += 1
+    //   console.log(slideID, locks[slideID])
+    //
+    //   if(locks[slideID] == 4) {
+    //     setTimeout(function () {
+    //       clearInterval(TimeOutEvent);
+    //       // mySwiper.unlockSwipeToNext()
+    //       // mySwiper.slideNext(true, 1000)
+    //     }, 2000);
+    //   }
+    // })
   })
 
   ///////////////////

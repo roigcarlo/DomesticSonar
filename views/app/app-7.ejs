@@ -1,4 +1,4 @@
-<div class="up-half-wrap up-half-wrap-tohide" style="margin-bottom: 0px; min-height: 50vh; background: rgba(0,0,0,0) url(img/explorer<%=pictureId%>.jpeg); background-size: cover;">
+<div class="up-img-wrap up-half-wrap-tohide" style="margin-bottom: 0px; background: rgba(0,0,0,0) url(img/explorer<%=pictureId%>.jpeg); background-size: cover;">
 
     <div class="row" style="margin:0px;">
       <div class="col-xs-3" style="padding:3%; text-align: left;">
@@ -8,21 +8,21 @@
       </div>
       <div class="col-xs-3" style="padding:3%; text-align: right;">
         <!-- <img src="img/spotify_w.png" height="100%" width="100%"> -->
+        <div class="pic-counter">0</div>
       </div>
-      <div class="pic-counter">0</div>
     </div><!-- row -->
 
 </div> <!-- Wrapp -->
-<div class="bot-half-wrap" style="background-color: grey; text-align: center;">
+<div class="bot-img-wrap" style="background-color: grey; text-align: center;">
   <div>
     <div class="sliders-heading"><span>Evaluate this picture adjusting the value of the four sliders</span></div>
     <table class="table borderless">
       <tbody>
         <tr id="explorerImage<%=pictureId%>">
-          <td style="width:25%" ><div class="sliders" id="flat-slider<%=pictureId%>1" picID="<%=pictureId%>" sliderID="1" name="Amazing"></div></td>
-          <td style="width:25%" ><div class="sliders" id="flat-slider<%=pictureId%>2" picID="<%=pictureId%>" sliderID="2" name="Intense"></div></td>
-          <td style="width:25%" ><div class="sliders" id="flat-slider<%=pictureId%>3" picID="<%=pictureId%>" sliderID="3" name="Chills"></div></td>
-          <td style="width:25%" ><div class="sliders" id="flat-slider<%=pictureId%>4" picID="<%=pictureId%>" sliderID="4" name="Boring"></div></td>
+          <td style="width:20%" ><div class="sliders" id="flat-slider<%=pictureId%>1" picID="<%=pictureId%>" sliderID="1" name="Amazing"></div></td>
+          <td style="width:20%" ><div class="sliders" id="flat-slider<%=pictureId%>2" picID="<%=pictureId%>" sliderID="2" name="Intense"></div></td>
+          <td style="width:20%" ><div class="sliders" id="flat-slider<%=pictureId%>3" picID="<%=pictureId%>" sliderID="3" name="Chills"></div></td>
+          <td style="width:20%" ><div class="sliders" id="flat-slider<%=pictureId%>4" picID="<%=pictureId%>" sliderID="4" name="Boring"></div></td>
         </tr>
         <tr style="font-size: 3vw; font-weight: bold; color:white">
           <td><div class="sliders-text">Amazing</div></td>
@@ -34,3 +34,9 @@
     </table>
   </div>
 </div> <!-- Wrapp -->
+
+<div id="footer" class="footer-text">
+  <div class="container centered">
+    <span id="linkPlay">Slide to continue</span>
+  </div>
+</div>
