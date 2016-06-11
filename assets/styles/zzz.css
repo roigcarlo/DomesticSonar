@@ -1,3 +1,11 @@
+/* FONTS */
+@font-face {
+    font-family: 'GraphicBlack';
+    src: url('/fonts/Graphik-Semibold.otf');
+    font-weight: normal;
+    font-style: bold;
+}
+
 .noUi-vertical .noUi-handle {
   width: 10vw;
   height: 10vw;
@@ -6,7 +14,7 @@
   border: none;
   cursor: pointer;
   top: -5vw;
-  left: -4.2vw;
+  left: -4.7vw;
 }
 
 .noUi-handle:after, .noUi-handle:before {
@@ -18,7 +26,7 @@
 }
 
 .noUi-vertical {
-    width: 2vw;
+    width: 1vw;
 }
 
 .noUi-handle {
@@ -26,11 +34,12 @@
 }
 
 .sliders {
-  height:25vh; display: inline-block;
+  height:28vh; display: inline-block;
 }
 
 .sliders-text {
-  padding-top: 25%;
+  font-size: 2vw;
+  padding-top: 5%;
 }
 
 .noUi-background {
@@ -98,16 +107,20 @@
 }
 
 .typed-text-container {
+    font-family: 'GraphicBlack';
     margin-top: 10%;
     color: white;
     padding: 5%;
-    font-size: 7vw;
+    padding-left: 10%;
+    padding-right: 10%;
+    font-size: 6vw;
     width:100%;
     line-height: 110%;
+    font-weight: 900;
 }
 
 .typed-text {
-    font-weight: bold;
+  font-weight: bold;
 }
 
 .spotygreen {
@@ -115,8 +128,7 @@
 }
 
 #typed-name {
-  font-size: 5vw;
-  line-height: 50%;
+  font-weight: bold;
 }
 
 
@@ -129,9 +141,10 @@
 
 .footer-text {
   font-weight: bold;
-  font-size: 5vw;
+  font-size: 2vw;
   color:rgb(57, 194, 95);
   -webkit-animation:fade-in 3s infinite;
+  letter-spacing: 7px;
 }
 
 html,
@@ -249,4 +262,29 @@ body {
 #VContainer div {
     position: relative;
     z-index: 1;
+}
+
+.input-group-addon:hover{
+  border: none;
+}
+
+.app-12-label {
+  color: white;
+  font-size: 5vw;
+  background: none;
+  border: none;
+}
+
+.app-12-input {
+  color: white;
+  font-size: 5vw;
+  border-radius: 0px;
+  border: 0px solid white;
+  border-bottom-width: 1px;
+  background-color: transparent;
+  height: 10vw;g
+}
+
+#ReleaseBall {
+  background-color: white;
 }
