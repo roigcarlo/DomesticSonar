@@ -319,3 +319,9 @@ body {
   font-size: 32px;
   vertical-align:middle;
 }
+
+.text-small {
+  font-weight: lighter;;
+  font-size: 2vw;
+  vertical-align:middle;
+}

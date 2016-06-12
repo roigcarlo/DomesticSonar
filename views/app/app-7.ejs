@@ -1,18 +1,15 @@
 <div class="up-img-wrap up-half-wrap-tohide" style="margin-bottom: 0px; background: rgba(0,0,0,0) url(img/explorer<%=pictureId%>.jpeg); background-size: cover;">
-
-    <div class="row" style="margin:0px;">
-      <div class="col-xs-3" style="padding:5%; text-align: left;">
-        <img src="img/dds_w.png" height="75%" width="75%">
-      </div>
-      <div class="col-xs-6">
-      </div>
-      <div class="col-xs-3" style="padding:3%; text-align: right;">
-        <!-- <img src="img/spotify_w.png" height="100%" width="100%"> -->
-        <div class="pic-counter">0</div>
-      </div>
-    </div><!-- row -->
-
+  <div class="row" style="margin:0px;">
+    <% include components/dds_w %>
+    <div class="col-xs-6">
+    </div>
+    <div class="col-xs-3" style="padding:3%; text-align: right;">
+      <!-- <img src="img/spotify_w.png" height="100%" width="100%"> -->
+      <div class="pic-counter">0</div>
+    </div>
+  </div><!-- row -->
 </div> <!-- Wrapp -->
+
 <div class="bot-img-wrap" style="background-color: grey; text-align: center;">
   <div>
     <div class="sliders-heading"><span>Evaluate this picture adjusting the value of the four sliders</span></div>
@@ -37,4 +34,5 @@
   </div>
 </div>
 
+<% isHideable='hideable' %>
 <% include components/footer %>
