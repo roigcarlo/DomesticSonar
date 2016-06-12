@@ -109,7 +109,7 @@
 .typed-text-container {
     font-family: 'GraphicBlack';
     margin-top: 10%;
-    color: white;
+    /*color: white;*/
     padding: 5%;
     padding-left: 10%;
     padding-right: 10%;
@@ -225,8 +225,25 @@ body {
 .overlay {
   background-color: rgba(25, 25, 28, 0.67);
   width: 100vw;
-  height: 100vh;"
+  height: 100vh;
+  color: white;
 }
+
+.overlay-black {
+  background-color: rgba(25, 25, 28, 1);
+  width: 100vw;
+  height: 100vh;
+  color: white;
+}
+
+
+.overlay-white {
+  background-color: rgba(255, 255, 255, 1);
+  width: 100vw;
+  height: 100vh;"
+  color: black;
+}
+
 
 /* Lastly, apply responsive CSS fixes as necessary */
 @media (max-width: 767px) {
@@ -287,4 +304,18 @@ body {
 
 #ReleaseBall {
   background-color: white;
+}
+
+.underline {
+  text-decoration: underline;
+}
+
+.slide-arrow {
+  font-size: 32px;
+  vertical-align:middle;
+}
+
+.slide-text {
+  font-size: 32px;
+  vertical-align:middle;
 }
