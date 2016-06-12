@@ -1,18 +1,27 @@
-<div id="wrap">
-  <div class="overlay">
-    <div class="row" style="margin:0px;">
-      <% include components/dds_w %>
-      <div class="col-xs-6">
+<div id="VContainer">
+
+  <!-- Video container in case we want to use an animated background -->
+  <video id="videobk" class="vjs-tech" loop="" autobuffer>
+    <source src="video/desert.mov">
+  </video>
+
+  <div id="wrap">
+    <div class="overlay">
+      <div class="row" style="margin:0px;">
+        <% include components/dds_w %>
+        <div class="col-xs-6">
+        </div>
+        <div class="col-xs-3" style="padding:3%; text-align: right;">
+          <!-- <img src="img/spotify_w.png" height="100%" width="100%"> -->
+        </div>
+      </div><!-- row -->
+      <div class="typed-text-container">
+        <span id="message"></span>
       </div>
-      <div class="col-xs-3" style="padding:3%; text-align: right;">
-        <!-- <img src="img/spotify_w.png" height="100%" width="100%"> -->
-      </div>
-    </div><!-- row -->
-    <div class="typed-text-container">
-      <span id="message"></span>
     </div>
   </div>
-</div>
 
-<% isHideable='hideable' %>
-<% include components/footer %>
+  <% isHideable='hideable' %>
+  <% include components/footer %>
+
+</div>

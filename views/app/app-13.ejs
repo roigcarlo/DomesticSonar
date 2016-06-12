@@ -1,17 +1,26 @@
-<div id="wrap">
-  <div class="overlay-black">
-    <div class="row" style="margin:0px;">
-      <% include components/dds_w %>
-      <div class="col-xs-6">
-      </div>
-      <div class="col-xs-3" style="padding:3%; text-align: right;">
-        <!-- <img src="img/spotify_w.png" height="100%" width="100%"> -->
-      </div>
-    </div><!-- row -->
+<div id="VContainer">
 
-    <div class="container centered">
-      <a id="ReleaseTheBall">CLICK TO<br>RELEASE<br>THE MARVEL</a>
+  <!-- Video container in case we want to use an animated background -->
+  <video id="videobk" class="vjs-tech" loop="" autobuffer>
+    <source src="video/keeper.mov">
+  </video>
+
+  <div id="wrap">
+    <div class="overlay-black">
+      <div class="row" style="margin:0px;">
+        <% include components/dds_w %>
+        <div class="col-xs-6">
+        </div>
+        <div class="col-xs-3" style="padding:3%; text-align: right;">
+          <!-- <img src="img/spotify_w.png" height="100%" width="100%"> -->
+        </div>
+      </div><!-- row -->
+
+      <div class="container centered">
+        <a id="ReleaseTheBall">CLICK TO<br>RELEASE<br>THE MARVEL</a>
+      </div>
+
     </div>
-
   </div>
+
 </div>
