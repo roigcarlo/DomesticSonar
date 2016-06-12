@@ -7,11 +7,11 @@ function getTyped() {
 
   var evc = explorer > 50
     ? '<span> You know what you like and you know where you can find it. That\'s why you like to stay in your area of comfort, making you a great </span> <span class="typed-text spotygreen"> Traditionalist </span>'
-    : '<span> Where to next? Always looking for something else, you are good with words like change, shift or mutation, you are an </span> <span class="typed-text spotygreen"> Explorer. </span>'
+    : '<span> Where to next? <br> Always looking for <br> something else, <br> you are good <br> with words like change, <br> shift or mutation, <br> you are an </span> <span class="typed-text spotygreen"> Explorer. </span>'
 
   var hvt = homebound > 60
     ? '<span> Hey there </span> <span class="typed-text spotygreen"> Homebound! </span> <br> <span> Seems like you\'ve got your <br> music taste pretty clear, <br> you like to listen to the same <br> kind of music all the time, <br> staying in a tune comfort zone. <br> Play on repeat! </span>'
-    : '<span> Hey there </span> <span class="typed-text spotygreen"> Tastemaker! </span> <br> Seems like you like exploring <br> new tunes, constantly in <br> search of new musical <br> expriences.  Shuffle mode on! </span>'
+    : '<span> Hey there </span> <span class="typed-text spotygreen"> Tastemaker! </span> <br> Seems like you like <br> exploring new tunes,  <br> constantly in search <br> of new musical <br> expriences. <br> Shuffle mode on! </span>'
 
   var names = [
     'Jordi', 'Sam', 'Carles', 'Frank', 'Dani', 'Pau', 'Iolanda', 'Chus', 'Lotte', 'Sharon', 'Edgar', 'Alex', 'Pol', 'Oscar', 'Mariona', 'Alexandra', 'Axel', 'Charlie',
@@ -20,7 +20,7 @@ function getTyped() {
 
   return {
     'app-1': {
-      strings: ['<span class="typed-text spotygreen">Hello </span> <span id="typed-name">Mark</span>  <br> <span class="typed-text">You are about to <br> create a future moment <br> while becoming part of a collective <br> scientific experiment on <br> human behaviors.</span>'],
+      strings: ['<span class="typed-text spotygreen">Hello </span> <span id="typed-name">Mark</span>  <br> <span class="typed-text">You are about to <br> create a future <br> moment while becoming part of a collective <br> scientific experiment on <br> human behaviors.</span>'],
       contentType: 'html',
       typeSpeed: TEXT_SPEED,
       showCursor: false,
@@ -169,7 +169,7 @@ function initWheel(prev, actv, next, swiper, onSlide, drawProgress) {
 
 function lockSlide(prev, actv, next, swiper, onSlide) {
   if(onSlide.indexOf(actv) >= 0) {
-    // swiper.lockSwipeToNext()
+    swiper.lockSwipeToNext()
   }
 }
 

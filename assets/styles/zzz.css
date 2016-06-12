@@ -115,7 +115,7 @@
     padding-right: 10%;
     font-size: 6vw;
     width:100%;
-    line-height: 110%;
+    line-height: 130%;
     font-weight: 900;
 }
 
@@ -230,7 +230,7 @@ body {
 }
 
 .overlay-black {
-  background-color: rgba(25, 25, 28, 1);
+  background-color: #18181d;
   width: 100vw;
   height: 100vh;
   color: white;
@@ -286,20 +286,25 @@ body {
 }
 
 .app-12-label {
-  color: white;
-  font-size: 5vw;
+  text-align: left;
+  color: grey;
+  font-size: 4vw;
   background: none;
   border: none;
 }
 
 .app-12-input {
   color: white;
-  font-size: 5vw;
+  font-size: 4vw;
   border-radius: 0px;
   border: 0px solid white;
   border-bottom-width: 1px;
   background-color: transparent;
-  height: 10vw;g
+  height: 4vw;
+  margin-top: 2%;
+  margin-bottom: 4%;
+  margin-left: 7%;
+  width: 90%;
 }
 
 #ReleaseBall {
@@ -320,8 +325,59 @@ body {
   vertical-align:middle;
 }
 
+.bigarrow {
+  font-size: 4vw;
+  color: rgb(57, 194, 95);
+}
+
+.valigned {
+  vertical-align:middle;
+}
+
 .text-small {
   font-weight: lighter;;
   font-size: 2vw;
   vertical-align:middle;
+}
+
+.swiper-container-horizontal>.swiper-pagination-progress {
+    top: 98%;
+}
+
+.swiper-container-horizontal>.swiper-pagination-progress {
+  height: 8vh;
+}
+
+#SendButton {
+  font-weight: 400;
+  margin-top: 5%;
+  font-size: 4vw;
+  border-radius: 50em;
+  min-width: 40%;
+  padding: 1%;
+}
+
+#ReleaseTheBall {
+  font-weight: 400;
+  margin-top: 5%;
+  font-size: 2vw;
+  border-radius: 50em;
+  min-width: 40%;
+  color: white;
+  letter-spacing: 7px;
+}
+
+.app-12-title {
+  font-weight: 400;
+  font-size:6.5vw;
+}
+
+.animation-fadding {
+  -webkit-animation: fade-White 10s infinite;
+}
+
+@-webkit-keyframes fade-White{
+  0%   {color:rgb(57, 194, 95)}
+  50%  {color:rgb(255, 255, 255)}
+  100% {color:rgb(57, 194, 95)}
 }
