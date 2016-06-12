@@ -104,7 +104,7 @@ function initialize(swiper) {
     var actv = $('.swiper-slide.swiper-slide-active').attr('href')
     var next = $('.swiper-slide.swiper-slide-next').attr('href')
 
-    $('.footer-inside').hide()
+    $('.footer-inside.hideable').hide()
 
     resetTyped(prev, actv, next)
     initTyped( prev, actv, next)
