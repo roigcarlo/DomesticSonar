@@ -6,26 +6,11 @@ Player:
 <script>
   $('document').ready(function() {
     $('#PlayerContainer').html('<iframe id="Fakeplayer" frameborder="0" allowtransparency="true" style="display: block;"></iframe>')
-    // $('#Fakeplayer').load(function(){
-    //   setTimeout(function(){
-    //     console.log(document.getElementsByClassName("play-pause-btn"))
-    //     document.getElementsByClassName("play-pause-btn")[0].click();
-    //   },2000)
-    // })
+    $('#Fakeplayer').load(function(){
+      setTimeout(function(){
+        $("#Fakeplayer").contents().find(".play-pause-btn").click();
+      }, 5000)
+    })
     $('#Fakeplayer').attr('src','https://embed.spotify.com/?uri=spotify:trackset:PREFEREDTITLE:<%= trackID %>' )
-
-    console.log('https://rtxhsusoxt.spotilocal.com:4371/remote/play.json?csrf=<%= csrf_token %>&oauth=<%= auth_token %>&uri=spotify%3Atrack%3A<%= trackID %>&context=spotify%3Atrackset%3APREFEREDTITLE%<%= trackID %>&ref=http%3A%2F%2Fec2-54-152-237-84.compute-1.amazonaws.com%3A1337%2Fplayer%3FtrackID%3D4nm9rEC2KiKeQFq3LbDfM0&cors=')
-
-    $.ajax({
-    type: 'GET',
-      url: 'https://rtxhsusoxt.spotilocal.com:4371/remote/play.json?csrf=<%= csrf_token %>&oauth=<%= auth_token %>&uri=spotify%3Atrack%3A<%= trackID %>&context=spotify%3Atrackset%3APREFEREDTITLE%3A<%= trackID %>&ref=http%3A%2F%2Fec2-54-152-237-84.compute-1.amazonaws.com%3A1337%2Fplayer%3FtrackID%3D4nm9rEC2KiKeQFq3LbDfM0&cors=',
-    }).done(function(data) {
-    })
-
-    $.ajax({
-    type: 'GET',
-      url: 'https://rtxhsusoxt.spotilocal.com:4371/remote/pause.json?pause=false&csrf=<%= csrf_token %>&oauth=<%= auth_token %>&uri=spotify%3Atrack%3A<%= trackID %>&context=spotify%3Atrackset%3APREFEREDTITLE%3A<%= trackID %>&ref=http%3A%2F%2Fec2-54-152-237-84.compute-1.amazonaws.com%3A1337%2Fplayer%3FtrackID%3D4nm9rEC2KiKeQFq3LbDfM0&cors=',
-    }).done(function(data) {
-    })
   })
 </script>

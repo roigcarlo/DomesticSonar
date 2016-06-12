@@ -30,32 +30,32 @@ module.exports = {
    */
   player: function (req, res) {
 
+    const track = req.param('trackID')
+    return res.view('player/player.ejs', {trackID:track})
 
-    https://open.spotify.com/token
-
-    var oauth_token = {
-      url: 'https://open.spotify.com/token',
-      json: true
-    };
-
-    request.get(oauth_token, function(error, response, otoken) {
-
-      var cauth_token = {
-        url: 'https://'+makeid()+'.spotilocal.com:4371/simplecsrf/token.json',
-        headers: {
-          'Referer': 'https://embed.spotify.com/remote-control-bridge/',
-          'Origin': 'https://embed.spotify.com/'
-        },
-        'rejectUnauthorized': false,
-        json: true
-      };
-
-      request.get(cauth_token, function(error, response, ctoken) {
-        console.log(error,ctoken)
-        const track = req.param('trackID')
-        return res.view('player/player.ejs', {trackID:track,auth_token :otoken['t'],csrf_token : ctoken['token']})
-      })
-    })
+    // var oauth_token = {
+    //   url: 'https://open.spotify.com/token',
+    //   json: true
+    // };
+    //
+    // request.get(oauth_token, function(error, response, otoken) {
+    //
+    //   var cauth_token = {
+    //     url: 'https://'+makeid()+'.spotilocal.com:4371/simplecsrf/token.json',
+    //     headers: {
+    //       'Referer': 'https://embed.spotify.com/remote-control-bridge/',
+    //       'Origin': 'https://embed.spotify.com/'
+    //     },
+    //     'rejectUnauthorized': false,
+    //     json: true
+    //   };
+    //
+    //   request.get(cauth_token, function(error, response, ctoken) {
+    //     console.log(error,ctoken)
+    //     const track = req.param('trackID')
+    //     return res.view('player/player.ejs', {trackID:track,auth_token :otoken['t'],csrf_token : ctoken['token']})
+    //   })
+    // })
   },
 
   changeSong: function(req, res) {
