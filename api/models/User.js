@@ -8,7 +8,7 @@
 module.exports = {
 
   attributes: {
-    name: {
+    nick: {
       type: 'string'
     },
     mail: {
@@ -23,13 +23,22 @@ module.exports = {
     expiresOn: {
       type: 'date'
     },
+    shares: {
+      type: 'boolean'
+    },
+    stage1song: {
+      type: 'string'
+    },
+    stage3song: {
+      type: 'string'
+    },
     homebound: {
       type: 'float'
     },
     explorer: {
       type: 'float'
     },
-    questionOn: {
+    questionWhen: {
       type: 'date'
     },
     questionWhere: {
