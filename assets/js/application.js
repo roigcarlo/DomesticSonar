@@ -255,7 +255,6 @@ $(document).ready(function () {
 		iProgressCTX.fillStyle = '#fff';
 		iProgressCTX.arc(137.5,137.5,100,0,2*Math.PI);
 		iProgressCTX.fill();
-
 	}
 
 	function drawProgress(bar, percentage, $pCaption){
@@ -311,14 +310,6 @@ $(document).ready(function () {
           explorer = data
         });
       }
-
-      // Lock it here as well...
-      lockSlide(prev, next, undefined, swiper, [
-        'app-1', 'app-2', 'app-3', 'app-4', 'fakeLoad',
-        'app-6', 'app-9', 'app-10'
-      ])
-
-
     })
 
     mySwiper.on('onSlideChangeEnd', function (swiper) {
