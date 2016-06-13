@@ -6,6 +6,14 @@ var userShare = 0
 
 function setShare(val) {
   userShare = val
+
+  // Update sharing
+  $.ajax({
+    url: '/updateShare',
+    method: 'POST',
+    data: {share: userShare}
+  })
+
 }
 
 function getTyped() {
@@ -174,7 +182,7 @@ function initWheel(prev, actv, next, swiper, onSlide, drawProgress) {
 
 function lockSlide(prev, actv, next, swiper, onSlide) {
   if(onSlide.indexOf(actv) >= 0) {
-    // swiper.lockSwipeToNext()
+    swiper.lockSwipeToNext()
   }
 }
 
@@ -286,6 +294,31 @@ $(document).ready(function () {
 
       resetTyped(prev, actv, next, swiper);
       resetWheel(prev, actv, next, swiper, ['app-3', 'app-7'], drawProgress);
+
+      // Do it on prev because the fucking users start sliding thing at the
+      // speed of ligt. Better if its done in locked slides
+
+      // Calculate Homeboundness, can be done asynchronously, no need to wait.
+      if(prev == 'app-3') {
+        $.ajax({
+          url: '/calculateHomeboundness',
+          method: 'POST',
+        }).done(function( data ) {
+          console.log('Homebound data from server', data)
+          homebound = data
+        }).fail(function (data ) {
+          console.log('Fail Homebound data from server', data)
+          explorer = data
+        });
+      }
+
+      // Lock it here as well...
+      lockSlide(prev, next, undefined, swiper, [
+        'app-1', 'app-2', 'app-3', 'app-4', 'fakeLoad',
+        'app-6', 'app-9', 'app-10'
+      ])
+
+
     })
 
     mySwiper.on('onSlideChangeEnd', function (swiper) {
@@ -311,49 +344,27 @@ $(document).ready(function () {
         });
       }
 
-      // Update sharing
-      if(actv == 'app-5') {
-        $.ajax({
-          url: '/updateShare',
-          method: 'POST',
-          data: {share: userShare}
-        })
-      }
-
-      // Calculate Homeboundness, can be done asynchronously, no need to wait.
-      if(actv == 'app-4') {
-        $.ajax({
-          url: '/calculateHomeboundness',
-          method: 'POST',
-        }).done(function( data ) {
-          console.log('Homebound data from server', data)
-          homebound = data
-        }).fail(function (data ) {
-          console.log('Fail Homebound data from server', data)
-          explorer = data
-        });;
-      }
-
       // Start the timer
       if(actv == 'app-7') {
         clearInterval(TimeOutEvent);
-        var seconds = 0
+        var seconds = 30
 
         $('.swiper-slide.swiper-slide-prev .pic-counter').html(seconds)
         $('.swiper-slide.swiper-slide-active .pic-counter').html(seconds)
 
         TimeOutEvent = setInterval(function() {
-          seconds += 1;
+          seconds -= 1;
           $('.swiper-slide.swiper-slide-active .pic-counter').html(seconds)
-          if (seconds == 25) {
+          if (seconds == 5) {
             $('.swiper-slide.swiper-slide-active .up-half-wrap-tohide').toggleClass('up-half-wrap-hide')
           }
-          if(seconds >= 30) {
+          if(seconds == 0) {
             clearInterval(TimeOutEvent);
           }
         }, 1000)
       }
 
+      // This needs to be done here
       // CalculateExploreness, can be done asynchronously, no need to wait.
       if(actv == 'app-8') {
         var images = ['#explorerImage0', '#explorerImage1', '#explorerImage2', '#explorerImage3']
@@ -507,5 +518,6 @@ var mySwiper = new Swiper ('.swiper-container', {
   allowSwipeToPrev: false,
   pagination: '.swiper-pagination',
   paginationType: 'progress',
-  longSwipes: false,
+  grabCursor: true
+  // longSwipes: false,
 })
