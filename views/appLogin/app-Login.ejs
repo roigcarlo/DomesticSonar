@@ -1,33 +1,33 @@
 <div id="wrap">
-  <div class="overlay">
+  <div class="overlay-white">
     <div class="row" style="margin:0px;">
-      <div class="col-xs-3" style="padding:3%; text-align: left;">
-        <img src="img/dds_w.png" height="100%" width="100%">
-      </div>
+      <% include ../app/components/dds_b %>
       <div class="col-xs-6">
       </div>
       <div class="col-xs-3" style="padding:3%; text-align: right;">
         <img src="img/spotify_w.png" height="100%" width="100%">
       </div>
     </div><!-- row -->
-    <div class="typed-text-container">
-      <input value="escriu aqui algo"></input>
+    <div class="typed-text-container login-text">
+      <span class="spotygreen">Wellcome!</span><br>
+      <span>You are close</span><br>
+      <span>to start the </span><br>
+      <span>expleriment,</span><br>
+      <span>Introduce your </span><br>
+      <span>magic code:</span><br>
+
+      <div id="login">
+        <form action="/login" style="text-align: center">
+          <input type="text" name="sessionCode" style="width:100%; margin-top: 5%;"></input>
+          <input type="submit" value="Log in with Spotify" id="LoginButton" class="btn">
+        </form>
+      </div>
+
     </div>
   </div>
 </div> <!-- Wrapp -->
 
 <div id="footer" class="footer-text">
   <div class="container centered" id="fotterMessage">
-    <span>Wellcome</span>
-    <span>You are close to start the expleriment,</span>
-    <span>Introduce your magic code:</span>
-
-    <div id="login">
-      <form action="/login">
-        <input type="text" name="sessionCode"></input>
-        <input type="submit" value="Log in with Spotify">
-      </form>
-    </div>
-    
   </div>
 </div>

@@ -175,4 +175,8 @@ module.exports = {
 	  }
   }, // callback
 
+  wellcome: function (req, res) {
+    return res.view('appLogin/textLogin.ejs')
+  }
+
 };

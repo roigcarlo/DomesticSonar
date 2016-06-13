@@ -348,6 +348,15 @@ body {
   height: 8vh;
 }
 
+#LoginButton {
+  font-weight: 400;
+  margin-top: 15%;
+  font-size: 6vw;
+  border-radius: 50em;
+  min-width: 80%;
+  padding: 1%;
+}
+
 #SendButton {
   font-weight: 400;
   margin-top: 5%;
@@ -380,4 +389,8 @@ body {
   0%   {color:rgb(57, 194, 95)}
   50%  {color:rgb(255, 255, 255)}
   100% {color:rgb(57, 194, 95)}
+}
+
+.login-text {
+  font-size: 9.5vw;
 }
