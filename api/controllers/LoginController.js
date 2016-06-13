@@ -153,7 +153,7 @@ module.exports = {
                       } else {
                         // Otherwise
                         console.log('session code E,I:',entryStatus.sessionId,sessionCode)
-                        res.redirect('/error')
+                        res.redirect('/lalala')
                       }
                     });
                   }
