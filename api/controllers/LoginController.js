@@ -125,10 +125,11 @@ module.exports = {
                   name: profilebody.display_name,
                   accessToken: authBody.access_token,
                   refreshToken: authBody.refresh_token,
+                  released: false
                 }
               ).exec(function checkUser(err, entryUser) {
                 if (err) {
-                  console.log('Error')
+                  console.log('Error', entryUser)
                   res.redirect('/error')
                 } else {
                   // If the user already has finished his experience, the status does not

@@ -3,7 +3,7 @@
     font-family: 'GraphicBlack';
     src: url('/fonts/Graphik-Semibold.otf');
     font-weight: normal;
-    font-style: bold;
+    /*font-style: bold;*/
 }
 
 .noUi-vertical .noUi-handle {
@@ -113,14 +113,14 @@
     padding: 5%;
     padding-left: 10%;
     padding-right: 10%;
-    font-size: 6vw;
+    font-size: 7vw;
     width:100%;
     line-height: 130%;
     font-weight: 900;
 }
 
 .typed-text {
-  font-weight: bold;
+  font-weight: 100;
 }
 
 .spotygreen {
@@ -130,8 +130,6 @@
 #typed-name {
   font-weight: bold;
 }
-
-
 
 @-webkit-keyframes fade-in{
   0%   {opacity:1}
@@ -392,5 +390,6 @@ body {
 }
 
 .login-text {
-  font-size: 9.5vw;
+  margin-top: -5%;
+  font-size: 8.5vw;
 }

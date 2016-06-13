@@ -126,6 +126,16 @@ module.exports.routes = {
     action: 'calculateExplorerness'
   },
 
+  '/updateShare': {
+    controller: 'Experience',
+    action: 'updateShare'
+  },
+
+  '/createDesire': {
+    controller: 'Experience',
+    action: 'createDesire'
+  },
+
   /**************************************************************************/
   /* Player                                                                 */
   /**************************************************************************/
@@ -154,11 +164,6 @@ module.exports.routes = {
     action: 'desire'
   },
 
-  '/calculateDesireSong': {
-    controller: 'Experience',
-    action: 'calculateDesireSong'
-  },
-
   '/test': {
     view: 'app/text'
   },
@@ -166,10 +171,4 @@ module.exports.routes = {
   '/testTrack': {
     view: 'test/trackFeatures'
   },
-
-  '/sendTrackFeatures': {
-    controller: 'Track',
-    action: 'sendTrackFeatures'
-  },
-
 };

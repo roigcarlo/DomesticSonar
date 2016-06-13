@@ -53,6 +53,9 @@ module.exports = {
     questionFeeling: {
       type: 'string'
     },
+    released: {
+      type: 'boolean'
+    },
     releaseOn: {
       type: 'date'
     },

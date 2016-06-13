@@ -2,6 +2,11 @@ const TEXT_SPEED = -20
 
 var homebound = 0
 var explorer = 0
+var userShare = 0
+
+function setShare(val) {
+  userShare = val
+}
 
 function getTyped() {
 
@@ -169,19 +174,23 @@ function initWheel(prev, actv, next, swiper, onSlide, drawProgress) {
 
 function lockSlide(prev, actv, next, swiper, onSlide) {
   if(onSlide.indexOf(actv) >= 0) {
-    swiper.lockSwipeToNext()
+    // swiper.lockSwipeToNext()
   }
 }
 
 function SendFormTK() {
   var data = {}
 
+  console.log("LALALALA")
+
   $('#tk-data input').each(function() {
     data[this.id] = this.value
   })
 
+  console.log(data)
+
   $.ajax({
-    url: '/sendTrackFeatures',
+    url: '/createDesire',
     data: data,
     method: 'POST',
   })
@@ -296,6 +305,15 @@ $(document).ready(function () {
         .done(function( data ) {
           $('#sessionCode').html(data)
         });
+      }
+
+      // Update sharing
+      if(actv == 'app-5') {
+        $.ajax({
+          url: '/updateShare',
+          method: 'POST',
+          data: {share: userShare}
+        })
       }
 
       // Calculate Homeboundness, can be done asynchronously, no need to wait.
