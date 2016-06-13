@@ -181,8 +181,6 @@ function lockSlide(prev, actv, next, swiper, onSlide) {
 function SendFormTK() {
   var data = {}
 
-  console.log("LALALALA")
-
   $('#tk-data input').each(function() {
     data[this.id] = this.value
   })
@@ -195,11 +193,17 @@ function SendFormTK() {
     method: 'POST',
   })
   .done(function( data ) {
-    console.log('Explorer data from server', data)
-    explorer = data
+    console.log('CreatedDesire', data)
+    console.log('CalculatingSong', data)
+
+    $.ajax({
+      url: '/calculateMostListen',
+      method: 'POST',
+    }).done(function( data ) {
+    }).fail(function (data ) {
+    })
+
   }).fail(function (data ) {
-    console.log('Fail Explorer data from server', data)
-    explorer = data
   });
 }
 

@@ -203,9 +203,36 @@ module.exports = {
 
   },
 
+  calculateMostListen: function(req, res) {
+    Status.findOne({id:1}).exec(function checkSessionCode(err, entryStatus) {
+      if(err || entryStatus == undefined) {
+        console.log('No user is bind to the session')
+      } else {
+        entryStatus.currentUser
+        User.findOne({id:entryStatus.currentUser}).exec(function checkSessionCode(err, entryUser) {
+          if(err || entryUser == undefined) {
+            console.log('User dosn\'t exists')
+          } else {
+            console.log(DesireService)
+            DesireService.getMostListened(entryUser.accessToken, function(track){
+              User.update({id:entryStatus.currentUser},{stage1song:track.uri.split(':')[2]}).exec(function checkUpdate(error, updated) {
+                console.log(updated)
+                res.ok();
+              })
+            })
+          }
+        })
+      }
+    })
+  },
+
   updateShare: function(req, res) {
 
-    const share = req.param('share') ? true : false;
+    var share = false
+
+    if(req.param('share') == 1) {
+      share = true
+    }
 
     console.log("SHARE",share)
 
@@ -223,13 +250,11 @@ module.exports = {
 
   createDesire: function(req, res) {
 
-    console.log("================")
-
-    const tknick = req.param('tk-nick')
-    const tkwhere = req.param('tk-where')
-    const tkwith = req.param('tk-with')
-    const tkdoing = req.param('tk-doing')
-    const tkfeeling = req.param('tk-feeling')
+    const tknick    = req.param('tk-nick')
+    const tkwhere   = req.param('tk-where')
+    const tkwith    = req.param('tk-with')
+    const tkdoing   = req.param('tk-doing')
+    const tkfeeling = req.param('tk-how')
 
     Status.findOne({id:1}).exec(function checkSessionCode(err, entryStatus) {
       if(err || entryStatus == undefined) {
@@ -237,26 +262,18 @@ module.exports = {
       } else {
         User.update({id:entryStatus.currentUser}, {
           nick:tknick,
-          questionWhen:'',
+          questionWhen:Date.now(),
           questionWhere:tkwhere,
           questionWith:tkwith,
           questionDoing:tkdoing,
           questionFeeling:tkfeeling,
         }).exec(function checkUpdate(error, updated) {
+          console.log(error)
           res.ok();
         })
       }
     })
+
   },
-
-  // Unused. Legacy
-  explorer: function(req, res) {
-    return res.view('forms/explorer', {conserver:33});
-	}, // explorer
-
-  // Unused. Legacy
-  desire: function(req, res) {
-    return res.view('forms/desire', {response:'body'});
-  }, // desire
 
 };

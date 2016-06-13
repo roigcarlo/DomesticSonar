@@ -1,4 +1,7 @@
-module.export = {
+var request = require('request')
+var querystring = require('querystring')
+
+module.exports = {
 
   getMostListened: function(access_token, callback) {
     var options_list = {

@@ -126,6 +126,11 @@ module.exports.routes = {
     action: 'calculateExplorerness'
   },
 
+  '/calculateMostListen': {
+    controller: 'Experience',
+    action: 'calculateMostListen'
+  },
+
   '/updateShare': {
     controller: 'Experience',
     action: 'updateShare'

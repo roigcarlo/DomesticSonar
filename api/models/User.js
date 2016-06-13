@@ -21,7 +21,8 @@ module.exports = {
       type: 'string'
     },
     expiresOn: {
-      type: 'date'
+      type: 'int',
+      size: 32
     },
     shares: {
       type: 'boolean'
@@ -39,7 +40,8 @@ module.exports = {
       type: 'float'
     },
     questionWhen: {
-      type: 'date'
+      type: 'int',
+      size: 32
     },
     questionWhere: {
       type: 'string'
@@ -57,7 +59,8 @@ module.exports = {
       type: 'boolean'
     },
     releaseOn: {
-      type: 'date'
+      type: 'int',
+      size: 32
     },
   }
 
