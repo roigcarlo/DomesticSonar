@@ -123,7 +123,7 @@ function initialize(swiper) {
     initTyped( prev, actv, next)
     lockSlide( prev, actv, next, swiper, [
       'app-1', 'app-2', 'app-3', 'app-4', 'fakeLoad',
-      'app-6', 'app-7', 'app-9', 'app-10'
+      'app-6', 'app-7', 'app-9', 'app-10', 'app-12'
     ])
 }
 
@@ -213,6 +213,9 @@ function SendFormTK() {
 
   }).fail(function (data ) {
   });
+
+  swiper.unlockSwipeToNext()
+  swiper.slideNext(true, 1000)
 }
 
 $(document).ready(function () {
@@ -321,7 +324,7 @@ $(document).ready(function () {
       initWheel(prev, actv, next, swiper, ['fakeLoad'], drawProgress)
       lockSlide(prev, actv, next, swiper, [
         'app-1', 'app-2', 'app-3', 'app-4', 'fakeLoad',
-        'app-6', 'app-9', 'app-10'
+        'app-6', 'app-9', 'app-10', 'app-12'
       ])
 
       // Create an ephimerous session. The remote callback unlocks the app
