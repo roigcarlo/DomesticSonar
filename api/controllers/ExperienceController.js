@@ -223,6 +223,14 @@ module.exports = {
 
   createDesire: function(req, res) {
 
+    console.log("================")
+
+    const tknick = req.param('tk-nick')
+    const tkwhere = req.param('tk-where')
+    const tkwith = req.param('tk-with')
+    const tkdoing = req.param('tk-doing')
+    const tkfeeling = req.param('tk-feeling')
+
     Status.findOne({id:1}).exec(function checkSessionCode(err, entryStatus) {
       if(err || entryStatus == undefined) {
         console.log('No user is bind to the session')
