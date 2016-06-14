@@ -136,6 +136,11 @@ module.exports.routes = {
     action: 'updateShare'
   },
 
+  '/updateMostListenedSong' : {
+    controller: 'Track',
+    action: 'updateMostListenedSong'
+  }
+
   '/createDesire': {
     controller: 'Experience',
     action: 'createDesire'

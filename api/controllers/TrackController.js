@@ -25,41 +25,50 @@ module.exports = {
       if(err || entryStatus == undefined) {
         console.log('No user is bind to the session')
       } else {
-        entryStatus.currentUser
+
         User.findOne({id:entryStatus.currentUser}).exec(function checkSessionCode(err, entryUser) {
+
           if(err || entryUser == undefined) {
             console.log('User dosn\'t exists')
           } else {
 
-            DesireService.getMostListened(entryUser.accessToken, function(track){
+            // Resquest an authorization for our app
+            var authOptions = {
+              url: 'https://accounts.spotify.com/api/token',
+              form: {
+                grant_type: 'refresh_token',
+                refresh_token: entryUser.refreshToken,
+              },
+              method: 'POST',
+              headers: {
+                'Authorization': 'Basic ' + (new Buffer(SpotifyService.clientId + ':' + SpotifyService.clientSecret).toString('base64'))
+              },
+              json: true
+            };
 
-              var uri = track.uri.split(':')[2]
+            request.post(authOptions, function(error, response, body) {
 
-              User.update({id:entryStatus.currentUser},{stage1song:uri}).exec(function checkSessionCode(err, updated) {
-                var options_track_feature = {
-                  url: 'https://api.spotify.com/v1/audio-features/'+uri,
-                  headers: { 'Authorization': 'Bearer ' + entryUser.accessToken }, // This is a test, no bearer token. Use it with moderation
-                  json: true
-                };
+                  DesireService.getMostListened(entryUser.accessToken, function(track){
 
-                request.get(options_track_feature, function(error, response, body_track) {
-                  DesireService.sendDatagram(entryUser, body_track, 1, 1, undefined, undefined, undefined)
-                })
-              })
+                    var uri = track.uri.split(':')[2]
+
+                    User.update({id:entryStatus.currentUser},{stage1song:uri}).exec(function checkSessionCode(err, updated) {
+                      var options_track_feature = {
+                        url: 'https://api.spotify.com/v1/audio-features/'+uri,
+                        headers: { 'Authorization': 'Bearer ' + body.access_token },
+                        json: true
+                      };
+
+                      request.get(options_track_feature, function(error, response, body_track) {
+                        DesireService.sendDatagram(entryUser, body_track, 1, 1, undefined, undefined, undefined)
+                      })
+                    })
+                  })
             })
           }
         })
       }
     })
   },
-
-  // Don't use this yet.
-  calculateDesireSong: function curatedSong(req, res) {
-
-    var hvt = parseInt(req.body['hvt'])
-    var cve = parseInt(req.body['cve'])
-
-  },
-
 
 };
