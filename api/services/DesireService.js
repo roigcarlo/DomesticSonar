@@ -141,7 +141,7 @@ module.exports = {
     const client  = dgram.createSocket('udp4');
 
     body_track['userID'] = id
-    body_track['nick'] = nick
+    body_track['nick'] = nick.toLowerCase().replace(/\s/g,'_')
 
     if(homebound > 60 && explorer > 50)
       body_track['usertype'] = 1
@@ -156,7 +156,7 @@ module.exports = {
     body_track['releaseTime'] = releaseTime
 
     if(replaceTrackURI != undefined)
-      body_track['uri'] = replaceTrackURI.toLowerCase().replace(/\s/g,'_')
+      body_track['uri'] = replaceTrackURI
     if(replaceTrackURI != undefined)
       body_track['curatedArtist'] = curatedArtist.toLowerCase().replace(/\s/g,'_')
     if(replaceTrackURI != undefined)
