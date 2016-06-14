@@ -128,7 +128,9 @@ function initialize(swiper) {
 }
 
 function reset(swiper) {
-  mySwiper.slideTo(0, 1, runCallbacks)
+  mySwiper.unlockSwipeToPrev()
+  mySwiper.slideTo(0, 1)
+  mySwiper.lockSwipeToPrev()
   initialize(swiper)
   $('#sessionCode').html('Waiting for code')
 }
@@ -188,7 +190,7 @@ function initWheel(prev, actv, next, swiper, onSlide, drawProgress) {
 
 function lockSlide(prev, actv, next, swiper, onSlide) {
   if(onSlide.indexOf(actv) >= 0) {
-    swiper.lockSwipeToNext()
+    // swiper.lockSwipeToNext()
   }
 }
 
@@ -224,6 +226,10 @@ function SendFormTK() {
   mySwiper.slideNext(true, 1000)
 
   $('#SendButton').prop('disabled', true);
+}
+
+function ReleaseMarble() {
+  reset(mySwiper)
 }
 
 $(document).ready(function () {
@@ -465,12 +471,14 @@ $(document).ready(function () {
 
     // A song is playing
     if(msg['code'] == 'SongStartPlaying') {
-      playingTrack = true
+      tkevent = true
+      ('#ReleaseTheBall').prop('disabled', true)
     }
 
     // A song ends to play
     if(msg['code'] == 'SongStopPlaying') {
-      playingTrack = false
+      tkevent = false
+      ('#ReleaseTheBall').prop('disabled', false)
     }
 
     // A song ends to play
@@ -488,7 +496,7 @@ $(document).ready(function () {
 ///////////////////
 // Globals       //
 ///////////////////
-var playingTrack = 0
+var tkevent = 0
 var locks = Array(4).fill(0)
 
 // Socket to communicate with the server

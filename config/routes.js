@@ -159,16 +159,6 @@ module.exports.routes = {
   /* Random                                                                 */
   /**************************************************************************/
 
-  '/explorer': {
-    controller: 'Experience',
-    action: 'explorer'
-  },
-
-  '/desire': {
-    controller: 'Experience',
-    action: 'desire'
-  },
-
   '/test': {
     view: 'app/text'
   },

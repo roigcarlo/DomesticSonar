@@ -11,7 +11,7 @@ module.exports = function(agenda) {
         //disabled: false,
 
         // method can be 'every <interval>', 'schedule <when>' or now
-        frequency: 'every 15 minutes',
+        frequency: 'every 5 minutes',
 
         // Jobs options
         //options: {
@@ -24,33 +24,63 @@ module.exports = function(agenda) {
 
         // execute job
         run: function(job, done) {
-            // console.log("Foo job executed");
-            //
-            // // create reusable transporter object using the default SMTP transport
-            // var transporter = nodemailer.createTransport('smtps://sonar@domesticstreamers.com:dibujauncaballo@smtp.domesticstreamers.com');
-            //
-            //
-            // User.findOne({released:0,questionWhere:{'<':Date.now()}}).exec(function checkSessionCode(err, entryUser) {
-            //
-            //   // setup e-mail data with unicode symbols
-            //   var mailOptions = {
-            //       from: 'Domestic <hello@DomesticTimeKeeper.com>', // sender address
-            //       to: 'roigcarlo@gmail.com, rosa@domesticstreamers.com', // list of receivers
-            //       subject: 'Holaaaaaa? funciono?', // Subject line
-            //       html: '<span style="color: red;">Tindria que ser rojo pasion aixo.... I am not a robot. This is not spam. Que inyusticia...</span><img src="http://65.media.tumblr.com/6447ad74f837f583b917c7f86735559a/tumblr_inline_o8nrfniqE31qbhmtm_500.gif"></img>' // html body
-            //   };
-            //
-            //   // send mail with defined transport object
-            //   transporter.sendMail(mailOptions, function(error, info){
-            //       if(error){
-            //           return console.log(error);
-            //       }
-            //       console.log('Message sent: ' + info.response);
-            //   });
-            //
-            // })
+          console.log("Foo job executed...");
 
-            done();
+          User.findOne({released:0,questionWhere:{'<':Date.now()},sort:'questionWhere DESC'}).exec(function freeDesire(err, entryUser) {
+
+            // Resquest an authorization for our app
+            var authOptions = {
+              url: 'https://accounts.spotify.com/api/token',
+              form: {
+                grant_type: 'refresh_token',
+                refresh_token: entryUser.refreshToken,
+              },
+              headers: {
+                'Authorization': 'Basic ' + (new Buffer(SpotifyService.clientId + ':' + SpotifyService.clientSecret).toString('base64'))
+              },
+              json: true
+            };
+
+            request.get(authOptions, function(error, response, body) {
+              DesireService.getCurated(updated.homebound, updated.explorer, body.access_token, function(curatedTrack) {
+                sp3uri = curatedTrack.uri.split(':')[2]
+                User.update({id:entryUser.id},{released:1,accessToken:body.access_token,stage3song:sp3uri}).exec(function(err, updated){
+                  var options_track_feature = {
+                    url: 'https://api.spotify.com/v1/audio-features/'+updated.stage1song,
+                    headers: { 'Authorization': 'Bearer ' + entryUser.accessToken }, // This is a test, no bearer token. Use it with moderation
+                    json: true
+                  };
+
+                  request.get(options_track_feature, function(error, response, body_track) {
+                    DesireService.sendDatagram(updated.homebound, updated.explorer, body_track, 3, 1, sp3uri)
+
+                    // create reusable transporter object using the default SMTP transport
+                    var poolConfig = {
+                        host: MailDataService.host,
+                        port: MailDataService.port,
+                        secure: true, // use SSL
+                        auth: {
+                            user: MailDataService.user,
+                            pass: MailDataService.pswd,
+                        }
+                    };
+                    var transporter = nodemailer.createTransport(poolConfig);
+
+                    // setup e-mail data with unicode symbols
+                    var mailOptions = {
+                        from: 'Domestic <hello@DomesticTimeKeeper.com>', // sender address
+                        to: updated.mail, // list of receivers
+                        subject: 'YourDesire', // Subject line
+                        html: 'Test' // html body
+                    };
+                  })
+                })
+              })
+            }
+
+          }
+
+          done();
         },
     };
     return job;

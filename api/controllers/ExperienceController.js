@@ -7,6 +7,7 @@
 
 var request = require('request')
 var querystring = require('querystring')
+var fs = require('fs')
 
 function compueteHomeboundness(res, sTerm, mTerm, userId) {
 
@@ -26,58 +27,89 @@ function compueteHomeboundness(res, sTerm, mTerm, userId) {
   genresShort = []
   genresMedium = []
 
-  // Make the list with the short term artists genres
-  for( var a in sTerm) {
-    for( var ag in sTerm[a]['genres']) {
-      genresShort.push(sTerm[a]['genres'][ag])
+  fs.readFile('/home/roigcarlo/DomesticSonar/data/uri_artist_genres.json', 'utf8', function (err,genfile) {
+    if (err) {
+      console.log('unable to load custom genres')
     }
-  }
 
-  // Make the list with the medium term artists genres
-  for( var a in mTerm) {
-    for( var ag in mTerm[a]['genres']) {
-      genresMedium.push(mTerm[a]['genres'][ag])
+    sgenres = []
+    sgenres_non_parse = genfile.split('\n')
+    for( a in sgenres_non_parse) {
+      var line = sgenres_non_parse[a]
+      try {
+        sgenres.push(JSON.parse(line))
+      }catch(err) {}
     }
-  }
 
-  // Remove duplicities
-  var genresShortUnique = genresShort.filter(function(item, pos) {
-    return genresShort.indexOf(item) == pos
-  })
 
-  var genresMediumUnique = genresMedium.filter(function(item, pos) {
-    return genresMedium.indexOf(item) == pos
-  })
+    // Make the list with the short term artists genres
+    for( var a in sTerm) {
+      console.log("SST",sTerm[a].uri)
+      for( var ag in sTerm[a]['genres']) {
+        genresShort.push(sTerm[a]['genres'][ag])
+      }
 
-  // Appply the formulas
-  if( genresShortUnique.length <= MAX_SHORT_LENGHT ) {
-    homeboundVsTastemaker = 1 // I Assume this is the absolute case
-  } else if (genresMediumUnique.length <= MAX_MEDIUM_LENGHT ) {
-    homeboundVsTastemaker = 1 // I Assume this is the absolute case
-  } else {
-    var genresShortInMedium = genresShortUnique.filter(function(item, pos) {
-      return genresMediumUnique.indexOf(item) > -1
+      sgenresf = sgenres.filter(function(value, index, ar){return value.global_uri == sTerm[a].uri})
+      for( var ag in sgenresf) {
+        genresShort.push(sgenresf[ag].genre)
+        console.log("ST",sgenresf[ag].genre)
+      }
+    }
+
+    // Make the list with the medium term artists genres
+    for( var a in mTerm) {
+      console.log("MMT",mTerm[a].uri)
+      for( var ag in mTerm[a]['genres']) {
+        genresMedium.push(mTerm[a]['genres'][ag])
+      }
+
+      sgenresf = sgenres.filter(function(value, index, ar){return value.global_uri == mTerm[a].uri})
+      for( var ag in sgenresf) {
+        genresMedium.push(sgenresf[ag].genre)
+        console.log("MT",sgenresf[ag].genre)
+      }
+    }
+
+    // Remove duplicities
+    var genresShortUnique = genresShort.filter(function(item, pos) {
+      return genresShort.indexOf(item) == pos
     })
 
-    var matches = genresShortInMedium.length / genresMediumUnique.length
+    var genresMediumUnique = genresMedium.filter(function(item, pos) {
+      return genresMedium.indexOf(item) == pos
+    })
 
-    matches = matches < 0 ? 0 : matches
-    matches = matches > 1 ? 1 : matches
+    // Appply the formulas
+    if( genresShortUnique.length <= MAX_SHORT_LENGHT ) {
+      homeboundVsTastemaker = 1 // I Assume this is the absolute case
+    } else if (genresMediumUnique.length <= MAX_MEDIUM_LENGHT ) {
+      homeboundVsTastemaker = 1 // I Assume this is the absolute case
+    } else {
+      var genresShortInMedium = genresShortUnique.filter(function(item, pos) {
+        return genresMediumUnique.indexOf(item) > -1
+      })
 
-    homeboundVsTastemaker = matches
-  }
+      var matches = genresShortInMedium.length / genresMediumUnique.length
 
-  console.log('Unique', genresShort)
-  console.log('Unique', genresMedium)
-  console.log('Unique', genresShortUnique.length)
+      matches = matches < 0 ? 0 : matches
+      matches = matches > 1 ? 1 : matches
 
-  homeboundVsTastemaker *= 100
+      homeboundVsTastemaker = matches
+    }
 
-  User.update({id:userId},{homebound:homeboundVsTastemaker}).exec(function (err, updated) {
-    console.log('Updated user Homeboundness:')
-    console.log(updated)
-    res.send(200, homeboundVsTastemaker);
-  })
+    console.log('Unique', genresShort)
+    console.log('Unique', genresMedium)
+    console.log('Unique', genresShortUnique.length)
+
+    homeboundVsTastemaker *= 100
+
+    User.update({id:userId},{homebound:homeboundVsTastemaker}).exec(function (err, updated) {
+      console.log('Updated user Homeboundness:')
+      console.log(updated)
+      res.send(200, homeboundVsTastemaker);
+    })
+
+  });
 }
 
 function computeExploreness(res, data, userId) {
@@ -125,10 +157,13 @@ module.exports = {
 		request.get(options, function(error, response, body) {
       if(!error && response.statusCode === 200) {
 			   req.session.profileCache = body
-			   return res.view('wellcome', {response:body});
+
+         DesireService.getMostListened(access_token, function(track){
+           	return res.view('appLogin/textCallback.ejs', {track:track});
+         })
       }
       else {
-        res.redirect('/error' +
+        res.redirect('/' +
           querystring.stringify({
             error: 'invalid_profile'
           }))
