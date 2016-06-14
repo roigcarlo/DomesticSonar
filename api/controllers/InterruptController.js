@@ -83,24 +83,7 @@ module.exports = {
     },
 
     startPhase2: function (req, res) {
-      // Retrieve the current session or create an new one if empty
-      Status.findOrCreate({id:1},{id:1}).exec(function checkSessionCode(err, entry) {
-        Status.update({id:1},{sessionId:slotCode,stage:2})
-      });
-    },
-
-    startPhase3: function (req, res) {
-      // Retrieve the current session or create an new one if empty
-      Status.findOrCreate({id:1},{id:1}).exec(function checkSessionCode(err, entry) {
-        Status.update({id:1},{sessionId:slotCode,stage:3})
-      });
-    },
-
-    startPhase4: function (req, res) {
-      // Retrieve the current session or create an new one if empty
-      Status.findOrCreate({id:1},{id:1}).exec(function checkSessionCode(err, entry) {
-        Status.update({id:1},{sessionId:slotCode,stage:4})
-      });
+      sails.sockets.blast('message', { code: 'SongStopPlaying' });
     },
 
     createNewSession: function (req, res) {

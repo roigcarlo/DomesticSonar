@@ -43,7 +43,7 @@ module.exports = {
                 };
 
                 request.get(options_track_feature, function(error, response, body_track) {
-                  DesireService.sendDatagram(entryUser, body_track, 1, 1, undefined)
+                  DesireService.sendDatagram(entryUser, body_track, 1, 1, undefined, undefined, undefined)
                 })
               })
             })
@@ -58,28 +58,6 @@ module.exports = {
 
     var hvt = parseInt(req.body['hvt'])
     var cve = parseInt(req.body['cve'])
-
-    // Get access token with the refresh token
-
-    // Get the most listened song data
-
-    // Calculate the curated song
-
-    // Send the datagram
-
-    // Send the mail
-
-    User.find(userId)
-
-    var access_token = req.session.access_token
-    var refresh_token = req.session.refresh_token
-
-    var callback = function(track) {
-      sendDatagram(homebound, explorer, body_track, phase, releaseTime, replaceTrackURI)
-      sendDatagram()
-    }
-
-    getCurated(hvt, cve, access_token, callback)
 
   },
 

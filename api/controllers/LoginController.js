@@ -130,7 +130,7 @@ module.exports = {
               ).exec(function checkUser(err, entryUser) {
                 if (err) {
                   console.log('Error', entryUser)
-                  res.redirect('/error')
+                  res.redirect('/')
                 } else {
                   // If the user already has finished his experience, the status does not
                   // matter and key is not used
@@ -164,14 +164,14 @@ module.exports = {
                 }
               })
             } else {
-              res.redirect('/error' +
+              res.redirect('/' +
                 querystring.stringify({
                   error: 'invalid_profile'
                 }));
             }
           });
 	      } else {
-	        res.redirect('/error' +
+	        res.redirect('/' +
 	          querystring.stringify({
 	            error: 'invalid_token'
 	          }));
