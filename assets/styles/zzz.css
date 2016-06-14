@@ -362,6 +362,11 @@ body {
   border-radius: 50em;
   min-width: 40%;
   padding: 1%;
+  -webkit-transition: background-color 250ms;
+  transition: background-color 250ms;
+  background-color: rgb(75, 75, 75);
+  color: white;
+  border-width: 0px;
 }
 
 #ReleaseTheBall {
