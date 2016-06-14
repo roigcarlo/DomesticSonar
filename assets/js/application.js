@@ -127,6 +127,12 @@ function initialize(swiper) {
   ])
 }
 
+function reset(swiper) {
+  mySwiper.slideTo(0, 1, runCallbacks)
+  initialize(swiper)
+  $('#sessionCode').html('Waiting for code')
+}
+
 function resetTyped(prev, actv, next) {
   $(".swiper-slide.swiper-slide-next #message").typed('reset')
 }
@@ -216,6 +222,8 @@ function SendFormTK() {
 
   mySwiper.unlockSwipeToNext()
   mySwiper.slideNext(true, 1000)
+
+  $('#SendButton').prop('disabled', true);
 }
 
 $(document).ready(function () {
@@ -341,7 +349,7 @@ $(document).ready(function () {
       // Start the timer
       if(actv == 'app-7') {
         clearInterval(TimeOutEvent);
-        var seconds = 30
+        var seconds = 25
 
         $('.swiper-slide.swiper-slide-prev .pic-counter').html(seconds)
         $('.swiper-slide.swiper-slide-active .pic-counter').html(seconds)
@@ -349,7 +357,7 @@ $(document).ready(function () {
         TimeOutEvent = setInterval(function() {
           seconds -= 1;
           $('.swiper-slide.swiper-slide-active .pic-counter').html(seconds)
-          if (seconds == 5) {
+          if (seconds == 2.5) {
             $('.swiper-slide.swiper-slide-active .up-half-wrap-tohide').toggleClass('up-half-wrap-hide')
           }
           if(seconds == 0) {
@@ -416,23 +424,6 @@ $(document).ready(function () {
     var blockOrigin = $(this).find('.noUi-origin')
 
     var slideID = $(this).attr('picID')
-
-    // $(this)[0].noUiSlider.on('set', function(index) {
-    //   // Change color of the slider
-    //   // blockTarget.attr('disabled',true)
-    //   // blockOrigin.attr('disabled',true)
-    //
-    //   locks[slideID] += 1
-    //   console.log(slideID, locks[slideID])
-    //
-    //   if(locks[slideID] == 4) {
-    //     setTimeout(function () {
-    //       clearInterval(TimeOutEvent);
-    //       // mySwiper.unlockSwipeToNext()
-    //       // mySwiper.slideNext(true, 1000)
-    //     }, 2000);
-    //   }
-    // })
   })
 
   ///////////////////
@@ -516,3 +507,18 @@ var mySwiper = new Swiper ('.swiper-container', {
   followFinger: false,
   // longSwipes: false,
 })
+
+$('#tk-data input').on('change',function(){
+  var enable = 1
+  $('#tk-data input').each(function() {
+    if(this.value == '')
+      enable = 0
+  })
+
+  if(enable)
+    $('#SendButton').prop('disabled', false);
+  else
+    $('#SendButton').prop('disabled', true);
+})
+
+$('#SendButton').prop('disabled', true);
