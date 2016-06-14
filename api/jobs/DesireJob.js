@@ -26,10 +26,13 @@ module.exports = function(agenda) {
 
         // execute job
         run: function(job, done) {
+
           console.log("Foo job executed...");
 
           User.findOne({released:0,questionWhere:{'<':Date.now()},sort:'questionWhere DESC'}).exec(function freeDesire(err, entryUser) {
-            console.log(entryUser)
+
+            // console.log(entryUser)
+
             if(entryUser != undefined) {
 
                     // Resquest an authorization for our app
@@ -47,22 +50,28 @@ module.exports = function(agenda) {
                     };
 
                     request.post(authOptions, function(error, response, body) {
-                      console.log('refreshTokenRequest', body.acces_token, entryUser.accessToken)
+
+                      // console.log('refreshTokenRequest', body.acces_token, entryUser.accessToken)
+
                       DesireService.getCurated(entryUser.homebound > 60, entryUser.explorer < 50, body.access_token, function(curatedTrack) {
-                        console.log('curated song', curatedTrack)
+
+                        // console.log('curated song', curatedTrack)
+
                         sp3uri = curatedTrack.uri.split(':')[2]
                         User.update({id:entryUser.id},{released:0,accessToken:body.access_token,stage3song:sp3uri}).exec(function(err, updated){
-                          console.log(err,updated)
+
+                          //console.log(err,updated)
+
                           var options_track_feature = {
                             url: 'https://api.spotify.com/v1/audio-features/'+updated[0].stage1song,
                             headers: { 'Authorization': 'Bearer ' + body.access_token },
                             json: true
                           };
 
-                          console.log('========>','https://api.spotify.com/v1/audio-features/'+updated[0].stage1song)
+                          // console.log('========>','https://api.spotify.com/v1/audio-features/'+updated[0].stage1song)
 
                           request.get(options_track_feature, function(error, response, body_track) {
-                            DesireService.sendDatagram(updated[0].id, updated[0].nick, updated[0].homebound, updated[0].explorer, body_track, 3, 1, sp3uri)
+                            DesireService.sendDatagram(updated[0].id, updated[0].nick, updated[0].homebound, updated[0].explorer, body_track, 3, 1, sp3uri, curatedTrack.name, curatedTrack.artists[0].name)
 
                             // create reusable transporter object using the default SMTP transport
                             var poolConfig = {
@@ -87,12 +96,12 @@ module.exports = function(agenda) {
                             };
 
                             // send mail with defined transport object
-                            transporter.sendMail(mailOptions, function(error, info){
-                                if(error){
-                                    return console.log(error);
-                                }
-                                console.log('Message sent: ' + info.response);
-                            });
+                            // transporter.sendMail(mailOptions, function(error, info){
+                            //     if(error){
+                            //         return console.log(error);
+                            //     }
+                            //     console.log('Message sent: ' + info.response);
+                            // });
                           })
                         })
                       })

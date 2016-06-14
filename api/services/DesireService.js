@@ -135,7 +135,7 @@ module.exports = {
     }
   },
 
-  sendDatagram: function (id, nick, homebound, explorer, body_track, phase, releaseTime, replaceTrackURI) {
+  sendDatagram: function (id, nick, homebound, explorer, body_track, phase, releaseTime, replaceTrackURI, curatedTrack, curatedArtist) {
     const dgram   = require('dgram');
     const client  = dgram.createSocket('udp4');
 
@@ -156,6 +156,10 @@ module.exports = {
 
     if(replaceTrackURI != undefined)
       body_track['uri'] = replaceTrackURI
+    if(replaceTrackURI != undefined)
+      body_track['curatedArtist'] = curatedArtist
+    if(replaceTrackURI != undefined)
+      body_track['curatedTrack'] = curatedTrack
 
     console.log(body_track)
 
