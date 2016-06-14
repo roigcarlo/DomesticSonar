@@ -1,0 +1,28 @@
+<div id="wrap">
+  <div class="overlay-white">
+    <div class="row" style="margin:0px;">
+      <% include ../app/components/dds_b %>
+      <div class="col-xs-6">
+      </div>
+      <div class="col-xs-3" style="padding:3%; text-align: right;">
+        <!-- <img src="img/spotify_w.png" height="100%" width="100%"> -->
+      </div>
+    </div><!-- row -->
+    <div class="typed-text-container" style="margin-top: -5%;">
+      You most listened song is. Desgin to be changed
+      <div class="row"  style="text-align:left">
+        <div class="col-md-8">
+          <h3><span style="color: #2a9f9f"><%= track.name %></span></h4>
+          <h4><%= track.album.name %></h3>
+          <h5><%= track.artists[0].name %></h5>
+        </div><!-- col-lg-2 -->
+        <div class="col-md-4">
+          <img src="<%= track.album.images[0].url %>" style="margin-top: 20px; max-width:100%; max-height:100%"></img>
+        </div><!-- col-lg-2 -->
+      </div><!-- row -->
+    </div>
+  </div>
+</div>
+
+<% isHideable='hidden' %>
+<% include ../app/components/footer %>
