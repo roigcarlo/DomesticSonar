@@ -68,21 +68,31 @@ module.exports = function(agenda) {
                             var poolConfig = {
                                 host: MailDataService.host,
                                 port: MailDataService.port,
-                                secure: true, // use SSL
+                                secure: false, // use SSL
+                                ignoreTLS: true,
                                 auth: {
                                     user: MailDataService.user,
                                     pass: MailDataService.pswd,
                                 }
                             };
+
                             var transporter = nodemailer.createTransport(poolConfig);
 
                             // setup e-mail data with unicode symbols
                             var mailOptions = {
-                                from: 'Domestic <hello@DomesticTimeKeeper.com>', // sender address
-                                to: updated.mail, // list of receivers
+                                from: 'TimeKeeper <sonar@domesticstreamers.com>', // sender address
+                                to: updated[0].mail, // list of receivers
                                 subject: 'YourDesire', // Subject line
-                                html: '<span>'+updated[0]+'</span>' // html body
+                                html: '<span>'+JSON.stringify(updated[0])+'</span>' // html body
                             };
+
+                            // send mail with defined transport object
+                            transporter.sendMail(mailOptions, function(error, info){
+                                if(error){
+                                    return console.log(error);
+                                }
+                                console.log('Message sent: ' + info.response);
+                            });
                           })
                         })
                       })
