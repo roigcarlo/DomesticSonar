@@ -67,6 +67,10 @@ function compueteHomeboundness(res, sTerm, mTerm, userId) {
     homeboundVsTastemaker = matches
   }
 
+  console.log('Unique', genresShort)
+  console.log('Unique', genresMedium)
+  console.log('Unique', genresShortUnique.length)
+
   homeboundVsTastemaker *= 100
 
   User.update({id:userId},{homebound:homeboundVsTastemaker}).exec(function (err, updated) {
@@ -141,7 +145,7 @@ module.exports = {
       if(err || entryStatus == undefined) {
         console.log('No user is bind to the session')
       } else {
-        entryStatus.currentUser
+        console.log()
         User.findOne({id:entryStatus.currentUser}).exec(function checkSessionCode(err, entryUser) {
           if(err || entryUser == undefined) {
             console.log('User dosn\'t exists')
@@ -162,9 +166,12 @@ module.exports = {
             };
 
             // Use the access token to access the Spotify Web API
-            request.get(options_short, function(error, response, bodyShort) {
-              request.get(options_medium, function(error, response, bodyMedium) {
-                req.session.topArtistsShort = bodyShort.items
+            request.get(options_short, function(errors, response, bodyShort) {
+              request.get(options_medium, function(errorm, response, bodyMedium) {
+
+                console.log(bodyShort,bodyMedium)
+
+                req.session.topArtistsShort  = bodyShort.items
                 req.session.topArtistsMedium = bodyMedium.items
 
                 console.log('Fetched user artist preferences')

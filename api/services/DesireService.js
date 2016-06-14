@@ -28,7 +28,11 @@ module.exports = {
       };
 
       request.get(options_short, function(error, response, body_track) {
-        callback(body_track.items[0])
+        if(body_track) {
+          if(body_track.items && body_track.items[0]){
+            callback(body_track.items[0])
+          }
+        }
         // return body_track.items[0]
       });
     }
