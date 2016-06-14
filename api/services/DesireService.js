@@ -28,8 +28,10 @@ module.exports = {
       };
 
       request.get(options_short, function(error, response, body_track) {
+        console.log('DesireService',error,body_track)
         if(body_track) {
           if(body_track.items && body_track.items[0]){
+            console.log(callback)
             callback(body_track.items[0])
           }
         }
@@ -119,8 +121,6 @@ module.exports = {
         json: true
       };
 
-      console.log(req.session.profileCache.id)
-
       var options_track = {
         url: 'https://api.spotify.com/v1/users/spotify/playlists/3rgsDhGHZxZ9sB9DQWQfuf/tracks?limit=1',
         headers: { 'Authorization': 'Bearer ' + access_token },
@@ -135,11 +135,11 @@ module.exports = {
     }
   },
 
-  sendDatagram: function (homebound, explorer, body_track, phase, releaseTime, replaceTrackURI) {
+  sendDatagram: function (id, nick, homebound, explorer, body_track, phase, releaseTime, replaceTrackURI) {
     const dgram   = require('dgram');
     const client  = dgram.createSocket('udp4');
 
-    body_track['userID'] = entryUser.id
+    body_track['userID'] = id
     body_track['nick'] = nick
 
     if(homebound > 60 && explorer > 50)
@@ -166,7 +166,7 @@ module.exports = {
     var message = new Buffer(toSend);
     client.send(message, 0, message.length, TimeKeeperService.port, TimeKeeperService.host, function (err) {
       client.close();
-      console.log(toSend)
+      console.log('SENT!',err)
     })
   }
 }

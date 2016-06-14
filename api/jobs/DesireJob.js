@@ -1,5 +1,6 @@
-var nodemailer = require('nodemailer');
+var nodemailer = require('nodemailer')
 var request = require('request')
+var querystring = require('querystring')
 
 module.exports = function(agenda) {
     var job = {
@@ -28,7 +29,9 @@ module.exports = function(agenda) {
           console.log("Foo job executed...");
 
           User.findOne({released:0,questionWhere:{'<':Date.now()},sort:'questionWhere DESC'}).exec(function freeDesire(err, entryUser) {
+            console.log(entryUser)
             if(entryUser != undefined) {
+
                     // Resquest an authorization for our app
                     var authOptions = {
                       url: 'https://accounts.spotify.com/api/token',
@@ -36,24 +39,30 @@ module.exports = function(agenda) {
                         grant_type: 'refresh_token',
                         refresh_token: entryUser.refreshToken,
                       },
+                      method: 'POST',
                       headers: {
                         'Authorization': 'Basic ' + (new Buffer(SpotifyService.clientId + ':' + SpotifyService.clientSecret).toString('base64'))
                       },
                       json: true
                     };
 
-                    request.get(authOptions, function(error, response, body) {
-                      DesireService.getCurated(entryUser.homebound, entryUser.explorer, body.access_token, function(curatedTrack) {
+                    request.post(authOptions, function(error, response, body) {
+                      console.log('refreshTokenRequest', body.acces_token, entryUser.accessToken)
+                      DesireService.getCurated(entryUser.homebound > 60, entryUser.explorer < 50, body.access_token, function(curatedTrack) {
+                        console.log('curated song', curatedTrack)
                         sp3uri = curatedTrack.uri.split(':')[2]
-                        User.update({id:entryUser.id},{released:1,accessToken:body.access_token,stage3song:sp3uri}).exec(function(err, updated){
+                        User.update({id:entryUser.id},{released:0,accessToken:body.access_token,stage3song:sp3uri}).exec(function(err, updated){
+                          console.log(err,updated)
                           var options_track_feature = {
-                            url: 'https://api.spotify.com/v1/audio-features/'+updated.stage1song,
-                            headers: { 'Authorization': 'Bearer ' + entryUser.accessToken }, // This is a test, no bearer token. Use it with moderation
+                            url: 'https://api.spotify.com/v1/audio-features/'+updated[0].stage1song,
+                            headers: { 'Authorization': 'Bearer ' + body.access_token },
                             json: true
                           };
 
+                          console.log('========>','https://api.spotify.com/v1/audio-features/'+updated[0].stage1song)
+
                           request.get(options_track_feature, function(error, response, body_track) {
-                            DesireService.sendDatagram(updated.homebound, updated.explorer, body_track, 3, 1, sp3uri)
+                            DesireService.sendDatagram(updated[0].id, updated[0].nick, updated[0].homebound, updated[0].explorer, body_track, 3, 1, sp3uri)
 
                             // create reusable transporter object using the default SMTP transport
                             var poolConfig = {
@@ -72,7 +81,7 @@ module.exports = function(agenda) {
                                 from: 'Domestic <hello@DomesticTimeKeeper.com>', // sender address
                                 to: updated.mail, // list of receivers
                                 subject: 'YourDesire', // Subject line
-                                html: 'Test' // html body
+                                html: '<span>'+updated[0]+'</span>' // html body
                             };
                           })
                         })
