@@ -48,9 +48,10 @@ module.exports = {
 
             request.post(authOptions, function(error, response, body) {
 
-                  DesireService.getMostListened(entryUser.accessToken, function(track){
+                  DesireService.getMostListened(body.access_token, function(track){
 
                     var uri = track.uri.split(':')[2]
+                    console.log('Trac',track)
 
                     User.update({id:entryStatus.currentUser},{stage1song:uri}).exec(function checkSessionCode(err, updated) {
                       var options_track_feature = {
@@ -60,7 +61,8 @@ module.exports = {
                       };
 
                       request.get(options_track_feature, function(error, response, body_track) {
-                        DesireService.sendDatagram(entryUser, body_track, 1, 1, undefined, undefined, undefined)
+                        sails.sockets.blast('message', { code: 'SongStartpPlaying' });
+                        DesireService.sendDatagram(entryUser.homebound, entryUser.explorer, entryUser.id, entryUser.nick, body_track, 1, 1, undefined, undefined, undefined)
                       })
                     })
                   })
