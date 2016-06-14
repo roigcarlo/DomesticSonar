@@ -156,11 +156,11 @@ module.exports = {
     body_track['releaseTime'] = releaseTime
 
     if(replaceTrackURI != undefined)
-      body_track['uri'] = replaceTrackURI
+      body_track['uri'] = replaceTrackURI.replace(' ','_')
     if(replaceTrackURI != undefined)
-      body_track['curatedArtist'] = curatedArtist
+      body_track['curatedArtist'] = curatedArtist.replace(' ','_')
     if(replaceTrackURI != undefined)
-      body_track['curatedTrack'] = curatedTrack
+      body_track['curatedTrack'] = curatedTrack.replace(' ','_')
 
     console.log(body_track)
 
