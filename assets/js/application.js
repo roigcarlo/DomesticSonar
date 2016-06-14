@@ -113,18 +113,18 @@ function getTyped() {
 }
 
 function initialize(swiper) {
-    var prev = $('.swiper-slide.swiper-slide-prev').attr('href')
-    var actv = $('.swiper-slide.swiper-slide-active').attr('href')
-    var next = $('.swiper-slide.swiper-slide-next').attr('href')
+  var prev = $('.swiper-slide.swiper-slide-prev').attr('href')
+  var actv = $('.swiper-slide.swiper-slide-active').attr('href')
+  var next = $('.swiper-slide.swiper-slide-next').attr('href')
 
-    $('.footer-inside.hideable').hide()
+  $('.footer-inside.hideable').hide()
 
-    resetTyped(prev, actv, next)
-    initTyped( prev, actv, next)
-    lockSlide( prev, actv, next, swiper, [
-      'app-1', 'app-2', 'app-3', 'app-4', 'fakeLoad',
-      'app-6', 'app-7', 'app-9', 'app-10', 'app-12'
-    ])
+  resetTyped(prev, actv, next)
+  initTyped( prev, actv, next)
+  lockSlide( prev, actv, next, swiper, [
+    'app-1', 'app-2', 'app-3', 'app-4', 'fakeLoad',
+    'app-6', 'app-7', 'app-9', 'app-10', 'app-12'
+  ])
 }
 
 function resetTyped(prev, actv, next) {
@@ -214,8 +214,8 @@ function SendFormTK() {
   }).fail(function (data ) {
   });
 
-  swiper.unlockSwipeToNext()
-  swiper.slideNext(true, 1000)
+  mySwiper.unlockSwipeToNext()
+  mySwiper.slideNext(true, 1000)
 }
 
 $(document).ready(function () {
@@ -289,7 +289,7 @@ $(document).ready(function () {
   ///////////////////
   console.log(mySwiper.on)
   if(mySwiper.on) {
-    mySwiper.on('onSlideChangeStart', function (swiper) {
+    mySwiper.on('onSlideChangeEnd', function (swiper) {
       var prev = $('.swiper-slide.swiper-slide-prev').attr('href')
       var actv = $('.swiper-slide.swiper-slide-active').attr('href')
       var next = $('.swiper-slide.swiper-slide-next').attr('href')
@@ -315,7 +315,7 @@ $(document).ready(function () {
       }
     })
 
-    mySwiper.on('onSlideChangeEnd', function (swiper) {
+    mySwiper.on('onSlideChangeStart', function (swiper) {
       var prev = $('.swiper-slide.swiper-slide-prev').attr('href')
       var actv = $('.swiper-slide.swiper-slide-active').attr('href')
       var next = $('.swiper-slide.swiper-slide-next').attr('href')
@@ -512,6 +512,7 @@ var mySwiper = new Swiper ('.swiper-container', {
   allowSwipeToPrev: false,
   pagination: '.swiper-pagination',
   paginationType: 'progress',
-  grabCursor: true
+  grabCursor: true,
+  followFinger: false,
   // longSwipes: false,
 })
