@@ -516,17 +516,20 @@ var mySwiper = new Swiper ('.swiper-container', {
   // longSwipes: false,
 })
 
-$('#tk-data input').on('change',function(){
+$('#tk-data input').on('change paste keyup',function(){
   var enable = 1
   $('#tk-data input').each(function() {
     if(this.value == '')
       enable = 0
   })
 
-  if(enable)
+  if(enable) {
     $('#SendButton').prop('disabled', false);
-  else
+    $('#SendButton').css('background-color','rgb(57, 194, 95)')
+  } else {
     $('#SendButton').prop('disabled', true);
+    $('#SendButton').css('background-color','rgb(75, 75, 75)')
+  }
 })
 
 $('#SendButton').prop('disabled', true);
