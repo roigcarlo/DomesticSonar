@@ -139,7 +139,7 @@ module.exports.routes = {
   '/updateMostListenedSong' : {
     controller: 'Track',
     action: 'updateMostListenedSong'
-  }
+  },
 
   '/createDesire': {
     controller: 'Experience',
