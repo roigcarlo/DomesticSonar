@@ -62,7 +62,7 @@ module.exports = {
 
                       request.get(options_track_feature, function(error, response, body_track) {
                         sails.sockets.blast('message', { code: 'SongStartpPlaying' });
-                        DesireService.sendDatagram(entryUser.id, entryUser.nick, entryUser.homebound, entryUser.explorer, body_track, 1, 1, undefined, undefined, undefined)
+                        DesireService.sendDatagram(entryUser.id, entryUser.nick, entryUser.homebound, entryUser.explorer, body_track, 1, 200, undefined, undefined, undefined)
                       })
                     })
                   })
