@@ -164,9 +164,9 @@ module.exports = {
          })
       }
       else {
-        res.redirect('/' +
+        res.redirect('/#' +
           querystring.stringify({
-            error: 'invalid_profile'
+            error: 'error_invalid_profile'
           }))
       }
 		})
