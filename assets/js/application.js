@@ -193,7 +193,7 @@ function initWheel(actv, swiper, onSlide) {
 
 function lockSlide(prev, actv, next, swiper, onSlide) {
   if(onSlide.indexOf(actv) >= 0) {
-    //swiper.lockSwipeToNext()
+    swiper.lockSwipeToNext()
   }
 }
 
