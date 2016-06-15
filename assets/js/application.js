@@ -23,7 +23,7 @@ function getTyped() {
     : '<span> Where to next? <br> Always looking for <br> something else, <br> you are good <br> with words like change, <br> shift or mutation, <br> you are an </span> <span class="typed-text spotygreen"> Explorer. </span>'
 
   var hvt = homebound > 60
-    ? '<span> Hey there </span> <span class="typed-text spotygreen"> Homebound! </span> <br> <span> Seems like you\'ve got your <br> music taste pretty clear, <br> you like to listen to the same <br> kind of music all the time, <br> staying in a tune comfort zone. <br> Play on repeat! </span>'
+    ? '<span> Hey there </span> <span class="typed-text spotygreen"> Homebound! </span> <br> <span> Seems like you\'ve got <br> your music taste <br> pretty clear, <br> you like to listen to <br> the same kind of <br> music all the time, <br> staying in a <br> tune comfort zone. <br> Play on repeat! </span>'
     : '<span> Hey there </span> <span class="typed-text spotygreen"> Tastemaker! </span> <br> Seems like you like <br> exploring new tunes,  <br> constantly in search <br> of new musical <br> expriences. <br> Shuffle mode on! </span>'
 
   var names = [
@@ -168,7 +168,7 @@ function initWheel(actv, swiper, onSlide) {
         $(".progressLabel").html(100)
         setTimeout(function () {
           swiper.unlockSwipeToNext()
-          swiper.slideNext(true, 1000)
+          // swiper.slideNext(true, 1000)
         }, 750)
       }
     }, 50)
@@ -275,7 +275,6 @@ function ReleaseMarble() {
 
   $.ajax({
     url: '/updateMostListenedSong',
-    data: JSON.stringify(data),
     method: 'POST',
     headers: {
       'content-type': 'application/json'
