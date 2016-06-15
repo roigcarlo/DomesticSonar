@@ -33,7 +33,7 @@ function getTyped() {
 
   return {
     'app-1': {
-      strings: ['<span class="typed-text spotygreen">Hello </span> <span id="typed-name">Mark</span>  <br> <span class="typed-text">You are about to <br> create a future <br> moment while <br> becoming part of <br> a collective scientific <br> experiment on human <br>  behaviors.</span>'],
+      strings: ['<span class="typed-text spotygreen">Hello </span> <span id="typed-name">Mark</span> <br> <span class="typed-text">You are about to <br> create a future <br> moment while <br> becoming part of <br> a collective scientific <br> experiment on human <br>  behaviors.</span>'],
       contentType: 'html',
       typeSpeed: TEXT_SPEED,
       showCursor: false,
@@ -54,7 +54,7 @@ function getTyped() {
     },
 
     'app-2':{
-      strings: ['<span> In order to be able to <br> curate a perfect song <br> for your future <br> moment first we need <br> to know a bit <br> more about you. <br> <br> Ready to reveal your <br> musical habits and <br> personality traits? <br> Here we go!  </span>'],
+      strings: ['<span> In order to be able to <br> curate a perfect song <br> for your future <br> moment first we need <br> to know a bit <br> more about you. <br> <br> Ready to reveal your <br> musical habits and <br> personality traits? <br> Here we go! </span>'],
       contentType: 'html',
       typeSpeed: TEXT_SPEED,
       showCursor: false,
@@ -132,6 +132,17 @@ function reset(swiper) {
   mySwiper.slideTo(0, 1)
   mySwiper.lockSwipeToPrev()
   initialize(swiper)
+  $('#tk-data input').each(function() {
+    data[this.id] = this.value
+  })
+
+  for(var i in images) {
+    data[images[i]] = {}
+    $(images[i]+' .sliders').each(function(){
+      data[images[i]][$(this).attr('name')] = $(this)[0].noUiSlider.set(50);
+    })
+  }
+
   $('#sessionCode').html('Waiting for code')
 }
 
@@ -168,7 +179,7 @@ function initWheel(actv, swiper, onSlide) {
         $(".progressLabel").html(100)
         setTimeout(function () {
           swiper.unlockSwipeToNext()
-          // swiper.slideNext(true, 1000)
+          swiper.slideNext(true, 1000)
         }, 750)
       }
     }, 50)
@@ -208,7 +219,7 @@ function initWheel(actv, swiper, onSlide) {
 
 function lockSlide(prev, actv, next, swiper, onSlide) {
   if(onSlide.indexOf(actv) >= 0) {
-    // swiper.lockSwipeToNext()
+    swiper.lockSwipeToNext()
   }
 }
 
