@@ -541,6 +541,11 @@ $(document).ready(function () {
       ('#ReleaseTheBall').prop('disabled', false)
     }
 
+    if(msg['code'] == 'InvalidUser') {
+      reset(mySwiper)
+      alert('Unfortunately, you don\'t have enough data for our results to be conclusive, try to listen a little bit more Spotify ;)')
+    }
+
     // A song ends to play
     if(msg['code'] == 'changeSong') {
         $('#Fakeplayer').attr('src','https://embed.spotify.com/?uri=spotify:trackset:PREFEREDTITLE:'+msg['data'] )

@@ -43,6 +43,10 @@ function compueteHomeboundness(res, sTerm, mTerm, userId) {
       }
     }
 
+    if(mTerm.length < 1) {
+      sails.sockets.blast('message', { code: 'InvalidUser' });
+    }
+
     // Make the list with the short term artists genres
     for( var a in sTerm) {
       for( var ag in sTerm[a]['genres']) {
