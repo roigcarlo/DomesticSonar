@@ -69,7 +69,7 @@ function getTyped() {
     },
 
     'app-6':{
-      strings: ['<span> Time for the <br> </span> <span class="typed-text spotygreen"> Five Factor Model Test </span> <span> <br> a crazy test that <br> psychologists use to <br> understand humman <br> behavior. </span>'],
+      strings: ['<span> Time for the <br> </span> <span class="typed-text spotygreen"> Five Factor Model Test </span> <span> <br> a crazy test that <br> psychologists use to <br> understand human <br> behavior. </span>'],
       contentType: 'html',
       typeSpeed: TEXT_SPEED,
       showCursor: false,
