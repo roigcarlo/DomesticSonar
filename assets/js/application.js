@@ -282,6 +282,10 @@ function SendFormTK() {
   $('#SendButton').prop('disabled', true);
 }
 
+function hardReset() {
+  reset(mySwiper)
+}
+
 function ReleaseMarble() {
   reset(mySwiper)
 
