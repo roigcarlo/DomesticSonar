@@ -98,22 +98,22 @@ module.exports = function(agenda) {
                                 attachments: [
                                   {
                                     filename: 'boom.png',
-                                    path: MailDataService.imgp,
+                                    path: MailDataService.imgp+'boom.png',
                                     cid: 'unique@bomb.ee' //same cid value as in the html img src
                                   },
                                   {
                                     filename: 'ddslogo.png',
-                                    path: MailDataService.imgp,
+                                    path: MailDataService.imgp+'ddslogo.png',
                                     cid: 'unique@ddslogo.ee' //same cid value as in the html img src
                                   },
                                   {
                                     filename: 'sonarlogo.png',
-                                    path: MailDataService.imgp,
+                                    path: MailDataService.imgp+'sonarlogo.png',
                                     cid: 'unique@sonarlogo.ee' //same cid value as in the html img src
                                   },
                                   {
                                     filename: 'spotilogo.png',
-                                    path: MailDataService.imgp,
+                                    path: MailDataService.imgp+'spotilogo.png',
                                     cid: 'unique@spotilogo.ee' //same cid value as in the html img src
                                   }
                               ]
