@@ -93,7 +93,7 @@ module.exports = function(agenda) {
                                 from: 'TimeKeeper <sonar@domesticstreamers.com>', // sender address
                                 to: updated[0].mail, // list of receivers
                                 subject: 'YourDesire', // Subject line
-                                html: mailtemplate
+                                html: mailtemplate,
                                 attachments: [
                                   {
                                     filename: 'bomb.png',
