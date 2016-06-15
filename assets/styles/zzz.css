@@ -227,13 +227,19 @@ body {
   color: white;
 }
 
+.overlay-transparent {
+  background-color: rgba(25, 25, 28, 0.0);
+  width: 100vw;
+  height: 100vh;
+  color: white;
+}
+
 .overlay-black {
   background-color: #18181d;
   width: 100vw;
   height: 100vh;
   color: white;
 }
-
 
 .overlay-white {
   background-color: rgba(255, 255, 255, 1);

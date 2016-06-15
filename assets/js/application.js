@@ -130,6 +130,7 @@ function initialize(swiper) {
 function reset(swiper) {
   mySwiper.unlockSwipeToPrev()
   mySwiper.slideTo(0, 1)
+  $(".swiper-slide #message").typed('reset')
   mySwiper.lockSwipeToPrev()
   initialize(swiper)
   $('#tk-data input').each(function() {
@@ -537,13 +538,13 @@ $(document).ready(function () {
 
     // A song is playing
     if(msg['code'] == 'SongStartPlaying') {
-      tkevent = true
+      ('#ReleaseTheBall').html("THE<br>TIMEKEEPER<br>IS BUSY")
       ('#ReleaseTheBall').prop('disabled', true)
     }
 
     // A song ends to play
     if(msg['code'] == 'SongStopPlaying') {
-      tkevent = false
+      ('#ReleaseTheBall').html("CLICK TO<br>RELEASE<br>THE MARBLE")
       ('#ReleaseTheBall').prop('disabled', false)
     }
 
