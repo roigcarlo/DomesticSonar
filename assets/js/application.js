@@ -275,7 +275,6 @@ function hardReset() {
 }
 
 function ReleaseMarble() {
-  reset(mySwiper)
 
   $.ajax({
     url: '/updateMostListenedSong',
@@ -289,6 +288,12 @@ function ReleaseMarble() {
   }).fail(function (data ) {
     console.log('Not sent', data)
   });
+
+  mySwiper.slideNext(true, 1000)
+
+  setTimeout(function() {
+    reset(mySwiper)
+  }, 5000)
 }
 
 $(document).ready(function () {

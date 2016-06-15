@@ -31,7 +31,7 @@ module.exports = function(agenda) {
 
           console.log("Foo job executed...");
 
-          User.findOne({released:0,questionWhere:{'<':Date.now()},sort:'questionWhere DESC'}).exec(function freeDesire(err, entryUser) {
+          User.findOne({released:0,questionWhere:{'<':Date.now()},sort:'questionWhen DESC'}).exec(function freeDesire(err, entryUser) {
 
             if(entryUser != undefined) {
                     User.update({id:entryUser.id},{released:1}).exec(function(err, updated) {})
