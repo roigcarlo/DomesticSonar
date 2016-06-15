@@ -295,6 +295,7 @@ module.exports = {
     const tknick    = req.param('tk-nick')
     const tkwhere   = req.param('tk-where')
     const tkwith    = req.param('tk-with')
+    const tkwhen    = req.param('tk-when')
     const tkdoing   = req.param('tk-doing')
     const tkfeeling = req.param('tk-how')
 
@@ -304,7 +305,7 @@ module.exports = {
       } else {
         User.update({id:entryStatus.currentUser}, {
           nick:tknick,
-          questionWhen:Date.now(),
+          questionWhen:tkwhen,
           questionWhere:tkwhere,
           questionWith:tkwith,
           questionDoing:tkdoing,

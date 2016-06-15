@@ -212,6 +212,21 @@ function lockSlide(prev, actv, next, swiper, onSlide) {
   }
 }
 
+Date.prototype.addHours = function(h) {
+   this.setTime(this.getTime() + (h*60*60*1000));
+   return this;
+}
+
+Date.prototype.addDays = function(d) {
+   this.setTime(this.getTime() + (d*24*60*60*1000));
+   return this;
+}
+
+Date.prototype.addMonths = function(m) {
+   this.setTime(this.getTime() + (m*30*24*60*60*1000));
+   return this;
+}
+
 function SendFormTK() {
   var data = {}
 
@@ -219,7 +234,16 @@ function SendFormTK() {
     data[this.id] = this.value
   })
 
-  console.log(data)
+
+  var releaseDate = new Date();
+
+  console.log($('#tk-hours').val(), $('#tk-days').val(), $('#tk-months').val())
+
+  releaseDate.addHours($('#tk-hours').val())
+  releaseDate.addDays($('#tk-days').val())
+  releaseDate.addMonths($('#tk-months').val())
+
+  data['tk-when'] = releaseDate.getTime()
 
   $.ajax({
     url: '/createDesire',
