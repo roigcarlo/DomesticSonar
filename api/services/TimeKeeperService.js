@@ -4,5 +4,5 @@ module.exports = {
   port: '5005',
 
   // Client secret
-  host: '192.168.1.53',
+  host: '37.34.69.103',
 }
