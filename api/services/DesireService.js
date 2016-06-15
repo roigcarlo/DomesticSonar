@@ -11,8 +11,10 @@ module.exports = {
     };
 
     request.get(options_list, function(error, response, body_list) {
-      console.log(error,body_list)
-      callback(body_list.items[0])
+      if(body_list) {
+        console.log(error,body_list)
+        callback(body_list.items[0])
+      }
     })
   },
 

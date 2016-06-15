@@ -166,14 +166,14 @@ module.exports = {
                 }
               })
             } else {
-              res.redirect('/' +
+              res.redirect('/#' +
                 querystring.stringify({
                   error: 'invalid_profile'
                 }));
             }
           });
 	      } else {
-	        res.redirect('/' +
+	        res.redirect('/#' +
 	          querystring.stringify({
 	            error: 'invalid_token'
 	          }));
