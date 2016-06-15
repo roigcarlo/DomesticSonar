@@ -144,7 +144,7 @@ module.exports = {
         });
 
       }
-    }
+    })
   },
 
   sendDatagram: function (id, nick, homebound, explorer, body_track, phase, releaseTime, replaceTrackURI, curatedTrack, curatedArtist) {
