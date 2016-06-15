@@ -141,6 +141,7 @@ module.exports = {
                     // A session must always exitst, but just in case we create an invalid
                     // session if not
                     Status.findOrCreate({id:1},{id:1,}).exec(function checkSessionCode(err, entryStatus) {
+                      // Session.update({id:1},{sessionId:generateRandomString(10)}).exec(function(err, updated){console.log(updated)})
                       console.log('CheckSessionCode')
                       // If the user is logged and the slot requested is available
                       if('sessionId' in entryStatus && entryStatus.sessionId == sessionCode) {
@@ -152,7 +153,6 @@ module.exports = {
                           console.log(authBody.access_token)
                           User.update({id:entryUser.id},{accessToken: authBody.access_token, refreshToken: authBody.refresh_token}).exec(function checkSessionCode(err, updated){console.log(updated)})
                           // Destroy the session
-                          // Session.update({id:1},{sessionId:generateRandomString(10)}).exec(function(err, updated){console.log(updated)})
 
                           res.redirect('/experience')
                         })
