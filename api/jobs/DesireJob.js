@@ -63,9 +63,9 @@ module.exports = function(agenda) {
 
                           mailtemplate = mailtemplate.replace('@BOMB','<img src="cid:unique@bomb.ee">')
 
-                          mailtemplate = mailtemplate.replace('@DDSLOGO','<img src="cid:unique@ddslogo.ee" width="200" height="40" >' )
-                          mailtemplate = mailtemplate.replace('@SONARLOGO','<img src="cid:unique@sonarlogo.ee" width="200" height="40" >' )
-                          mailtemplate = mailtemplate.replace('@SPOTYLOGO','<img src="cid:unique@spotilogo.ee" width="200" height="40" >' )
+                          mailtemplate = mailtemplate.replace('@DDSLOGO','<img src="cid:unique@ddslogo.ee" >' )
+                          mailtemplate = mailtemplate.replace('@SONARLOGO','<img src="cid:unique@sonarlogo.ee" >' )
+                          mailtemplate = mailtemplate.replace('@SPOTYLOGO','<img src="cid:unique@spotilogo.ee" >' )
 
                           var options_track_feature = {
                             url: 'https://api.spotify.com/v1/audio-features/'+updated[0].stage1song,
