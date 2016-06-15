@@ -2,7 +2,7 @@
 
 import socket
 
-UDP_IP = "localhost"
+UDP_IP = "192.168.1.6"
 UDP_PORT = 5005
 
 sock = socket.socket(

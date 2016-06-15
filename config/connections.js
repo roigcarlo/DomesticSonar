@@ -42,10 +42,10 @@ module.exports.connections = {
   ***************************************************************************/
   someMysqlServer: {
     adapter: 'sails-mysql',
-    host: 'YOUR_MYSQL_SERVER_HOSTNAME_OR_IP_ADDRESS',
-    user: 'YOUR_MYSQL_USER',
-    password: 'YOUR_MYSQL_PASSWORD',
-    database: 'YOUR_MYSQL_DB'
+    host: 'sonar.cqbhaxegejq0.us-east-1.rds.amazonaws.com',
+    user: 'sonarRoot',
+    password: 'Dibujauncaball0',
+    database: 'sonar'
   },
 
   /***************************************************************************
