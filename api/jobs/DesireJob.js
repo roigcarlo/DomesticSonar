@@ -112,8 +112,8 @@ module.exports = function(agenda) {
                                     cid: 'unique@sonarlogo.ee' //same cid value as in the html img src
                                   },
                                   {
-                                    filename: 'spotilogo.png',
-                                    path: MailDataService.imgp+'spotilogo.png',
+                                    filename: 'spotylogo.png',
+                                    path: MailDataService.imgp+'spotylogo.png',
                                     cid: 'unique@spotilogo.ee' //same cid value as in the html img src
                                   }
                               ]
