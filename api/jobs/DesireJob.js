@@ -119,7 +119,7 @@ module.exports = function(agenda) {
                               ]
                             };
 
-                            send mail with defined transport object
+                            // send mail with defined transport object
                             transporter.sendMail(mailOptions, function(error, info){
                                 if(error){
                                     return console.log(error);
