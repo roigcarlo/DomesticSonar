@@ -3,6 +3,7 @@ const TEXT_SPEED = -20
 var homebound = 0
 var explorer = 0
 var userShare = 0
+var interval = 0
 
 function setShare(val) {
   userShare = val
@@ -128,19 +129,22 @@ function initialize(swiper) {
 }
 
 function reset(swiper) {
+  $('#SendButton').prop('disabled', true);
+  $('#SendButton').css('background-color','rgb(75, 75, 75)')
+  clearInterval(interval);
   mySwiper.unlockSwipeToPrev()
   mySwiper.slideTo(0, 1)
   $(".swiper-slide #message").typed('reset')
   mySwiper.lockSwipeToPrev()
   initialize(swiper)
   $('#tk-data input').each(function() {
-    data[this.id] = this.value
+    this.value = ''
   })
 
+  var images = ['#explorerImage0', '#explorerImage1', '#explorerImage2', '#explorerImage3']
   for(var i in images) {
-    data[images[i]] = {}
     $(images[i]+' .sliders').each(function(){
-      data[images[i]][$(this).attr('name')] = $(this)[0].noUiSlider.set(50);
+      $(this)[0].noUiSlider.set(50);
     })
   }
 
@@ -172,7 +176,7 @@ function initWheel(actv, swiper, onSlide) {
 
     var progress = 0
     $(".progressLabel").html(progress)
-    var interval = setInterval(function() {
+    interval = setInterval(function() {
       progress += 0.80;
       $(".progressLabel").html(Math.round(progress))
       if (progress >= 100) {
@@ -220,7 +224,7 @@ function initWheel(actv, swiper, onSlide) {
 
 function lockSlide(prev, actv, next, swiper, onSlide) {
   if(onSlide.indexOf(actv) >= 0) {
-    swiper.lockSwipeToNext()
+    //swiper.lockSwipeToNext()
   }
 }
 
@@ -401,6 +405,7 @@ $(document).ready(function () {
     })
 
     mySwiper.on('onSlideChangeStart', function (swiper) {
+      clearInterval(interval);
       var prev = $('.swiper-slide.swiper-slide-prev').attr('href')
       var actv = $('.swiper-slide.swiper-slide-active').attr('href')
       var next = $('.swiper-slide.swiper-slide-next').attr('href')
