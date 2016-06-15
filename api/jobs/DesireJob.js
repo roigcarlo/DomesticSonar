@@ -15,7 +15,7 @@ module.exports = function(agenda) {
         //disabled: false,
 
         // method can be 'every <interval>', 'schedule <when>' or now
-        frequency: 'every 15 seconds',
+        frequency: 'every 5 minutes',
 
         // Jobs options
         //options: {
@@ -34,7 +34,7 @@ module.exports = function(agenda) {
           User.findOne({released:0,questionWhere:{'<':Date.now()},sort:'questionWhere DESC'}).exec(function freeDesire(err, entryUser) {
 
             if(entryUser != undefined) {
-                    // User.update({id:entryUser.id},{released:1}).exec(function(err, updated) {})
+                    User.update({id:entryUser.id},{released:1}).exec(function(err, updated) {})
 
                     // Resquest an authorization for our app
                     var authOptions = {
