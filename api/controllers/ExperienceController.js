@@ -28,19 +28,20 @@ function compueteHomeboundness(res, sTerm, mTerm, userId) {
   genresMedium = []
 
   fs.readFile('/home/roigcarlo/DomesticSonar/data/uri_artist_genres.json', 'utf8', function (err,genfile) {
-    if (err) {
-      console.log('unable to load custom genres')
-    }
 
     sgenres = []
-    sgenres_non_parse = genfile.split('\n')
-    for( a in sgenres_non_parse) {
-      var line = sgenres_non_parse[a]
-      try {
-        sgenres.push(JSON.parse(line))
-      }catch(err) {}
-    }
 
+    if (err) {
+      console.log('unable to load custom genres')
+    } else {
+      sgenres_non_parse = genfile.split('\n')
+      for( a in sgenres_non_parse) {
+        var line = sgenres_non_parse[a]
+        try {
+          sgenres.push(JSON.parse(line))
+        }catch(err) {}
+      }
+    }
 
     // Make the list with the short term artists genres
     for( var a in sTerm) {
