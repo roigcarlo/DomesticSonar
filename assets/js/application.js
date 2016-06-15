@@ -33,7 +33,7 @@ function getTyped() {
 
   return {
     'app-1': {
-      strings: ['<span class="typed-text spotygreen">Hello </span> <span id="typed-name">Mark</span>  <br> <span class="typed-text">You are about to <br> create a future <br> moment while becoming part of a collective <br> scientific experiment on <br> human behaviors.</span>'],
+      strings: ['<span class="typed-text spotygreen">Hello </span> <span id="typed-name">Mark</span>  <br> <span class="typed-text">You are about to <br> create a future <br> moment while <br> becoming part of <br> a collective scientific <br> experiment on human <br>  behaviors.</span>'],
       contentType: 'html',
       typeSpeed: TEXT_SPEED,
       showCursor: false,
@@ -54,7 +54,7 @@ function getTyped() {
     },
 
     'app-2':{
-      strings: ['<span> In order to be able to <br> curate a perfect song for <br> your future moment first <br> we need to know a bit <br> more about you. <br> <br> Ready to reveal your <br> musical habits and <br> personality traits? <br> Here we go!  </span>'],
+      strings: ['<span> In order to be able to <br> curate a perfect song <br> for your future <br> moment first we need <br> to know a bit <br> more about you. <br> <br> Ready to reveal your <br> musical habits and <br> personality traits? <br> Here we go!  </span>'],
       contentType: 'html',
       typeSpeed: TEXT_SPEED,
       showCursor: false,
@@ -272,6 +272,20 @@ function SendFormTK() {
 
 function ReleaseMarble() {
   reset(mySwiper)
+
+  $.ajax({
+    url: '/updateMostListenedSong',
+    data: JSON.stringify(data),
+    method: 'POST',
+    headers: {
+      'content-type': 'application/json'
+    },
+  })
+  .done(function( data ) {
+    console.log('Sent to alex', data)
+  }).fail(function (data ) {
+    console.log('Not sent', data)
+  });
 }
 
 $(document).ready(function () {

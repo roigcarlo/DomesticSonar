@@ -113,7 +113,7 @@
     padding: 5%;
     padding-left: 10%;
     padding-right: 10%;
-    font-size: 5.5vw;
+    font-size: 7vw;
     width:100%;
     line-height: 130%;
     font-weight: 900;
@@ -139,7 +139,7 @@
 
 .footer-text {
   font-weight: bold;
-  font-size: 2vw;
+  font-size: 1.5vw;
   color:rgb(57, 194, 95);
   -webkit-animation:fade-in 3s infinite;
   letter-spacing: 7px;
