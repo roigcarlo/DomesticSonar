@@ -45,7 +45,6 @@ function compueteHomeboundness(res, sTerm, mTerm, userId) {
 
     // Make the list with the short term artists genres
     for( var a in sTerm) {
-      console.log("SST",sTerm[a].uri)
       for( var ag in sTerm[a]['genres']) {
         genresShort.push(sTerm[a]['genres'][ag])
       }
@@ -53,13 +52,11 @@ function compueteHomeboundness(res, sTerm, mTerm, userId) {
       sgenresf = sgenres.filter(function(value, index, ar){return value.global_uri == sTerm[a].uri})
       for( var ag in sgenresf) {
         genresShort.push(sgenresf[ag].genre)
-        console.log("ST",sgenresf[ag].genre)
       }
     }
 
     // Make the list with the medium term artists genres
     for( var a in mTerm) {
-      console.log("MMT",mTerm[a].uri)
       for( var ag in mTerm[a]['genres']) {
         genresMedium.push(mTerm[a]['genres'][ag])
       }
@@ -67,7 +64,6 @@ function compueteHomeboundness(res, sTerm, mTerm, userId) {
       sgenresf = sgenres.filter(function(value, index, ar){return value.global_uri == mTerm[a].uri})
       for( var ag in sgenresf) {
         genresMedium.push(sgenresf[ag].genre)
-        console.log("MT",sgenresf[ag].genre)
       }
     }
 
@@ -98,15 +94,9 @@ function compueteHomeboundness(res, sTerm, mTerm, userId) {
       homeboundVsTastemaker = matches
     }
 
-    console.log('Unique', genresShort)
-    console.log('Unique', genresMedium)
-    console.log('Unique', genresShortUnique.length)
-
     homeboundVsTastemaker *= 100
 
     User.update({id:userId},{homebound:homeboundVsTastemaker}).exec(function (err, updated) {
-      console.log('Updated user Homeboundness:')
-      console.log(updated)
       res.send(200, homeboundVsTastemaker);
     })
 
@@ -132,8 +122,6 @@ function computeExploreness(res, data, userId) {
   }
 
   User.update({id:userId},{explorer:value}).exec(function (err, updated) {
-    console.log('Updated user Exploreness:')
-    console.log(updated)
     res.send(200, value);
   })
 }
@@ -167,7 +155,8 @@ module.exports = {
         res.redirect('/#' +
           querystring.stringify({
             error: 'error_invalid_profile'
-          }))
+          })
+        )
       }
 		})
 
@@ -258,15 +247,17 @@ module.exports = {
           } else {
             console.log(DesireService)
             DesireService.getMostListened(entryUser.accessToken, function(track){
-              User.update({id:entryStatus.currentUser},{stage1song:track.uri.split(':')[2]}).exec(function checkUpdate(error, updated) {
-                console.log(updated)
-                res.ok();
-              })
-            })
-          }
-        })
-      }
-    })
+              if(track.uri != undefined) {
+                User.update({id:entryStatus.currentUser},{stage1song:track.uri.split(':')[2]}).exec(function checkUpdate(error, updated) {
+                  console.log(updated)
+                  res.ok();
+                })
+              } // track.uri != undefined
+            }) // getMostListened callback
+          } // err || entryUser == undefined
+        }) // User Findone
+      } // err || entryStatus == undefined
+    }) // Status.findOne callback
   },
 
   updateShare: function(req, res) {
@@ -281,7 +272,7 @@ module.exports = {
 
     Status.findOne({id:1}).exec(function checkSessionCode(err, entryStatus) {
       if(err || entryStatus == undefined) {
-        console.log('No user is bind to the session')
+        res.ok();
       } else {
         User.update({id:entryStatus.currentUser},{shares:share}).exec(function checkUpdate(error, updated) {
           res.ok();
