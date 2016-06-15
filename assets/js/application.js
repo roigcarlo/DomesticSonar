@@ -159,13 +159,13 @@ function initWheel(actv, swiper, onSlide) {
   if(onSlide.indexOf(actv) >= 0) {
 
     var progress = 0
-    $("#progressLabel").html(progress)
+    $(".progressLabel").html(progress)
     var interval = setInterval(function() {
       progress += 0.80;
-      $("#progressLabel").html(Math.round(progress))
+      $(".progressLabel").html(Math.round(progress))
       if (progress >= 100) {
         clearInterval(interval);
-        $("#progressLabel").html(100)
+        $(".progressLabel").html(100)
         setTimeout(function () {
           swiper.unlockSwipeToNext()
           swiper.slideNext(true, 1000)
@@ -183,16 +183,16 @@ function initWheel(actv, swiper, onSlide) {
     //   drawProgress(this, 0, $pCaption);
     // })
     //
-    // $("#progressLabel").html(progress)
+    // $(".progressLabel").html(progress)
     // var progress = 0
     // var interval = setInterval(function() {
     //   progress += 0.80;
-    //   $("#progressLabel").html(Math.round(progress))
+    //   $(".progressLabel").html(Math.round(progress))
     //   aProgress.each(function() {
     //     drawProgress(this, progress/100, $pCaption);
     //   })
     //   if (progress >= 100) {
-    //     $("#progressLabel").html(100)
+    //     $(".progressLabel").html(100)
     //     clearInterval(interval);
     //     aProgress.each(function() {
     //       drawProgress(this, 100/100, $pCaption);
