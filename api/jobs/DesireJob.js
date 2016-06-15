@@ -34,6 +34,7 @@ module.exports = function(agenda) {
           User.findOne({released:0,questionWhere:{'<':Date.now()},sort:'questionWhere DESC'}).exec(function freeDesire(err, entryUser) {
 
             if(entryUser != undefined) {
+                    // User.update({id:entryUser.id},{released:1}).exec(function(err, updated) {})
 
                     // Resquest an authorization for our app
                     var authOptions = {
@@ -118,13 +119,13 @@ module.exports = function(agenda) {
                               ]
                             };
 
-                            // send mail with defined transport object
-                            // transporter.sendMail(mailOptions, function(error, info){
-                            //     if(error){
-                            //         return console.log(error);
-                            //     }
-                            //     console.log('Message sent: ' + info.response);
-                            // });
+                            send mail with defined transport object
+                            transporter.sendMail(mailOptions, function(error, info){
+                                if(error){
+                                    return console.log(error);
+                                }
+                                console.log('Message sent: ' + info.response);
+                            });
                           })
                         })
                       })
