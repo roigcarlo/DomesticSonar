@@ -549,6 +549,7 @@ $(document).ready(function () {
     // A song ends to play
     if(msg['code'] == 'changeSong') {
         $('#Fakeplayer').attr('src','https://embed.spotify.com/?uri=spotify:trackset:PREFEREDTITLE:'+msg['data'] )
+        thisSong = msg['data']
     }
   })
 

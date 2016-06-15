@@ -4,11 +4,20 @@ Player:
 
 <script src="https://code.jquery.com/jquery-1.10.2.min.js"></script>
 <script>
+  var lastSong = 0
+  var thisSong = '<%= trackID %>'
+
   $('document').ready(function() {
     $('#PlayerContainer').html('<iframe id="Fakeplayer" frameborder="0" allowtransparency="true" style="display: block;"></iframe>')
     $('#Fakeplayer').load(function(){
       setTimeout(function(){
-        $("#Fakeplayer").contents().find(".play-pause-btn").click();
+        // La gent es molt rara i el univers sol alinearse per que pasin
+        // cosas aixi.
+        console.log(lastSong, thisSong, lastSong != thisSong)
+        if(lastSong != thisSong) {
+          $("#Fakeplayer").contents().find(".play-pause-btn").click();
+        }
+        lastSong = thisSong
       }, 5000)
     })
     $('#Fakeplayer').attr('src','https://embed.spotify.com/?uri=spotify:trackset:PREFEREDTITLE:<%= trackID %>' )

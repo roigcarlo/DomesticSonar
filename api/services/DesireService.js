@@ -176,7 +176,7 @@ module.exports = {
     if(replaceTrackURI != undefined)
       body_track['curatedTrack'] = curatedTrack.toLowerCase().replace(/\s/g,'_')
 
-    console.log(body_track)
+    //console.log(body_track)
 
     var toSend = JSON.stringify(body_track)
 
