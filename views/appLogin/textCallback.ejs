@@ -6,7 +6,7 @@
     <div class="swiper-wrapper">
 
         <!-- Slides -->
-        <div class="swiper-slide" href="app-Login">
+        <div class="swiper-slide" href="fakeLoad">
           <%- include ../app/fakeLoad.ejs %>
         </div>
 
@@ -24,5 +24,20 @@
 <script src="https://code.jquery.com/jquery-1.10.2.min.js"></script>
 
 <script>
-
+$(document).ready(function(){
+  var progress = 0
+  $("#progressLabel").html(progress)
+  var interval = setInterval(function() {
+    progress += 0.80;
+    $("#progressLabel").html(Math.round(progress))
+    if (progress >= 100) {
+      clearInterval(interval);
+      $("#progressLabel").html(100)
+      setTimeout(function () {
+        mySwiper.unlockSwipeToNext()
+        mySwiper.slideNext(true, 1000)
+      }, 750)
+    }
+  }, 50)
+})
 </script>

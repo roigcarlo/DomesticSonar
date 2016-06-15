@@ -199,10 +199,10 @@ body {
   background-color: inherit;
   content: ' ';
   height: 40vh;
-  transition: background-color 5s;
+  transition: background-color 7500ms;
   background-color: rgba(0,0,0,1);
   animation-name: fade;
-  animation-duration: 5s;
+  animation-duration: 9000ms;
 }
 
 .allport {

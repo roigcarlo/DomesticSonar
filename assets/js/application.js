@@ -155,36 +155,54 @@ function initTyped(prev, actv, next) {
   $(".swiper-slide.swiper-slide-active #message").typed(getTyped()[actv])
 }
 
-function initWheel(prev, actv, next, swiper, onSlide, drawProgress) {
+function initWheel(actv, swiper, onSlide) {
   if(onSlide.indexOf(actv) >= 0) {
 
-    var $pCaption = $('.progress-wheel p');
-    var iProgress = $('.inactiveProgress');
-    var aProgress = $('.activeProgress');
-
     var progress = 0
-
-    aProgress.each(function() {
-      drawProgress(this, 0, $pCaption);
-    })
-
-    var progress = 0
+    $("#progressLabel").html(progress)
     var interval = setInterval(function() {
       progress += 0.80;
-      aProgress.each(function() {
-        drawProgress(this, progress/100, $pCaption);
-      })
+      $("#progressLabel").html(Math.round(progress))
       if (progress >= 100) {
         clearInterval(interval);
-        aProgress.each(function() {
-          drawProgress(this, 100/100, $pCaption);
-        })
+        $("#progressLabel").html(100)
         setTimeout(function () {
           swiper.unlockSwipeToNext()
           swiper.slideNext(true, 1000)
-        }, 100)
+        }, 750)
       }
-    }, 7.5)
+    }, 50)
+
+    // var $pCaption = $('.progress-wheel p');
+    // var iProgress = $('.inactiveProgress');
+    // var aProgress = $('.activeProgress');
+    //
+    // var progress = 0
+    //
+    // aProgress.each(function() {
+    //   drawProgress(this, 0, $pCaption);
+    // })
+    //
+    // $("#progressLabel").html(progress)
+    // var progress = 0
+    // var interval = setInterval(function() {
+    //   progress += 0.80;
+    //   $("#progressLabel").html(Math.round(progress))
+    //   aProgress.each(function() {
+    //     drawProgress(this, progress/100, $pCaption);
+    //   })
+    //   if (progress >= 100) {
+    //     $("#progressLabel").html(100)
+    //     clearInterval(interval);
+    //     aProgress.each(function() {
+    //       drawProgress(this, 100/100, $pCaption);
+    //     })
+    //     setTimeout(function () {
+    //       swiper.unlockSwipeToNext()
+    //       swiper.slideNext(true, 1000)
+    //     }, 750)
+    //   }
+    // }, 50)
   }
 }
 
@@ -335,7 +353,7 @@ $(document).ready(function () {
       var next = $('.swiper-slide.swiper-slide-next').attr('href')
 
       initTyped(prev, actv, next, swiper);
-      initWheel(prev, actv, next, swiper, ['fakeLoad'], drawProgress)
+      initWheel(actv, swiper, ['fakeLoad'])
       lockSlide(prev, actv, next, swiper, [
         'app-1', 'app-2', 'app-3', 'app-4', 'fakeLoad',
         'app-6', 'app-9', 'app-10', 'app-12'
@@ -363,7 +381,7 @@ $(document).ready(function () {
         TimeOutEvent = setInterval(function() {
           seconds -= 1;
           $('.swiper-slide.swiper-slide-active .pic-counter').html(seconds)
-          if (seconds == 2.5) {
+          if (seconds == 5) {
             $('.swiper-slide.swiper-slide-active .up-half-wrap-tohide').toggleClass('up-half-wrap-hide')
           }
           if(seconds == 0) {
