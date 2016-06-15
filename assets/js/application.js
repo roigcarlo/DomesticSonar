@@ -188,37 +188,6 @@ function initWheel(actv, swiper, onSlide) {
         }, 750)
       }
     }, 50)
-
-    // var $pCaption = $('.progress-wheel p');
-    // var iProgress = $('.inactiveProgress');
-    // var aProgress = $('.activeProgress');
-    //
-    // var progress = 0
-    //
-    // aProgress.each(function() {
-    //   drawProgress(this, 0, $pCaption);
-    // })
-    //
-    // $(".progressLabel").html(progress)
-    // var progress = 0
-    // var interval = setInterval(function() {
-    //   progress += 0.80;
-    //   $(".progressLabel").html(Math.round(progress))
-    //   aProgress.each(function() {
-    //     drawProgress(this, progress/100, $pCaption);
-    //   })
-    //   if (progress >= 100) {
-    //     $(".progressLabel").html(100)
-    //     clearInterval(interval);
-    //     aProgress.each(function() {
-    //       drawProgress(this, 100/100, $pCaption);
-    //     })
-    //     setTimeout(function () {
-    //       swiper.unlockSwipeToNext()
-    //       swiper.slideNext(true, 1000)
-    //     }, 750)
-    //   }
-    // }, 50)
   }
 }
 
