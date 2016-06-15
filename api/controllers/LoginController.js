@@ -150,7 +150,9 @@ module.exports = {
                           console.log('UserRemotelyLogged')
 
                           console.log(authBody.access_token)
-                          User.update({id:entryUser.id},{accessToken: authBody.access_token, refreshToken: authBody.refresh_token}).exec(function checkSessionCode(err, updated) {console.log(updated)})
+                          User.update({id:entryUser.id},{accessToken: authBody.access_token, refreshToken: authBody.refresh_token}).exec(function checkSessionCode(err, updated){console.log(updated)})
+                          // Destroy the session
+                          // Session.update({id:1},{sessionId:generateRandomString(10)}).exec(function(err, updated){console.log(updated)})
 
                           res.redirect('/experience')
                         })
