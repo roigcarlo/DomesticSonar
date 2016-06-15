@@ -1,5 +1,5 @@
-<div id="wrap">
-  <div class="overlay-white">
+
+  <div class="overlay-white-full">
     <div class="row" style="margin:0px;">
       <% include ../app/components/dds_b %>
       <div class="col-xs-6">
@@ -8,7 +8,7 @@
         <img src="img/spotify_w.png" height="100%" width="100%">
       </div>
     </div><!-- row -->
-    <div class="typed-text-container login-text" style="margin-top:7%;">
+    <div class="typed-text-container login-text">
 
       <span class="spotygreen">Welcome!</span><br>
       <span>You are close</span><br>
@@ -21,14 +21,263 @@
         <form action="/login" style="text-align: center">
           <input type="text" name="sessionCode" style="width:100%; margin-top: 5%;"></input>
           <input type="submit" value="Log in with Spotify" id="LoginButton" class="btn">
+          <div style="text-align: center; margin-top:1%">
+            <span class="toc-accept"><input id="LoginTick" type="checkbox" value=""></input> By clicking this, I Accept the following<span><br>
+            <a class="tac" data-toggle="modal" data-target="#tocModal">Terms and conditions</a>
+          </div>
         </form>
       </div>
 
     </div>
-  </div>
-</div> <!-- Wrapp -->
 
-<div id="footer" class="footer-text">
-  <div class="container centered" id="fotterMessage">
+  </div>
+
+
+<!-- Modal -->
+<div id="tocModal" class="modal fade" role="dialog">
+  <div class="modal-dialog">
+
+    <!-- Modal content-->
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+        <h4 class="modal-title">Terms and Conditions</h4>
+      </div>
+      <div class="modal-body">
+        Last update June 2016.
+
+<h3>I. PRIVACY POLICY:</h3>
+
+<p class="toc-text">
+
+In compliance with data protection policies , Law 15/99 from December 13th of data
+protecction and its development regulation approved by the Royal Decree 1720/2007 from
+December 17th, ByFacility S.L.,  owner of the web app TimeKeeper
+(<a href="http://www.timekeeper.rocks">www.timekeeper.rocks</a>), exposes the privacy policy that establishes the treament of the
+personal data of all its users.
+</p>
+
+<p class="toc-text">
+This document describes how we use and proces your personal information and how we
+use cookies. In this document you can also find our contact information to solve any doubte
+that you might have about your personal information.
+</p>
+
+<p class="toc-text">
+This privacy policy might be modified frequently, you can find the date of last update in the
+header of the document. For this reason we recommend that you revise and read the entire
+text to verify that you are satisfied with it.
+</p>
+
+<h4>1. OWNERSHIP OF FILE,  INFORMATION AND  Y PURPOSE OF THE</h4>
+
+<p class="toc-text">
+By Facility S.L. informs Internet users that their personal data will be processed and treated
+by the company, whose information is listed below:
+</p>
+
+<p class="toc-text">Name: BY FACILITY S.L. (en adelante, la EMPRESA)</p>
+<p class="toc-text">CIF: B-66474743</p>
+<p class="toc-text">Registered Office: C/Major de Sarrià Nº63 baixos 08017, Barcelona</p>
+<p class="toc-text">Contact e-mail: <a href="http://hello@domesticstreamers.com">hello@domesticstreamers.com</a></p>
+<p class="toc-text">Phone Number:                  +34/ 931 677 618</p>
+
+<p class="toc-text">
+All personal data collected through this WEB APP is owned by Spotify S.L. and will be used
+by BY FACILITY, S.L. (as a service provider) in order to improve user experience.
+</p>
+
+<p class="toc-text">
+BY FACILITY will only access personal data of the users who have authorized to share
+SPOTIFY with other service providers. For an Internet user to be able to user our web app,
+he/she must be logged into their Spotify account. We will use and store information only of
+users who accepts these privacy policies through a check box placed in the log-in page.
+</p>
+
+<p class="toc-text">
+We inform users that files containing personal data,  are duly registered by THE COMPANY
+in the Spanish Data Protection Agency.
+</p>
+
+<h4>2. MINIMUM AGE ALLOWED TO  BE ABLE TO REGISTER IN THE WEB APP</h4>
+
+<p class="toc-text">
+This web app is not permitted for children under 13 years old, and will not store his/her
+information in the case this occurred. The age limit established by SPOTIFY  is of 13 years
+old, but this can change depending on the country, for this reason you must check
+SPOTIFY’s Terms and Conditions of  Contract of your country of origin.</p>
+
+<h4>3. PERSONAL DATA OF CLIENTAS AND INFORMATION THAT THIS WEB APP</h4>
+
+<h5>COLLECTS, USES AND SHARES:</h5>
+
+<p class="toc-text">
+THE TIMEKEER collects, uses and shares your personal data in accordance with what is
+established in the 3,4,5 and 6th paragraph of Spotify’s Privacy Policy.  Please, access this link
+and read carefully to understand and be informed of the type of information the company
+collects and the purpose for which it collects it.
+</p>
+
+<p class="toc-text">
+We only collect and store information that you have specifically authorized SPOTIFY. We
+use personal data of your profile and the preferences of your musical preferences to be able
+to show a visual test and analyze your behavior as a SPOTIFY user.
+</p>
+
+<p class="toc-text">
+In the case a user or any other third party becomes aware of violations that could damage
+protectable properties, rights or interests such as intellectual property, image rights, not
+consented publication of personal data, should immediately contact BY FACILITY S.L.
+through the following email address: <a href="http://hello@domesticstreamers.com">hello@domesticstreamers.com</a> indicating the alleged
+infringement.  Once the COMPANY receives this communication it will use the outmost
+diligence in addressing and resolving the issue.
+</p>
+
+<h4>4. EXERCISE OF RIGHTS OF ACCESS, CORRECTION CANCELATION OR OPPOSITION</h5>
+
+<h5>(ARCO RIGHTS)</h5>
+
+<p class="toc-text">
+The user will be responsible for the registration and entering personal information in both
+the platform TheTimekeeper and Spotify.
+</p>
+
+<p class="toc-text">
+However, our COMPANY, in compliance with Law 15/1999 of December 13th , of Protection
+of Personal Data offers customers and/or users  the possibility to access, modify, cancel or
+oppose in the legally determined terms his/her personal information which appears in files
+and databases of our property.
+</p>
+
+<p class="toc-text">
+We provide our users the models for the exercises of ARCO rights in PDF format, that can be
+downloaded and completed by the user and sent by email to:
+hello@domesticstreamers.com indicating in the message “Exercise of ARCO rights”,
+followed they the following option: ACCESS, MODIFICATION, CANCELATION or OPOSITION.
+</p>
+
+<p class="toc-text">
+You can download the ARCO forms in the following links:
+</p>
+
+<a href="#">Access</a> <br>
+<a href="#">Modification</a> <br>
+<a href="#">Cancelation</a> <br>
+<a href="#">Oposition</a> <br>
+<br>
+
+<p class="toc-text">
+The person responsible of the file treatment will contact the user in a maximum of 7
+working days to answer the request and resolve the petition of exercise of any of the rights
+of access, modification, cancelation, or opposition.
+</p>
+
+<h3>5. SECUTIRY MEASURES:</h3>
+
+<p class="toc-text">
+THETIMEKEEPER.ROCKS has adopted legally required security measures for
+protection of personal data and seeks to install any additional technical measure at
+its disposal to prevent the loss, misuse, alteration, unauthorized access and theft of
+personal data. However, the user must be aware that Internet security measures are
+not impregnable. The user is solely responsible for the custody and safe storage of
+his/her username and password.
+</p>
+
+<h4>6. INCOMPLETE OR INEXACT PERSONAL DATA</h4>
+
+<p class="toc-text">
+With the verification and acceptance of the Privacy and Cookie Policy the
+user/customer agrees to provide true and accurate data.  Any loss of damage caused
+to the site or to the person responsible for the website or to any third party by
+communicating erroneous, inaccurate or incomplete information in the registration
+form will be sole responsibility of the user.
+</p>
+
+<h3>II. COOKIES POLICY:</h3>
+
+<h4>1. COOKIES:</h4>
+
+<p class="toc-text">
+The web app named THETIMEKEEPER, uses technology called cookies. A cookie is a small
+quantity of information stored by webpages computers or mobile devices; this is used since
+webpages to no have memory. Cookies allow a certain web page to recognize the users
+when the page is visited in different occasions. Cookies are used for different purposes and
+are differentiated by function, duration, who stores them on a website.
+</p>
+
+<h4>2. CONCENT:</h4>
+
+<p class="toc-text">
+By using this website you consent and agree that we store these cookies on your computer
+or mobile device for the purposes set forth herein. If you decide not to accept our cookies,
+you may continue to use our website as usual, although it is possible that your user
+experience will be slightly impaired.
+</p>
+
+<h4>3. TYPE OF COOKIES AND PURPOSE</h4>
+
+<p class="toc-text">
+THETIMEKEEPER.ROCKS uses technical and functional cookies with the purpose to
+enhance the user experience in our web, both for the registration of your personal
+information as well as managing your user account. If you disable our cookies we
+are not responsible for interruptions in navigation or slower downloads in different
+sections of our website/webapp.
+</p>
+
+<p class="toc-text">
+We also use third party analytic cookies such as Google Analytics, to understand
+how our users use the website. This helps us identify what works and what does
+not, optimize and improve and making sure that our users continue considering our
+website interesting and relevant.
+</p>
+
+<h4>4. REMOVING COOKIES:</h4>
+
+<p class="toc-text">
+Your browser can sometimes generate an instant message that will give you the
+opportunity to oppose to the installation of these cookies. In the event that your
+browser does not provide his option automatically, you can prevent the installation
+by following these instructions of your browser:
+</p>
+
+Firefox  <a href="http://support.mozilla.org/es/products/firefox/cookies">http://support.mozilla.org/es/products/firefox/cookies</a>
+<br>
+Chrome  <a href="http://support.google.com/chrome/bin/answer.py?hl=es&answer=95647">http://support.google.com/chrome/bin/answer.py?hl=es&answer=95647</a>
+<br>
+Explorer  <a href="http://windows.microsoft.com/es-es/windows7/how-to-manage-cookies-in-internet-explorer-9">http://windows.microsoft.com/es-es/windows7/how-to-manage-cookies-in-internet-explorer-9</a>
+<br>
+Safari  <a href="http://support.apple.com/kb/ph5042">http://support.apple.com/kb/ph5042</a>
+<br><br>
+
+<p class="toc-text">
+If you choose not to accept certain cookies, you may not be able to use certain
+features on our web app. We dot provide support for browsers settings that
+prevents tracking cookies. Rejecting an online advertising network does not mean
+you are never going to receive online ads or not be the subject of marketing studies.
+It means that the network that you have rejected will not show you personalized ads
+based on your web preferences and browsing patterns.
+</p>
+
+<h4>5. CHANGES IN COOKIE POLICY</h4>
+
+<p class="toc-text">
+By Faciltiy S.L., can modify the cookie policy  in any moment, for which we ask you
+to consult this policy periodically since changes can be made.
+</p>
+
+<h4>6. CONTACT:</h4>
+
+<p class="toc-text">
+If you need help to carry out the configuration of cookies with your browser,  please send us
+an e-mail to <a href="http://hello@domesticstreamers.com">hello@domesticstreamers.com</a> and we will contact you as soon as possible with
+the necessary information.
+</p>
+
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+
   </div>
 </div>

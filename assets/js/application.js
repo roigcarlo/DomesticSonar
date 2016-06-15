@@ -533,3 +533,12 @@ $('#tk-data input').on('change paste keyup',function(){
 })
 
 $('#SendButton').prop('disabled', true);
+
+$('#LoginButton').prop('disabled', true);
+$('#LoginTick').on('click', function() {
+  if($(this).is(':checked')) {
+    $('#LoginButton').prop('disabled', false);
+  } else {
+    $('#LoginButton').prop('disabled', true);
+  }
+})
