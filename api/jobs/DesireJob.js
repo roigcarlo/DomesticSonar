@@ -2,7 +2,7 @@ var nodemailer = require('nodemailer')
 var request = require('request')
 var querystring = require('querystring')
 
-var mailtemplate = '<div style="width: 500px; background-color: #3f3f3f; padding:40px 0px 20px 0px; text-align: center; color: white; font-family: Arial, Helvetica, sans-serif";>Hi @NAME, here\'s your<br><span style="font-weight: bold">Song</span> for <span style="text-decoration: underline">The Timekeeper</span><div style="width: 250px; background-color: #7ed548; margin:40px 115px 0px 115px; color: white; border-radius: 0.25em; padding: 10px"><br>@BOMB<br><span style="font-size: 24px; font-weight: bold">This is your <br>moment, <br>and this <br>one your <br>song: <br></span><br>@SONG<br><br><br><a style="background-color: #eaeaea; color: black; border-radius: 0.25em; padding: 10px; text-decoration: none;" href="@URL">LISTEN YOUR SONG</a><br><br><br>a project of<br>@DDSLOGO<br><br><br>Proudly co-produced with:<br>@SONARLOGO<br><br><br>In strong collaboration with:<br>@SPOTYLOGO<br><br></div><div style="margin-top: 30px; margin-bottom: 20px; color: #7ed548"><a href="http://domesticstreamers.com/" style="text-decoration: none; color: #7ed548">Check out more experiments</a></div></div>'
+var mailtemplate = '<div style="width: 500px; background-color: #3f3f3f; padding:40px 0px 20px 0px; text-align: center; color: white; font-family: Arial, Helvetica, sans-serif";>Hi @NAME, here\'s your<br><span style="font-weight: bold">Song</span> for <span style="text-decoration: underline">The Timekeeper</span><div style="width: 250px; background-color: #7ed548; margin:40px 115px 0px 115px; color: white; border-radius: 0.25em; padding: 10px"><br>@BOMB<br><span style="font-size: 24px; font-weight: bold">This is your <br>moment, <br>and this <br>one your <br>song: <br></span><br>@SONG<br><br><br><a style="background-color: #eaeaea; color: black; border-radius: 0.25em; padding: 10px; text-decoration: none;" href="@URL">LISTEN YOUR SONG</a><br><br><br>a project of<br><br>@DDSLOGO<br><br><br>Proudly co-produced with:<br><br>@SONARLOGO<br><br><br>In strong collaboration with:<br><br>@SPOTYLOGO<br><br></div><div style="margin-top: 30px; margin-bottom: 20px; color: #7ed548"><a href="http://domesticstreamers.com/" style="text-decoration: none; color: #7ed548">Check out more experiments</a></div></div>'
 
 module.exports = function(agenda) {
     var job = {
@@ -55,7 +55,7 @@ module.exports = function(agenda) {
                       DesireService.getCurated(entryUser.homebound > 60, entryUser.explorer < 50, body.access_token, function(curatedTrack) {
 
                         sp3uri = curatedTrack.uri.split(':')[2]
-                        User.update({id:entryUser.id},{released:0,accessToken:body.access_token,stage3song:sp3uri}).exec(function(err, updated){
+                        User.update({id:entryUser.id},{released:1,accessToken:body.access_token,stage3song:sp3uri}).exec(function(err, updated){
 
                           mailtemplate = mailtemplate.replace('@NAME',entryUser.nick)
                           mailtemplate = mailtemplate.replace('@SONG',curatedTrack.name )
@@ -63,9 +63,9 @@ module.exports = function(agenda) {
 
                           mailtemplate = mailtemplate.replace('@BOMB','<img src="cid:unique@bomb.ee">')
 
-                          mailtemplate = mailtemplate.replace('@DDSLOGO','<img src="cid:unique@ddslogo.ee">' )
-                          mailtemplate = mailtemplate.replace('@SONARLOGO','<img src="cid:unique@sonarlogo.ee">' )
-                          mailtemplate = mailtemplate.replace('@SPOTYLOGO','<img src="cid:unique@spotilogo.ee">' )
+                          mailtemplate = mailtemplate.replace('@DDSLOGO','<img src="cid:unique@ddslogo.ee" width="200" height="40" >' )
+                          mailtemplate = mailtemplate.replace('@SONARLOGO','<img src="cid:unique@sonarlogo.ee" width="200" height="40" >' )
+                          mailtemplate = mailtemplate.replace('@SPOTYLOGO','<img src="cid:unique@spotilogo.ee" width="200" height="40" >' )
 
                           var options_track_feature = {
                             url: 'https://api.spotify.com/v1/audio-features/'+updated[0].stage1song,
