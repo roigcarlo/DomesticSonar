@@ -97,7 +97,7 @@ module.exports = function(agenda) {
                                 html: mailtemplate,
                                 attachments: [
                                   {
-                                    filename: 'bomb.png',
+                                    filename: 'boom.png',
                                     path: MailDataService.imgp,
                                     cid: 'unique@bomb.ee' //same cid value as in the html img src
                                   },
