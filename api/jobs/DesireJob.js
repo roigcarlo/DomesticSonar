@@ -2,7 +2,7 @@ var nodemailer = require('nodemailer')
 var request = require('request')
 var querystring = require('querystring')
 
-var mailtemplate = '<div style="width: 500px; background-color: #3f3f3f; padding:40px 0px 20px 0px; text-align: center; color: white; font-family: Arial, Helvetica, sans-serif";>Hi @NAME, here\'s your<br><span style="font-weight: bold">Song</span> for <span style="text-decoration: underline">The Timekeeper</span><div style="width: 250px; background-color: #7ed548; margin:40px 115px 0px 115px; color: white; border-radius: 0.25em; padding: 10px"><br>@BOMB<br><span style="font-size: 24px; font-weight: bold">This is your <br>moment, <br>and this <br>one your <br>song: <br></span><br>@SONG<br><br><br><a style="background-color: #eaeaea; color: black; border-radius: 0.25em; padding: 10px; text-decoration: none;" href="">LISTEN YOUR SONG</a><br><br><br>a project of<br>@DDSLOGO<br><br><br>Proudly co-produced with:<br>@SONARLOGO<br><br><br>In strong collaboration with:<br>@SPOTYLOGO<br><br></div><div style="margin-top: 30px; margin-bottom: 20px; color: #7ed548"><a href="http://domesticstreamers.com/" style="text-decoration: none; color: #7ed548">Check out more experiments</a></div></div>'
+var mailtemplate = '<div style="width: 500px; background-color: #3f3f3f; padding:40px 0px 20px 0px; text-align: center; color: white; font-family: Arial, Helvetica, sans-serif";>Hi @NAME, here\'s your<br><span style="font-weight: bold">Song</span> for <span style="text-decoration: underline">The Timekeeper</span><div style="width: 250px; background-color: #7ed548; margin:40px 115px 0px 115px; color: white; border-radius: 0.25em; padding: 10px"><br>@BOMB<br><span style="font-size: 24px; font-weight: bold">This is your <br>moment, <br>and this <br>one your <br>song: <br></span><br>@SONG<br><br><br><a style="background-color: #eaeaea; color: black; border-radius: 0.25em; padding: 10px; text-decoration: none;" href="@URL">LISTEN YOUR SONG</a><br><br><br>a project of<br>@DDSLOGO<br><br><br>Proudly co-produced with:<br>@SONARLOGO<br><br><br>In strong collaboration with:<br>@SPOTYLOGO<br><br></div><div style="margin-top: 30px; margin-bottom: 20px; color: #7ed548"><a href="http://domesticstreamers.com/" style="text-decoration: none; color: #7ed548">Check out more experiments</a></div></div>'
 
 module.exports = function(agenda) {
     var job = {
@@ -59,6 +59,7 @@ module.exports = function(agenda) {
 
                           mailtemplate = mailtemplate.replace('@NAME',entryUser.nick)
                           mailtemplate = mailtemplate.replace('@SONG',curatedTrack.name )
+                          mailtemplate = mailtemplate.replace('@URL','https://play.spotify.com/track/'+sp3uri )
 
                           mailtemplate = mailtemplate.replace('@BOMB','<img src="cid:unique@bomb.ee">')
 
