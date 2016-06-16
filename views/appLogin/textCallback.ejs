@@ -26,16 +26,16 @@
 <script>
 $(document).ready(function(){
   var progress = 0
-  $("#progressLabel").html(progress)
-  var interval = setInterval(function() {
+  $(".progressLabel").html(progress)
+  interval = setInterval(function() {
     progress += 0.80;
-    $("#progressLabel").html(Math.round(progress))
+    $(".progressLabel").html(Math.round(progress))
     if (progress >= 100) {
       clearInterval(interval);
-      $("#progressLabel").html(100)
+      $(".progressLabel").html(100)
       setTimeout(function () {
-        mySwiper.unlockSwipeToNext()
-        mySwiper.slideNext(true, 1000)
+        swiper.unlockSwipeToNext()
+        swiper.slideNext(true, 1000)
       }, 750)
     }
   }, 50)
