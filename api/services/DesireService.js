@@ -162,13 +162,13 @@ module.exports = {
     body_track['nick'] = nick.toLowerCase().replace(/\s/g,'_')
 
     if(homebound > 60 && explorer > 50)
-      body_track['usertype'] = 1
-    else if(homebound <= 60 && explorer >  50)
       body_track['usertype'] = 2
+    else if(homebound <= 60 && explorer >  50)
+      body_track['usertype'] = 4
     else if(homebound <= 60 && explorer <= 50)
       body_track['usertype'] = 3
     else
-      body_track['usertype'] = 4
+      body_track['usertype'] = 1
 
     body_track['phase'] = phase
     body_track['releaseTime'] = releaseTime
