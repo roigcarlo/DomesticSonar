@@ -13,7 +13,8 @@ module.exports = {
     request.get(options_list, function(error, response, body_list) {
       if(body_list) {
         console.log(error,body_list)
-        callback(body_list.items[0])
+        if(body_list != undefined  && body_list.items != undefined)
+          callback(body_list.items[0])
       }
     })
   },
@@ -46,7 +47,8 @@ module.exports = {
             if(body_track) {
               if(body_track.items && body_track.items[0]){
                 console.log(callback)
-                callback(body_track.items[0])
+                if(body_track != undefined  && body_track.items != undefined)
+                  callback(body_track.items[0])
               }
             }
             // return body_track.items[0]
@@ -83,7 +85,8 @@ module.exports = {
               };
 
               request.get(options_s_track, function(error, response, body_s_track) {
-                callback(body_s_track.tracks[0])
+                if(body_s_track != undefined  && body_s_track.items != undefined)
+                  callback(body_s_track.tracks[0])
                 // return body_s_track.tracks[0]
               });
             });
@@ -117,7 +120,8 @@ module.exports = {
             };
 
             request.get(options_track, function(error, response, body_track) {
-              callback(body_track.items[0].track)
+              if(body_track != undefined  && body_track.items != undefined)
+                callback(body_track.items[0].track)
               // return body_track.items[0].track
             });
           });
