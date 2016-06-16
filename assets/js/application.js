@@ -131,6 +131,9 @@ function initialize(swiper) {
 function reset(swiper) {
   $('#SendButton').prop('disabled', true);
   $('#SendButton').css('background-color','rgb(75, 75, 75)')
+  $('#tk-hours').val(1)
+  $('#tk-days').val(0)
+  $('#tk-months').val(0)
   clearInterval(interval);
   mySwiper.unlockSwipeToPrev()
   mySwiper.slideTo(0, 1)
