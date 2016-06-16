@@ -289,6 +289,7 @@ function ReleaseMarble() {
     console.log('Not sent', data)
   });
 
+  mySwiper.unlockSwipeToNext()
   mySwiper.slideNext(true, 1000)
 
   setTimeout(function() {
