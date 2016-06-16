@@ -19,7 +19,7 @@ function setShare(val) {
 
 function getTyped() {
 
-  var evc = explorer > 50
+  var evc = explorer < 50
     ? '<span> You know what you like and you know where you can find it. That\'s why you like to stay in your area of comfort, making you a great </span> <span class="typed-text spotygreen"> Traditionalist </span>'
     : '<span> Where to next? <br> Always looking for <br> something else, <br> you are good <br> with words like change, <br> shift or mutation, <br> you are an </span> <span class="typed-text spotygreen"> Explorer. </span>'
 
