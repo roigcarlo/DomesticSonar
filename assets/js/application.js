@@ -617,3 +617,5 @@ $('#LoginTick').on('click', function() {
     $('#LoginButton').prop('disabled', true);
   }
 })
+
+$('#ReleaseTheBall').on('click',ReleaseMarble())
