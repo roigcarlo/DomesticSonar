@@ -84,7 +84,7 @@ module.exports = {
 
     startPhase2: function (req, res) {
       sails.sockets.blast('message', { code: 'SongStopPlaying' });
-      Status.update({id:1},{stage:0}).exec(function(err, updated){})
+      Status.update({id:1},{stage:0}).exec(function(err, updated){res.ok();})
     },
 
     createNewSession: function (req, res) {
