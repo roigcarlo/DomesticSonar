@@ -538,14 +538,16 @@ $(document).ready(function () {
 
     // A song is playing
     if(msg['code'] == 'SongStartPlaying') {
-      ('#ReleaseTheBall').html("THE<br>TIMEKEEPER<br>IS BUSY")
-      ('#ReleaseTheBall').prop('disabled', true)
+      $('#ReleaseTheBall').html("THE<br>TIMEKEEPER<br>IS BUSY")
+      $('#ReleaseTheBall').prop('disabled', true)
+      $('#ReleaseTheBall').off('click')
     }
 
     // A song ends to play
     if(msg['code'] == 'SongStopPlaying') {
-      ('#ReleaseTheBall').html("CLICK TO<br>RELEASE<br>THE MARBLE")
-      ('#ReleaseTheBall').prop('disabled', false)
+      $('#ReleaseTheBall').html("CLICK TO<br>RELEASE<br>THE MARBLE")
+      $('#ReleaseTheBall').prop('disabled', false)
+      $('#ReleaseTheBall').on('click',ReleaseMarble())
     }
 
     if(msg['code'] == 'InvalidUser') {
