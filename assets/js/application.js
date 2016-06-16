@@ -430,7 +430,7 @@ $(document).ready(function () {
           seconds -= 1;
           $('.swiper-slide.swiper-slide-active .pic-counter').html(seconds)
           if (seconds == 5) {
-            $('.swiper-slide.swiper-slide-active .up-half-wrap-tohide').toggleClass('up-half-wrap-hide')
+            // $('.swiper-slide.swiper-slide-active .up-half-wrap-tohide').toggleClass('up-half-wrap-hide')
           }
           if(seconds == 0) {
             clearInterval(TimeOutEvent);
