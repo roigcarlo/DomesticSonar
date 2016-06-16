@@ -30,13 +30,13 @@ module.exports = function(agenda) {
         run: function(job, done) {
 
           console.log("Seeking for songs to release");
-          Session.findOne({id:1}).exec(function(err, entrySession){
+          Status.findOne({id:1}).exec(function(err, entrySession){
 
               // Only of the machine is not bussy
               if(entrySession.stage == 0) {
 
                 User.findOne({released:0,questionWhen:{'<':Date.now()},sort:'questionWhen DESC'}).exec(function freeDesire(err, entryUser) {
-                  Session.update({id:1},{stage:1}).exec(function(err, updated){})
+                  Status.update({id:1},{stage:1}).exec(function(err, updated){})
                   if(entryUser != undefined) {
                     console.log(questionWhen,Date.now())
                   }

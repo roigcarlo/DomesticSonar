@@ -141,7 +141,7 @@ module.exports = {
                     // A session must always exitst, but just in case we create an invalid
                     // session if not
                     Status.findOrCreate({id:1},{id:1,}).exec(function checkSessionCode(err, entryStatus) {
-                      // Session.update({id:1},{sessionId:generateRandomString(10)}).exec(function(err, updated){console.log(updated)})
+                      // Status.update({id:1},{sessionId:generateRandomString(10)}).exec(function(err, updated){console.log(updated)})
                       console.log('CheckSessionCode')
                       // If the user is logged and the slot requested is available
                       if('sessionId' in entryStatus && entryStatus.sessionId == sessionCode) {

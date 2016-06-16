@@ -26,7 +26,7 @@ module.exports = {
         console.log('No user is bind to the session')
       } else {
 
-        Session.update({id:1},{stage:1}).exec(function(err, updated){})
+        Status.update({id:1},{stage:1}).exec(function(err, updated){})
         User.findOne({id:entryStatus.currentUser}).exec(function checkSessionCode(err, entryUser) {
 
           if(err || entryUser == undefined) {
