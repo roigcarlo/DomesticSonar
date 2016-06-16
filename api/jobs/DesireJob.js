@@ -29,114 +29,121 @@ module.exports = function(agenda) {
         // execute job
         run: function(job, done) {
 
-          console.log("Foo job executed...");
+          console.log("Seeking for songs to release");
+          Session.findOne({id:1}).exec(function(err, entrySession){
 
-          User.findOne({released:0,questionWhen:{'<':Date.now()},sort:'questionWhen DESC'}).exec(function freeDesire(err, entryUser) {
+              // Only of the machine is not bussy
+              if(entrySession.stage == 0) {
 
-            if(entryUser != undefined) {
-              console.log(questionWhen,Date.now())
-            }
+                User.findOne({released:0,questionWhen:{'<':Date.now()},sort:'questionWhen DESC'}).exec(function freeDesire(err, entryUser) {
+                  Session.update({id:1},{stage:1}).exec(function(err, updated){})
+                  if(entryUser != undefined) {
+                    console.log(questionWhen,Date.now())
+                  }
 
-            if(entryUser != undefined) {
-                    User.update({id:entryUser.id},{released:1}).exec(function(err, updated) {})
+                  if(entryUser != undefined) {
+                          sails.sockets.blast('message', { code: 'SongStartPlaying' });
+                          User.update({id:entryUser.id},{released:1}).exec(function(err, updated) {})
 
-                    // Resquest an authorization for our app
-                    var authOptions = {
-                      url: 'https://accounts.spotify.com/api/token',
-                      form: {
-                        grant_type: 'refresh_token',
-                        refresh_token: entryUser.refreshToken,
-                      },
-                      method: 'POST',
-                      headers: {
-                        'Authorization': 'Basic ' + (new Buffer(SpotifyService.clientId + ':' + SpotifyService.clientSecret).toString('base64'))
-                      },
-                      json: true
-                    };
-
-                    request.post(authOptions, function(error, response, body) {
-
-                      DesireService.getCurated(entryUser.homebound > 60, entryUser.explorer < 50, body.access_token, function(curatedTrack) {
-
-                        sp3uri = curatedTrack.uri.split(':')[2]
-                        User.update({id:entryUser.id},{released:1,accessToken:body.access_token,stage3song:sp3uri}).exec(function(err, updated){
-
-                          mailtemplate = mailtemplate.replace('@NAME',entryUser.nick)
-                          mailtemplate = mailtemplate.replace('@SONG',curatedTrack.name )
-                          mailtemplate = mailtemplate.replace('@URL','https://play.spotify.com/track/'+sp3uri )
-
-                          mailtemplate = mailtemplate.replace('@BOMB','<img src="cid:unique@bomb.ee">')
-
-                          mailtemplate = mailtemplate.replace('@DDSLOGO','<img src="cid:unique@ddslogo.ee" >' )
-                          mailtemplate = mailtemplate.replace('@SONARLOGO','<img src="cid:unique@sonarlogo.ee" >' )
-                          mailtemplate = mailtemplate.replace('@SPOTYLOGO','<img src="cid:unique@spotilogo.ee" >' )
-
-                          var options_track_feature = {
-                            url: 'https://api.spotify.com/v1/audio-features/'+updated[0].stage1song,
-                            headers: { 'Authorization': 'Bearer ' + body.access_token },
+                          // Resquest an authorization for our app
+                          var authOptions = {
+                            url: 'https://accounts.spotify.com/api/token',
+                            form: {
+                              grant_type: 'refresh_token',
+                              refresh_token: entryUser.refreshToken,
+                            },
+                            method: 'POST',
+                            headers: {
+                              'Authorization': 'Basic ' + (new Buffer(SpotifyService.clientId + ':' + SpotifyService.clientSecret).toString('base64'))
+                            },
                             json: true
                           };
 
-                          request.get(options_track_feature, function(error, response, body_track) {
-                            DesireService.sendDatagram(updated[0].id, updated[0].nick, updated[0].homebound, updated[0].explorer, body_track, 3, 1, sp3uri, curatedTrack.name, curatedTrack.artists[0].name)
+                          request.post(authOptions, function(error, response, body) {
 
-                            // create reusable transporter object using the default SMTP transport
-                            var poolConfig = {
-                                host: MailDataService.host,
-                                port: MailDataService.port,
-                                secure: false, // use SSL
-                                ignoreTLS: true,
-                                auth: {
-                                    user: MailDataService.user,
-                                    pass: MailDataService.pswd,
-                                }
-                            };
+                            DesireService.getCurated(entryUser.homebound > 60, entryUser.explorer < 50, body.access_token, function(curatedTrack) {
 
-                            var transporter = nodemailer.createTransport(poolConfig);
+                              sp3uri = curatedTrack.uri.split(':')[2]
+                              User.update({id:entryUser.id},{released:1,accessToken:body.access_token,stage3song:sp3uri}).exec(function(err, updated){
 
-                            // setup e-mail data with unicode symbols
-                            var mailOptions = {
-                                from: 'TimeKeeper <sonar@domesticstreamers.com>', // sender address
-                                to: updated[0].mail, // list of receivers
-                                subject: 'YourDesire', // Subject line
-                                html: mailtemplate,
-                                attachments: [
-                                  {
-                                    filename: 'boom.png',
-                                    path: MailDataService.imgp+'boom.png',
-                                    cid: 'unique@bomb.ee' //same cid value as in the html img src
-                                  },
-                                  {
-                                    filename: 'ddslogo.png',
-                                    path: MailDataService.imgp+'ddslogo.png',
-                                    cid: 'unique@ddslogo.ee' //same cid value as in the html img src
-                                  },
-                                  {
-                                    filename: 'sonarlogo.png',
-                                    path: MailDataService.imgp+'sonarlogo.png',
-                                    cid: 'unique@sonarlogo.ee' //same cid value as in the html img src
-                                  },
-                                  {
-                                    filename: 'spotylogo.png',
-                                    path: MailDataService.imgp+'spotylogo.png',
-                                    cid: 'unique@spotilogo.ee' //same cid value as in the html img src
-                                  }
-                              ]
-                            };
+                                mailtemplate = mailtemplate.replace('@NAME',entryUser.nick)
+                                mailtemplate = mailtemplate.replace('@SONG',curatedTrack.name )
+                                mailtemplate = mailtemplate.replace('@URL','https://play.spotify.com/track/'+sp3uri )
 
-                            // send mail with defined transport object
-                            transporter.sendMail(mailOptions, function(error, info){
-                                if(error){
-                                    return console.log(error);
-                                }
-                                console.log('Message sent: ' + info.response);
-                            });
+                                mailtemplate = mailtemplate.replace('@BOMB','<img src="cid:unique@bomb.ee">')
+
+                                mailtemplate = mailtemplate.replace('@DDSLOGO','<img src="cid:unique@ddslogo.ee" >' )
+                                mailtemplate = mailtemplate.replace('@SONARLOGO','<img src="cid:unique@sonarlogo.ee" >' )
+                                mailtemplate = mailtemplate.replace('@SPOTYLOGO','<img src="cid:unique@spotilogo.ee" >' )
+
+                                var options_track_feature = {
+                                  url: 'https://api.spotify.com/v1/audio-features/'+updated[0].stage1song,
+                                  headers: { 'Authorization': 'Bearer ' + body.access_token },
+                                  json: true
+                                };
+
+                                request.get(options_track_feature, function(error, response, body_track) {
+                                  DesireService.sendDatagram(updated[0].id, updated[0].nick, updated[0].homebound, updated[0].explorer, body_track, 3, 1, sp3uri, curatedTrack.name, curatedTrack.artists[0].name)
+
+                                  // create reusable transporter object using the default SMTP transport
+                                  var poolConfig = {
+                                      host: MailDataService.host,
+                                      port: MailDataService.port,
+                                      secure: false, // use SSL
+                                      ignoreTLS: true,
+                                      auth: {
+                                          user: MailDataService.user,
+                                          pass: MailDataService.pswd,
+                                      }
+                                  };
+
+                                  var transporter = nodemailer.createTransport(poolConfig);
+
+                                  // setup e-mail data with unicode symbols
+                                  var mailOptions = {
+                                      from: 'TimeKeeper <sonar@domesticstreamers.com>', // sender address
+                                      to: updated[0].mail, // list of receivers
+                                      subject: 'YourDesire', // Subject line
+                                      html: mailtemplate,
+                                      attachments: [
+                                        {
+                                          filename: 'boom.png',
+                                          path: MailDataService.imgp+'boom.png',
+                                          cid: 'unique@bomb.ee' //same cid value as in the html img src
+                                        },
+                                        {
+                                          filename: 'ddslogo.png',
+                                          path: MailDataService.imgp+'ddslogo.png',
+                                          cid: 'unique@ddslogo.ee' //same cid value as in the html img src
+                                        },
+                                        {
+                                          filename: 'sonarlogo.png',
+                                          path: MailDataService.imgp+'sonarlogo.png',
+                                          cid: 'unique@sonarlogo.ee' //same cid value as in the html img src
+                                        },
+                                        {
+                                          filename: 'spotylogo.png',
+                                          path: MailDataService.imgp+'spotylogo.png',
+                                          cid: 'unique@spotilogo.ee' //same cid value as in the html img src
+                                        }
+                                    ]
+                                  };
+
+                                  // send mail with defined transport object
+                                  transporter.sendMail(mailOptions, function(error, info){
+                                      if(error){
+                                          return console.log(error);
+                                      }
+                                      console.log('Message sent: ' + info.response);
+                                  });
+                                })
+                              })
+                            })
                           })
-                        })
-                      })
-                    })
-            }
-          })
+                  }
+                })
+              }
+            })
 
           done();
         },
