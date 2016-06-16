@@ -291,7 +291,7 @@ module.exports = {
     const tknick    = req.param('tk-nick')
     const tkwhere   = req.param('tk-where')
     const tkwith    = req.param('tk-with')
-    const tkwhen    = req.param('tk-when')
+    const tkwhen    = parseInt(req.param('tk-when'))
     const tkdoing   = req.param('tk-doing')
     const tkfeeling = req.param('tk-how')
 
