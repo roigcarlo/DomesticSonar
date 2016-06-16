@@ -266,8 +266,6 @@ function SendFormTK() {
 
   mySwiper.unlockSwipeToNext()
   mySwiper.slideNext(true, 1000)
-
-  $('#SendButton').prop('disabled', true);
 }
 
 function hardReset() {
