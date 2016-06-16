@@ -62,7 +62,7 @@ module.exports = {
                       };
 
                       request.get(options_track_feature, function(error, response, body_track) {
-                        sails.sockets.blast('message', { code: 'SongStartpPlaying' });
+                        sails.sockets.blast('message', { code: 'SongStartPlaying' });
                         DesireService.sendDatagram(entryUser.id, entryUser.nick, entryUser.homebound, entryUser.explorer, body_track, 1, Math.round( (parseInt(entryUser.questionWhen) - Date.now()) / 3600000), undefined, undefined, undefined)
                       })
                     })
