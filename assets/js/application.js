@@ -547,7 +547,7 @@ $(document).ready(function () {
     if(msg['code'] == 'SongStopPlaying') {
       $('#ReleaseTheBall').html("CLICK TO<br>RELEASE<br>THE MARBLE")
       $('#ReleaseTheBall').prop('disabled', false)
-      $('#ReleaseTheBall').on('click',ReleaseMarble())
+      $('#ReleaseTheBall').on('click',function() {ReleaseMarble()})
     }
 
     if(msg['code'] == 'InvalidUser') {
@@ -618,4 +618,4 @@ $('#LoginTick').on('click', function() {
   }
 })
 
-$('#ReleaseTheBall').on('click',ReleaseMarble())
+$('#ReleaseTheBall').on('click',function() {ReleaseMarble()})
