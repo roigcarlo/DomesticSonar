@@ -242,7 +242,7 @@ function SendFormTK() {
 
   console.log($('#tk-hours').val(), $('#tk-days').val(), $('#tk-months').val())
 
-  releaseDate.addHours($('#tk-hours').val()-9)
+  releaseDate.addHours($('#tk-hours').val())
   releaseDate.addDays($('#tk-days').val())
   releaseDate.addMonths($('#tk-months').val())
 
