@@ -26,6 +26,7 @@ module.exports = {
         console.log('No user is bind to the session')
       } else {
 
+        Status.update({id:1},{stage:1}).exec(function(err, updated){})
         User.findOne({id:entryStatus.currentUser}).exec(function checkSessionCode(err, entryUser) {
 
           if(err || entryUser == undefined) {
@@ -61,7 +62,7 @@ module.exports = {
                       };
 
                       request.get(options_track_feature, function(error, response, body_track) {
-                        sails.sockets.blast('message', { code: 'SongStartpPlaying' });
+                        sails.sockets.blast('message', { code: 'SongStartPlaying' });
                         DesireService.sendDatagram(entryUser.id, entryUser.nick, entryUser.homebound, entryUser.explorer, body_track, 1, Math.round( (parseInt(entryUser.questionWhen) - Date.now()) / 3600000), undefined, undefined, undefined)
                       })
                     })

@@ -239,7 +239,8 @@ body {
   width: 100vw;
   height: 100vh;
   color: white;
-  background: url('../img/bkg.jpeg')
+  background: url('../img/bkg.jpeg');
+  background-size:cover;
 }
 
 .overlay-white {
