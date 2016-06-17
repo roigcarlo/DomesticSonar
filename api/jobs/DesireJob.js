@@ -38,7 +38,6 @@ module.exports = function(agenda) {
                 User.findOne({released:0,questionWhen:{'<':Date.now()},sort:'questionWhen DESC'}).exec(function freeDesire(err, entryUser) {
                   Status.update({id:1},{stage:1}).exec(function(err, updated){})
                   if(entryUser != undefined) {
-                    console.log(questionWhen,Date.now())
                   }
 
                   if(entryUser != undefined) {
