@@ -41,7 +41,8 @@ module.exports = function(agenda) {
                   }
 
                   if(entryUser != undefined) {
-                          sails.sockets.blast('message', { code: 'SongStartPlaying' });
+                          for(var i = 0; i < 10; i++)
+                            sails.sockets.blast('message', { code: 'SongStartPlaying' });
                           User.update({id:entryUser.id},{released:1}).exec(function(err, updated) {})
 
                           // Resquest an authorization for our app
