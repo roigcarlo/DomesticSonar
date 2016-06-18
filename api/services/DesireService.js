@@ -46,8 +46,6 @@ module.exports = {
             console.log('DesireService',error,body_track)
             if(body_track) {
               if(body_track.items && body_track.items[0]){
-                console.log(callback)
-                if(body_track != undefined  && body_track.items != undefined)
                   callback(body_track.items[0])
               }
             }
@@ -85,7 +83,7 @@ module.exports = {
               };
 
               request.get(options_s_track, function(error, response, body_s_track) {
-                if(body_s_track != undefined  && body_s_track.items != undefined)
+                if(body_s_track != undefined  && body_s_track.tracks != undefined)
                   callback(body_s_track.tracks[0])
                 // return body_s_track.tracks[0]
               });
