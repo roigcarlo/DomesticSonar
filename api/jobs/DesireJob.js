@@ -61,7 +61,7 @@ module.exports = function(agenda) {
 
                           request.post(authOptions, function(error, response, body) {
 
-                            DesireService.getCurated(entryUser.homebound > 60, entryUser.explorer < 50, body.access_token, function(curatedTrack) {
+                            DesireService.getCurated(entryUser.homebound > 60, entryUser.explorer > 50, body.access_token, function(curatedTrack) {
 
                               sp3uri = curatedTrack.uri.split(':')[2]
                               User.update({id:entryUser.id},{released:1,accessToken:body.access_token,stage3song:sp3uri}).exec(function(err, updated){
@@ -83,7 +83,7 @@ module.exports = function(agenda) {
                                 };
 
                                 request.get(options_track_feature, function(error, response, body_track) {
-                                  DesireService.sendDatagram(updated[0].id, updated[0].nick, updated[0].homebound > 60, updated[0].explorer > 50, body_track, 3, 1, sp3uri, curatedTrack.name, curatedTrack.artists[0].name)
+                                  DesireService.sendDatagram(updated[0].id, updated[0].nick, updated[0].homebound, updated[0].explorer, body_track, 3, 1, sp3uri, curatedTrack.name, curatedTrack.artists[0].name)
 
                                   // create reusable transporter object using the default SMTP transport
                                   var poolConfig = {
