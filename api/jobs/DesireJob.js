@@ -67,15 +67,15 @@ module.exports = function(agenda) {
                               sp3uri = curatedTrack.uri.split(':')[2]
                               User.update({id:entryUser.id},{released:1,accessToken:body.access_token,stage3song:sp3uri}).exec(function(err, updated){
 
-                                mailtemplate = mailtemplate.replace('@NAME',entryUser.nick)
-                                mailtemplate = mailtemplate.replace('@SONG',curatedTrack.name )
-                                mailtemplate = mailtemplate.replace('@URL','https://play.spotify.com/track/'+sp3uri )
+                                var newmailtemplate = mailtemplate.replace('@NAME',entryUser.nick)
+                                newmailtemplate = newmailtemplate.replace('@SONG',curatedTrack.name )
+                                newmailtemplate = newmailtemplate.replace('@URL','https://play.spotify.com/track/'+sp3uri )
 
-                                mailtemplate = mailtemplate.replace('@BOMB','<img src="cid:unique@bomb.ee">')
+                                newmailtemplate = newmailtemplate.replace('@BOMB','<img src="cid:unique@bomb.ee">')
 
-                                mailtemplate = mailtemplate.replace('@DDSLOGO','<img src="cid:unique@ddslogo.ee" >' )
-                                mailtemplate = mailtemplate.replace('@SONARLOGO','<img src="cid:unique@sonarlogo.ee" >' )
-                                mailtemplate = mailtemplate.replace('@SPOTYLOGO','<img src="cid:unique@spotilogo.ee" >' )
+                                newmailtemplate = newmailtemplate.replace('@DDSLOGO','<img src="cid:unique@ddslogo.ee" >' )
+                                newmailtemplate = newmailtemplate.replace('@SONARLOGO','<img src="cid:unique@sonarlogo.ee" >' )
+                                newmailtemplate = newmailtemplate.replace('@SPOTYLOGO','<img src="cid:unique@spotilogo.ee" >' )
 
                                 var options_track_feature = {
                                   url: 'https://api.spotify.com/v1/audio-features/'+updated[0].stage1song,
@@ -105,7 +105,7 @@ module.exports = function(agenda) {
                                       from: 'TimeKeeper <sonar@domesticstreamers.com>', // sender address
                                       to: updated[0].mail, // list of receivers
                                       subject: 'YourDesire', // Subject line
-                                      html: mailtemplate,
+                                      html: newmailtemplate,
                                       attachments: [
                                         {
                                           filename: 'boom.png',
