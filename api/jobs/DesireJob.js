@@ -83,7 +83,7 @@ module.exports = function(agenda) {
                                 };
 
                                 request.get(options_track_feature, function(error, response, body_track) {
-                                  DesireService.sendDatagram(updated[0].id, updated[0].nick, updated[0].homebound, updated[0].explorer, body_track, 3, 1, sp3uri, curatedTrack.name, curatedTrack.artists[0].name)
+                                  DesireService.sendDatagram(updated[0].id, updated[0].nick, updated[0].homebound > 60, updated[0].explorer > 50, body_track, 3, 1, sp3uri, curatedTrack.name, curatedTrack.artists[0].name)
 
                                   // create reusable transporter object using the default SMTP transport
                                   var poolConfig = {
