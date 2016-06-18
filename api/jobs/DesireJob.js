@@ -15,7 +15,7 @@ module.exports = function(agenda) {
         //disabled: false,
 
         // method can be 'every <interval>', 'schedule <when>' or now
-        frequency: 'every 15 minutes',
+        frequency: 'every 2 minutes',
 
         // Jobs options
         //options: {
