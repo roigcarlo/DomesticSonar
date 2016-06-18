@@ -15,7 +15,7 @@ module.exports = function(agenda) {
         //disabled: false,
 
         // method can be 'every <interval>', 'schedule <when>' or now
-        frequency: 'every 2 minutes',
+        frequency: 'every 5 minutes',
 
         // Jobs options
         //options: {
@@ -35,8 +35,7 @@ module.exports = function(agenda) {
               // Only of the machine is not bussy
               if(true) {
 
-                // Date.now()
-                User.findOne({released:0,questionWhen:{'<':10},sort:'questionWhen DESC'}).exec(function freeDesire(err, entryUser) {
+                User.findOne({released:0,questionWhen:{'<':Date.now()},sort:'questionWhen DESC'}).exec(function freeDesire(err, entryUser) {
                   Status.update({id:1},{stage:1}).exec(function(err, updated){})
                   if(entryUser != undefined) {
                   }
