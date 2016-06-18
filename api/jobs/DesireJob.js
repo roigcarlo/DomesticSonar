@@ -33,9 +33,10 @@ module.exports = function(agenda) {
           Status.findOne({id:1}).exec(function(err, entrySession){
 
               // Only of the machine is not bussy
-              if(entrySession.stage == 0) {
+              if(true) {
 
-                User.findOne({released:0,questionWhen:{'<':Date.now()},sort:'questionWhen DESC'}).exec(function freeDesire(err, entryUser) {
+                // Date.now()
+                User.findOne({released:0,questionWhen:{'<':10},sort:'questionWhen DESC'}).exec(function freeDesire(err, entryUser) {
                   Status.update({id:1},{stage:1}).exec(function(err, updated){})
                   if(entryUser != undefined) {
                   }
